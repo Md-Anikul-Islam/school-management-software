@@ -85,10 +85,10 @@
     <div class="leftside-menu">
         <a href="{{route('dashboard')}}" class="logo logo-light">
             <span class="logo-lg">
-                <img src="{{URL::to('backend/images/logo.png')}}" alt="logo" style="height: 20px;">
+                <img src="{{URL::to('backend/images/logo/1737184094.png')}}" alt="logo" style="height: 20px;">
             </span>
             <span class="logo-sm">
-                <img src="{{URL::to('backend/images/logo.png')}}" alt="small logo" style="height: 20px;">
+                <img src="{{URL::to('backend/images/logo/1730959165.png')}}" alt="small logo" style="height: 20px;">
             </span>
         </a>
 
