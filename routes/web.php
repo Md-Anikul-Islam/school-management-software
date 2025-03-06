@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\admin\SliderController;
+use App\Http\Controllers\admin\StudentController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,15 @@ Route::middleware('auth')->group(callback: function () {
 
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/unauthorized-action', [AdminDashboardController::class, 'unauthorized'])->name('unauthorized.action');
+
+    //student
+    Route::get('/student-list', [StudentController::class, 'index'])->name('student.index');
+    Route::get('/student-create', [StudentController::class, 'create'])->name('student.create');
+    Route::post('/student-store', [StudentController::class, 'store'])->name('student.store');
+    Route::get('/student-edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
+    Route::get('/student-show/{id}', [StudentController::class, 'show'])->name('student.show');
+    Route::put('/student-update/{id}', [StudentController::class, 'update'])->name('student.update');
+    Route::delete('/student-delete/{id}', [StudentController::class, 'destroy'])->name('student.destroy');
 
 
     //Role and User Section

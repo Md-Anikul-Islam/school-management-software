@@ -9,6 +9,8 @@
     <link rel="shortcut icon" href="{{asset('backend/images/favicon.ico')}}">
     <!-- Select2 css -->
     <link href="{{asset('backend/vendor/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Datatables css -->
     <link href="{{asset('backend/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('backend/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
@@ -85,7 +87,7 @@
     <div class="leftside-menu">
         <a href="{{route('dashboard')}}" class="logo logo-light">
             <span class="logo-lg">
-                <img src="{{URL::to('backend/images/logo/1737184094.png')}}" alt="logo" style="height: 20px;">
+                <img src="{{URL::to('backend/images/logo/1737184094.png')}}" alt="logo" style="height: 100px;">
             </span>
             <span class="logo-sm">
                 <img src="{{URL::to('backend/images/logo/1730959165.png')}}" alt="small logo" style="height: 20px;">
@@ -127,6 +129,15 @@
                         <span> Slider </span>
                     </a>
                 </li>
+                @endcan
+
+                @can('student-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('student.index')}}" class="side-nav-link">
+                            <i class="ri-dashboard-3-line"></i>
+                            <span> Student </span>
+                        </a>
+                    </li>
                 @endcan
 
 
@@ -219,6 +230,8 @@
         });
     });
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </body>
