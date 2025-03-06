@@ -82,7 +82,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <div class="d-flex justify-content-end">
+                <div class="d-flex justify-content-between">
                     @can('student-create')
                         <a href="{{ route('student.create') }}" class="btn btn-primary">Add Student</a>
                     @endcan
