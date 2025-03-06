@@ -1,0 +1,132 @@
+.ck-editor__main .ck-content {
+    height: 150px;
+}
+
+/* multiple image uplode */
+#dropzoneWrapper {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#image-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-preview {
+    margin: 10px;
+    position: relative;
+}
+
+.remove-preview {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    background-color: red;
+    border: 1px solid red;
+    border-radius: 50%;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+    color: white;
+}
+.remove-preview:hover {
+    background-color: #01a2e4;
+    color: #fff;
+    border: 1px solid #01a2e4;
+}
+.img-preview {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+
+/* design for folder */
+
+.file_system_design {
+    padding: 20px;
+    background: #fff;
+    margin-bottom: 24px;
+}
+.file_system_design a,
+.single_file_wrap {
+    text-decoration: none;
+}
+.file_icon {
+    background: rgba(242, 172, 35, .15);
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+.file_icon svg {
+    width:70px;
+    height: 70px;
+}
+.file_name h3 {
+    font-size: 20px;
+    line-height: 28px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: #15160F;
+    margin-bottom: 0px;
+}
+.file_name p {
+    font-size: 14px;
+    line-height: 24px;
+    font-family: 'Lato', sans-serif;
+    color: #BBBBBB;
+    margin-bottom: 0px;
+}
+.single_file {
+    background: #fff;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+.single_file_icon svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    width: 60px;
+    height: 60px;
+    padding: 5px;
+}
+.pdf_file {
+    background-color: rgba(224, 68, 68, .10);
+}
+.zip_file {
+    background-color: rgba(169, 124, 255, .10);
+}
+.image_file {
+    background-color: rgba(82, 206, 177, .10);
+}
+.signle_file_name h3 {
+    font-size: 16px;
+    color: #333940;
+    line-height: 20px;
+    margin-bottom: 0px;
+}
+h2.file_system_title {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    color: #35bccb;
+    margin-bottom: 15px;
+}
