@@ -16,6 +16,13 @@
     </div>
     <div class="col-12">
         <div class="card">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    @can('student-create')
+                        <a href="{{ route('student.index') }}" class="btn btn-primary">Go Back</a>
+                    @endcan
+                </div>
+            </div>
             <div class="card-body">
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
@@ -31,11 +38,13 @@
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Photo</label>
-                    @if($student->photo)
-                        <img src="{{ asset('uploads/students/' . $student->photo) }}" alt="{{ $student->name }}" width="100">
-                    @else
-                        <p>No Image</p>
-                    @endif
+                    <div>
+                        @if($student->photo)
+                            <img src="{{ asset('uploads/students/' . $student->photo) }}" alt="{{ $student->name }}" width="100" class="img-thumbnail">
+                        @else
+                            <p>No Image</p>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

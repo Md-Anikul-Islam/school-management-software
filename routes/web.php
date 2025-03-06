@@ -31,6 +31,7 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/student-show/{id}', [StudentController::class, 'show'])->name('student.show');
     Route::put('/student-update/{id}', [StudentController::class, 'update'])->name('student.update');
     Route::delete('/student-delete/{id}', [StudentController::class, 'destroy'])->name('student.destroy');
+    Route::put('/student-update-status/{id}', [StudentController::class, 'update_status'])->name('student.update_status');
 
 
     //Role and User Section

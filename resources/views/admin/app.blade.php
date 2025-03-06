@@ -134,7 +134,7 @@
                 @can('student-list')
                     <li class="side-nav-item">
                         <a href="{{route('student.index')}}" class="side-nav-link">
-                            <i class="ri-dashboard-3-line"></i>
+                            <i class="ri-user-2-line"></i>
                             <span> Student </span>
                         </a>
                     </li>

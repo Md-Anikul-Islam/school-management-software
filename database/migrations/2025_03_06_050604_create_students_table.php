@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('roll')->nullable();
             $table->string('email')->nullable();
-            $table->string('status')->default(1);
+            $table->integer('status')->default(1);
             $table->integer('school_id')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

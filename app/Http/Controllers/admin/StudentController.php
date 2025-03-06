@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 
 class StudentController extends Controller
@@ -24,6 +24,8 @@ class StudentController extends Controller
             return $next($request);
         })->only('index');
     }
+
+
 
     public function index()
     {
@@ -67,10 +69,11 @@ class StudentController extends Controller
             $student->school_id = Auth::id() ?? Auth::user()->school_id;
             $student->created_by = Auth::id();
             $student->save();
-            Toastr::success('Data Added Successfully', 'Success');
+            toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
+            toastr()->error('Something went wrong! Please try again');
+            return redirect()->back();
         }
     }
 
@@ -100,20 +103,25 @@ class StudentController extends Controller
     {
         try {
             $request->validate([
-                'photo' => 'file|required',
                 'name' => 'required',
                 'roll' => 'required',
                 'email' => 'required',
-                'status' => 'required',
+                'status' => 'required|boolean',  // Make sure status is a boolean (1 or 0)
             ]);
 
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
+            $student = Student::find($id);
+
+            $filename = $request->photo ?? "";
+
+            if ($request->hasFile('photo')) {
+                if (File::exists(public_path('uploads/students/' . $student->photo))) {
+                    File::delete(public_path('uploads/students/' . $student->photo));
+                }
+                $file = $request->file('photo');
                 $filename = date('ymdhis') . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('uploads/students/'), $filename);
             }
 
-            $student = Student::find($id);
             $student->photo = $filename;
             $student->name = $request->name;
             $student->roll = $request->roll;
@@ -121,11 +129,32 @@ class StudentController extends Controller
             $student->status = $request->status;
             $student->updated_by = Auth::id();
             $student->save();
-            return redirect()->route('student.edit', $id)->with('success', 'Student updated successfully');
+
+            toastr()->success('Data has been saved successfully!');
+            return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            toastr()->error('Something went wrong! Please try again');
+            return redirect()->back();
         }
     }
+
+    public function update_status(Request $request, string $id)
+    {
+        try {
+            $student = Student::find($id);
+            $student->status = $request->has('status') ? 1 : 0;
+            $student->updated_by = Auth::id();
+            $student->save();
+            toastr()->success('Status has been updated successfully!');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            toastr()->error('Something went wrong! Please try again');
+            return redirect()->back();
+        }
+    }
+
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -135,9 +164,11 @@ class StudentController extends Controller
         try {
             $student = Student::find($id);
             $student->delete();
-            return redirect()->route('student.index')->with('success', 'Student deleted successfully');
+            toastr()->success('Data has been saved successfully!');
+            return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+            toastr()->error('Something went wrong! Please try again');
+            return redirect()->back();
         }
     }
 }
