@@ -106,7 +106,6 @@ class StudentController extends Controller
                 'name' => 'required',
                 'roll' => 'required',
                 'email' => 'required',
-                'status' => 'required|boolean',  // Make sure status is a boolean (1 or 0)
             ]);
 
             $student = Student::find($id);
@@ -126,7 +125,6 @@ class StudentController extends Controller
             $student->name = $request->name;
             $student->roll = $request->roll;
             $student->email = $request->email;
-            $student->status = $request->status;
             $student->updated_by = Auth::id();
             $student->save();
 

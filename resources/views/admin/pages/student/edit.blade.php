@@ -54,18 +54,6 @@
                             @endif
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="status">Status: *</label>
-                        <select name="status" class="form-control">
-                            @if ($student->status == 1)
-                                <option value="1">Active</option>
-                                <option value="0">Inactive</option>
-                            @else
-                                <option value="0">Inactive</option>
-                                <option value="1">Active</option>
-                            @endif
-                        </select>
-                    </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
