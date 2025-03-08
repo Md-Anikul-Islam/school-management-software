@@ -140,6 +140,15 @@
                     </li>
                 @endcan
 
+                @can('teacher-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('teacher.index')}}" class="side-nav-link">
+                            <i class="ri-user-2-line"></i>
+                            <span> Teacher </span>
+                        </a>
+                    </li>
+                @endcan
+
 
                 @can('role-and-permission-list')
                     <li class="side-nav-item">

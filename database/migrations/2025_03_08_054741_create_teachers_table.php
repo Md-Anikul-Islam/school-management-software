@@ -11,32 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->integer('guardian_id')->nullable();
-            $table->date('admission_date')->nullable();
+            $table->string('designation')->nullable();
             $table->date('dob')->nullable();
-            $table->integer('gender')->nullable();
-            $table->integer('blood_group_id')->nullable();
+            $table->string('gender')->nullable();
             $table->string('religion')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->text('address')->nullable();
-            $table->string('city')->nullable();
-            $table->integer('country_id')->nullable();
-            $table->integer('class_id')->nullable();
-            $table->integer('section_id')->nullable();
-            $table->integer('group_id')->nullable();
-            $table->integer('optional_subject_id')->nullable();
-            $table->string('reg_no')->nullable();
-            $table->string('roll')->nullable();
+            $table->string('address')->nullable();
+            $table->date('joining_date')->nullable();
             $table->string('photo')->nullable();
-            $table->text('extra_curricular_activities')->nullable();
-            $table->text('remarks')->nullable();
             $table->string('username')->nullable();
             $table->string('password')->nullable();
-            $table->integer('status')->default(1);
+            $table->string('status')->default(1);
+            $table->text('routine')->nullable();
             $table->integer('school_id')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
@@ -50,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('teachers');
     }
 };

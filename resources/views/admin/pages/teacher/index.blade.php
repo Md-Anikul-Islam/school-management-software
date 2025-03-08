@@ -83,9 +83,9 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    @can('student-create')
-                        <a href="{{ route('student.create') }}" class="btn btn-primary"><span><i
-                                    class="ri-add-fill"></i></span>Add Student</a>
+                    @can('teacher-create')
+                        <a href="{{ route('teacher.create') }}" class="btn btn-primary"><span><i
+                                    class="ri-add-fill"></i></span>Add Teacher</a>
                     @endcan
                     <div class="d-flex justify-content-between">
                         <div class="btn-group">
@@ -109,69 +109,67 @@
                         <th>#</th>
                         <th>Photo</th>
                         <th>Name</th>
-                        <th>Roll</th>
                         <th>Email</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($students as $student)
+                    @foreach ($teachers as $teacher)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>
-                                @if($student->photo)
-                                    <img src="{{ asset('uploads/students/' . $student->photo) }}"
-                                         alt="{{ $student->name }}" width="70" class="img-thumbnail">
+                                @if($teacher->photo)
+                                    <img src="{{ asset('uploads/teachers/' . $teacher->photo) }}"
+                                         alt="{{ $teacher->name }}" width="70" class="img-thumbnail">
                                 @else
                                     No Image
                                 @endif
                             </td>
-                            <td>{{ $student->name }}</td>
-                            <td>{{ $student->roll }}</td>
-                            <td>{{ $student->email }}</td>
+                            <td>{{ $teacher->name }}</td>
+                            <td>{{ $teacher->email }}</td>
                             <td>
-                                <form action="{{ route('student.update_status', $student->id) }}" method="POST"
+                                <form action="{{ route('teacher.update_status', $teacher->id) }}" method="POST"
                                       class="status-form">
                                     @csrf
                                     @method('PUT')
                                     <label class="switch">
                                         <input type="checkbox" name="status" value="1"
-                                               {{ $student->status == 1 ? 'checked' : '' }}
+                                               {{ $teacher->status == 1 ? 'checked' : '' }}
                                                onchange="this.form.submit()">
                                         <span class="slider round"></span>
                                     </label>
                                 </form>
                             </td>
                             <td>
-                                <a href="{{ route('student.edit', $student->id) }}" class="btn btn-info"><i
+                                <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-info"><i
                                         class="ri-edit-line"></i></a>
-                                <a href="{{ route('student.show', $student->id) }}" class="btn btn-primary"><i
+                                <a href="{{ route('teacher.show', $teacher->id) }}" class="btn btn-primary"><i
                                         class="ri-eye-fill"></i></a>
-                                @can('student-delete')
+                                @can('teacher-delete')
                                     <a class="btn btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#danger-header-modal{{ $student->id }}"><i
+                                       data-bs-target="#danger-header-modal{{ $teacher->id }}"><i
                                             class="ri-delete-bin-6-fill"></i></a>
-                                    <div id="danger-header-modal{{ $student->id }}" class="modal fade" tabindex="-1"
-                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $student->id }}"
+                                    <div id="danger-header-modal{{ $teacher->id }}" class="modal fade" tabindex="-1"
+                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $teacher->id }}"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header modal-colored-header bg-danger">
                                                     <h4 class="modal-title"
-                                                        id="danger-header-modalLabel{{ $student->id }}">Delete</h4>
+                                                        id="danger-header-modalLabel{{ $teacher->id }}">Delete</h4>
                                                     <button type="button" class="btn-close btn-close-white"
                                                             data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h5 class="mt-0">Are you sure you want to delete this student?</h5>
+                                                    <h5 class="mt-0">Are you sure you want to delete this teacher?</h5>
                                                 </div>
                                                 <div class="modal-footer">
 
                                                     <button type="button" class="btn btn-light"
                                                             data-bs-dismiss="modal">Close
                                                     </button>
-                                                    <form action="{{ route('student.destroy', $student->id) }}"
+                                                    <form action="{{ route('teacher.destroy', $teacher->id) }}"
                                                           method="post">
                                                         @csrf
                                                         @method('DELETE')

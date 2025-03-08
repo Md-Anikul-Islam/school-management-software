@@ -29,15 +29,12 @@
                     <p>{{ $student->name }}</p>
                 </div>
                 <div class="mb-3">
-                    <label for="roll" class="form-label">Roll</label>
-                    <p>{{ $student->roll }}</p>
+                    <label for="guardian" class="form-label">Guardian</label>
+                    <p>{{ $student->guardian->name }}</p>
                 </div>
+                <!-- Repeat similar fields for other _id relationships -->
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <p>{{ $student->email }}</p>
-                </div>
-                <div class="mb-3">
-                    <label for="image" class="form-label">Photo</label>
+                    <label for="photo" class="form-label">Photo</label>
                     <div>
                         @if($student->photo)
                             <img src="{{ asset('uploads/students/' . $student->photo) }}" alt="{{ $student->name }}" width="100" class="img-thumbnail">

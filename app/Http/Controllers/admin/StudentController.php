@@ -72,8 +72,7 @@ class StudentController extends Controller
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            toastr()->error('Something went wrong! Please try again');
-            return redirect()->back();
+            return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
         }
     }
 
@@ -81,7 +80,7 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         $student = Student::find($id);
         return view('admin.pages.student.show', compact('student'));
@@ -90,7 +89,7 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $student = Student::find($id);
         return view('admin.pages.student.edit', compact('student'));
@@ -99,7 +98,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         try {
             $request->validate([
@@ -136,7 +135,7 @@ class StudentController extends Controller
         }
     }
 
-    public function update_status(Request $request, string $id)
+    public function update_status(Request $request, $id)
     {
         try {
             $student = Student::find($id);
@@ -157,7 +156,7 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         try {
             $student = Student::find($id);
@@ -165,8 +164,7 @@ class StudentController extends Controller
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            toastr()->error('Something went wrong! Please try again');
-            return redirect()->back();
+            return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
         }
     }
 }
