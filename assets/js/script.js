@@ -1,6 +1,16 @@
 (function ($) {
   "use strict";
-   
+  
+   /* Odometer Activeate js */
+  $(document).ready(function () {
+    $(".odometer").appear(function () {
+      var odo = $(".odometer");
+      odo.each(function () {
+        var countNumber = $(this).attr("data-count");
+        $(this).html(countNumber);
+      });
+    });
+  });
   
   // // dynamic year for copyright
   // document.getElementById("copyright_year").textContent =

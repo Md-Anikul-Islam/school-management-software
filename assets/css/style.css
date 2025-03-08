@@ -2473,86 +2473,109 @@ select.form-control {
 /*=============================
 	05. About CSS start
 ===============================*/
-.about-section .section-title {
-  margin-bottom: 14px;
+.about-part {
+  margin-bottom: 80px;
 }
-.about-section .about-img {
-  vertical-align: middle;
-}
-.about-section .about-img .img-main {
-  max-width: 460px;
-}
-@media screen and (min-width: 991.98px) {
-  .about-section .about-img .img-main {
-    margin-left: 100px;
+@media (max-width: 575px) {
+  .about-part {
+    margin-bottom: 60px;
   }
 }
-.about-section .about-img .img-main .about-shape {
-  right: -60px;
-  top: -5px;
-  -webkit-animation: spin 26s infinite linear;
-          animation: spin 26s infinite linear;
+
+.about-content {
+  width: 100%;
+  max-width: 550px;
 }
-.about-section .about-content p {
-  max-width: 591px;
-}
-@media (max-width: 1199.98px) {
-  .about-section .about-content p {
-    font-size: 14px;
-    line-height: 24px;
+@media (max-width: 767px) {
+  .about-content {
+    max-width: 100%;
+    margin-bottom: 50px;
   }
 }
-@media (max-width: 991.98px) {
-  .about-section .about-content p {
-    font-size: 12px;
-    line-height: 24px;
+.about-content h2 {
+  margin-bottom: 50px;
+}
+@media (max-width: 767px) {
+  .about-content h2 {
+    margin-bottom: 20px;
   }
 }
-.about-section .about-content .list-box .list-wrapper .list-info li {
-  text-wrap: nowrap;
-  margin-bottom: 10px;
-  color: var(--black);
+.about-content p {
   font-size: 18px;
-  font-weight: 400;
-  line-height: 28px; /* 155.556% */
-  letter-spacing: -0.36px;
-}
-.about-section .about-content .list-box .list-wrapper .list-info li i {
-  color: #47b16a;
-  margin-right: 15px;
-}
-.about-section .description {
-  max-width: 1190px;
-}
-.about-section p + p {
-  margin-top: 14px;
-}
-.about-section .theme-btn {
-  margin-top: 14px;
-  margin-bottom: 64px;
+  line-height: 30px;
+  margin-bottom: 45px;
 }
 
-@-webkit-keyframes spin {
-  from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+.about-media img {
+  width: 100%;
+  max-width: 550px;
+  border-radius: 4px;
+  -webkit-margin-start: auto;
+          margin-inline-start: auto;
+  display: block;
+}
+
+.about-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  max-width: 580px;
+  border-radius: 4px;
+  gap: 30px;
+  padding: 36px 50px;
+  margin-left: -40px;
+  margin-top: -60px;
+  position: relative;
+  background-color: var(--white);
+}
+@media (max-width: 1199px) {
+  .about-list {
+    margin: 0px;
   }
-  to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+}
+@media (max-width: 767px) {
+  .about-list {
+    max-width: 100%;
+    padding: 30px 18px;
+  }
+}
+@media (max-width: 575px) {
+  .about-list {
+    gap: 16px;
   }
 }
 
-@keyframes spin {
-  from {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
+.about-item {
+  text-align: center;
+}
+.about-item h4 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+@media (max-width: 575px) {
+  .about-item h4 {
+    margin-bottom: 10px;
+    font-size: 28px;
   }
 }
+.about-item p {
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+@media (max-width: 575px) {
+  .about-item p {
+    font-size: 14px;
+  }
+}
+
 /*=============================
 	06. Service CSS start
 ===============================*/
