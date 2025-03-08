@@ -1,0 +1,75 @@
+/*=============================
+	05. About CSS start
+===============================*/
+.about-section {
+  .section-title {
+    margin-bottom: 14px;
+  }
+  .about-img {
+    vertical-align: middle;
+    .img-main {
+      max-width: 460px;
+      @media screen and (min-width: 991.98px) {
+        margin-left:100px ;
+      }
+      .about-shape {
+        right: -60px;
+        top: -5px;
+        animation: spin 26s infinite linear;
+      }
+    }
+  }
+  .about-content {
+    
+    p {
+      max-width: 591px;
+      @media (max-width: 1199.98px) {
+        font-size: 14px;
+        line-height: 24px;
+      }
+      @media (max-width: 991.98px) {
+        font-size: 12px;
+        line-height: 24px;
+      }
+    }
+    .list-box {
+      .list-wrapper {
+        .list-info {
+          li {
+            text-wrap: nowrap;
+            margin-bottom: 10px;
+            color: var(--black);
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 28px; /* 155.556% */
+            letter-spacing: -0.36px;
+            i {
+              color: #47b16a;
+              margin-right: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .description{
+    // margin-top: 64px;
+    max-width: 1190px;
+    // margin-bottom: 17px;
+  }
+  p+p {
+    margin-top: 14px;
+  }
+  .theme-btn {
+    margin-top: 14px;
+    margin-bottom: 64px;
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

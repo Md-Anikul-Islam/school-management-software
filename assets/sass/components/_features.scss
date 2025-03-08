@@ -1,0 +1,25 @@
+/*=============================
+	07. Feature CSS Start
+===============================*/
+.feature-part {
+  margin-bottom: 100px;
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+
+  @media (max-width: 1199px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 767px) {
+    margin-bottom: 80px;
+  }
+
+  @media (max-width: 575px) {
+    grid-template-columns: repeat(1, 1fr);
+    margin-bottom: 60px;
+  }
+}
+
+

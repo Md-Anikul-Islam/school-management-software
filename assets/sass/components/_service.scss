@@ -1,0 +1,120 @@
+/*=============================
+	06. Service CSS start
+===============================*/
+.service-section {
+  
+  .service-card{
+    padding: 51px 31px 65px 31px;
+    background: white;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    &:hover {
+      border-color: #0044eb;
+    }
+    .title{
+      margin-top: 30px;
+      margin-bottom: 14px;
+      color: var(--secondary) !important;
+      font-size: 24px;
+      line-height: 26px;
+      text-align: center;
+    }
+    .desc{
+      font-size: 16;
+      line-height: 26.4px;
+      text-align: center;
+    }
+  }
+  .service-btn{
+    margin-top: 60px;
+  }
+}
+
+
+// sertvice section two
+.service-section-two {
+  
+  .services-slider-two {
+    // for slider css
+    .slick-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      list-style-type: none;
+      margin-top: 75px;
+      .slick-active {
+        button {
+          width: 100px;
+          border-radius: 50px;
+          background-color: var(--tertiary);
+        }
+      }
+      li {
+        &:first-child {
+          button {
+            border-top-left-radius: 50px;
+            border-bottom-left-radius: 50px;
+          }
+        }
+        &:last-child {
+          button {
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+          }
+        }
+        button {
+          background-color: var(--bg-one);
+          width: 50px;
+          height: 10px;
+          font-size: 0;
+          border: 0;
+        }
+      }
+    }
+    .slick-list{
+      padding: 20px 0;
+      margin: -20px 0;
+    }
+  }
+
+  .service-card {
+    // position: relative;
+    height: 100% !important;
+    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
+    transition: var(--transition);
+    border-bottom: 3px solid transparent;
+    margin: 0 15px;
+    &:hover {
+      border-color: var(--tertiary);
+      box-shadow: none;
+      .img img {
+        scale: 1.1;
+      }
+    }
+
+    .img {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      img {
+        transition: var(--transition);
+      }
+    }
+    .box-icon {
+      bottom: -40px;
+      i{
+        color: white !important;
+        font-size: 24px;
+      }
+    }
+    .service-text {
+      padding: 60px 40px 40px 40px;
+      .service-title {
+        margin-bottom: 30px;
+        font-size: 22px;
+        font-style: normal;
+        line-height: 36px; /* 163.636% */
+      }
+    }
+  }
+}

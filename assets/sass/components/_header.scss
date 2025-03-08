@@ -1,0 +1,362 @@
+/*=============================
+	03. Header CSS start
+===============================*/
+.header-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  background: var(--body-background);
+  .navbar {
+    padding: 0;
+    .navbar-main {
+      
+      .navbar-brand {
+        padding: 0;
+      }
+      .navbar-collapse {
+        .navbar-nav {
+          padding: 0;
+          gap: 25px;
+          .nav-item {
+            padding: 0;
+            position: relative;
+            .nav-link {
+              padding: 0;
+              color: var(--primary);
+              font-size: 17px;
+              font-weight: 700;
+              line-height: 85px;
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              transition: var(--transition);
+              &:hover {
+                color: var(--secondary2);
+              }
+              i {
+                font-size: 18px;
+              }
+              &.active {
+                border-bottom: 2px solid var(--primary);
+              }
+            }
+            .sub-menu {
+              width: 226px;
+              background-color: white;
+              position: absolute;
+              top: 100%;
+              margin-top: 10px;
+              left: 0;
+              z-index: 999;
+              visibility: hidden;
+              opacity: 0;
+              transition: var(--transition);
+              box-shadow: var(--shadow);
+              li {
+                a {
+                  color: var(--black);
+                  display: block;
+                  background-color: transparent;
+                  width: 100%;
+                  padding: 8px 16px;
+                  font-weight: 500;
+                  transition: var(--transition);
+                  &:hover {
+                    background-color: var(--primary);
+                    color: white;
+                  }
+                }
+              }
+            }
+            &:hover {
+              > .sub-menu {
+                visibility: visible;
+                opacity: 1;
+                margin-top: 0px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // .call-to-action {
+  //   gap: 5px;
+  //   padding: 5px 0;
+  //   p {
+  //     font-size: 11px;
+  //     font-weight: 700;
+  //     line-height: 20px;
+  //     letter-spacing: -0.36px;
+  //     color: white !important;
+  //   }
+  //   .info {
+  //     font-size: 11px;
+  //     font-weight: 700;
+  //     line-height:20px;
+  //     color: white !important;
+  //     transition: var(--transition);
+  //     &:hover {
+  //       color: var(--secondary2) !important;
+  //     }
+  //   }
+  // }
+}
+.call-to-action {
+  gap: 15px;
+  .icon {
+    width: 55px;
+    height: 55px;
+    background: var(--tertiary);
+    display: grid;
+    place-items: center;
+    color: var(--primary);
+    transition: var(--transition);
+  }
+  .info {
+    p {
+      letter-spacing: -0.36px;
+    }
+    h6 {
+      line-height: 30px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
+  &:hover {
+    .icon {
+      color: white;
+      background: var(--primary);
+    }
+  }
+  &.style2 {
+    .icon {
+      background: var(--tertiary);
+      color: white;
+    }
+
+    .info {
+      .help {
+        margin-bottom: 2px;
+      }
+      .number{
+        transition: var(--transition);
+      }
+    }
+    &:hover {
+      .info {
+        .number{
+           color: var(--tertiary);
+        }
+      }
+    }
+  }
+
+}
+
+#header-fixed-height.active-height {
+  display: block;
+  height: 94px;
+}
+
+.sticky-menu {
+  background-color: rgba(255, 255, 255, 0.8);
+  animation: 400ms ease-in-out 0s normal none 1 running fadeInDown;
+  box-shadow: var(--shadow);
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  .navbar-main {
+    border-radius: 0;
+    padding: 0 12px !important;
+  }
+}
+
+/* Mobile menu start */
+.mobile-menu-area {
+  z-index: 999;
+  background-color: transparent;
+  width: 100%;
+  transition: var(--transition);
+
+  .mobile-topbar {
+    width: 100%;
+    padding: 13px 20px;
+
+    .bars {
+      height: 40px;
+      width: 40px;
+      color: var(--primary);
+      border-radius: 50% !important;
+      text-align: center;
+      line-height: 35px;
+      cursor: pointer;
+      transition: all 0.1s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--primary);
+      i{
+        font-size: 20px;
+      }
+
+      &:hover {
+        background-color: var(--primary);
+        border-color: var(--primary);
+        color: white;
+      }
+    }
+  }
+
+  .mobile-menu-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    transition-duration: 0.3s;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .mobile-menu-overlay.active {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .mobile-menu-main {
+    width: 320px;
+    height: 100%;
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: -320px;
+    z-index: 999;
+    overflow-y: scroll;
+    transition-duration: 0.3s;
+
+    .logo {
+      padding: 20px;
+    }
+
+    .close-mobile-menu {
+      transition: var(--transition);
+      border-radius: 5px;
+
+      i {
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        line-height: 35px;
+        color: var(--black);
+        font-size: 20px;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      &:hover {
+        background: var(--bg-one);
+      }
+    }
+
+    .menu-body {
+      .menu-list {
+        padding-top: 10px;
+
+        ul {
+          li {
+            a {
+              color: var(--primary);
+              font-size: 18px;
+              font-weight: 600;
+              line-height: 78px;
+              border-top: 1px solid var(--border-color);
+              width: 100%;
+              padding: 0px 20px;
+              line-height: 44px;
+              padding-right: 10px;
+              transition: var(--transition);
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+
+              i {
+                width: 32px;
+                height: 32px;
+                background-color: var(--bg-one);
+                text-align: center;
+                line-height: 32px;
+                font-size: 12px;
+                border-radius: 3px;
+                transition: var(--transition);
+              }
+
+              &:hover {
+                color: var(--primary);
+
+                i {
+                  background-color: var(--primary);
+                  color: white;
+                }
+              }
+            }
+
+            ul {
+              padding-left: 0;
+              display: none;
+
+              a {
+                padding: 0px 20px;
+                padding-left: 40px;
+              }
+
+              li:last-child a {
+                border-bottom: 0;
+              }
+            }
+
+            &:last-child {
+              a {
+                border-bottom: 1px solid var(--bg-one);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    
+  }
+
+  .mobile-menu-main.active {
+    left: 0 !important;
+  }
+
+  .mobile-menu-action-btn {
+    padding: 20px;
+
+    a {
+      color: white;
+      padding: 12px 0;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 5px;
+      width: 100%;
+      text-align: center;
+
+      i {
+        font-size: 14px;
+        margin-left: 8px;
+      }
+
+      &:hover {
+        background-color: var(--primary);
+      }
+    }
+  }
+}
