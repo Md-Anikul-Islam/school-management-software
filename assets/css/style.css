@@ -2867,6 +2867,30 @@ select.form-control {
   }
 }
 
+.event-part-two {
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+@media (max-width: 991px) {
+  .event-part-two {
+    padding-top: 60px;
+  }
+}
+@media (max-width: 767px) {
+  .event-part-two {
+    padding-top: 40px;
+    padding-bottom: 20px;
+  }
+}
+.event-part-two .event-card {
+  margin-bottom: 50px;
+}
+@media (max-width: 767px) {
+  .event-part-two .event-card {
+    margin-bottom: 30px;
+  }
+}
+
 .social-part {
   margin-bottom: 100px;
   background: no-repeat center/cover;
