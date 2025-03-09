@@ -71,6 +71,12 @@ class PermissionTableSeeder extends Seeder
             'subject-edit',
             'subject-delete',
 
+            //syllabus
+            'syllabus-list',
+            'syllabus-create',
+            'syllabus-edit',
+            'syllabus-delete',
+
         ];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {

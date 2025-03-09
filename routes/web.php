@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\SectionNameContoller;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\StudentController;
 use App\Http\Controllers\admin\SubjectController;
+use App\Http\Controllers\admin\SyllabusController;
 use App\Http\Controllers\admin\TeacherController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -74,6 +75,14 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/subject-edit/{id}', [SubjectController::class, 'edit'])->name('subject.edit');
     Route::put('/subject-update/{id}', [SubjectController::class, 'update'])->name('subject.update');
     Route::delete('/subject-delete/{id}', [SubjectController::class, 'destroy'])->name('subject.destroy');
+
+    //syllabus
+    Route::get('/syllabus-list', [SyllabusController::class, 'index'])->name('syllabus.index');
+    Route::get('/syllabus-create', [SyllabusController::class, 'create'])->name('syllabus.create');
+    Route::post('/syllabus-store', [SyllabusController::class, 'store'])->name('syllabus.store');
+    Route::get('/syllabus-edit/{id}', [SyllabusController::class, 'edit'])->name('syllabus.edit');
+    Route::put('/syllabus-update/{id}', [SyllabusController::class, 'update'])->name('syllabus.update');
+    Route::delete('/syllabus-delete/{id}', [SyllabusController::class, 'destroy'])->name('syllabus.destroy');
 
 
     //Role and User Section

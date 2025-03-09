@@ -195,6 +195,15 @@
                                     </li>
                                 @endcan
                             </ul>
+                            <ul class="side-nav-second-level">
+                                @can('syllabus-list')
+                                    <li>
+                                        <a href="{{ route('syllabus.index') }}">
+                                            <i class="ri-bar-chart-2-fill"></i>
+                                            <span>Syllabus</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
                         </div>
                     </li>
                 @endcan
