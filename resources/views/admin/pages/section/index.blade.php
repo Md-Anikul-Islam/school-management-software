@@ -27,8 +27,8 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex justify-content-between gap-1">
                         @can('class-create')
-                            <a href="{{ route('class.create') }}" class="btn btn-primary"><span><i
-                                        class="ri-add-fill"></i></span>Add Class</a>
+                            <a href="{{ route('section.create') }}" class="btn btn-primary"><span><i
+                                        class="ri-add-fill"></i></span>Add Section</a>
                         @endcan
                         <form action="{{ route('section.index') }}" method="GET" class="d-flex gap-2">
                             <select class="form-control" name="class_id" onchange="this.form.submit()">

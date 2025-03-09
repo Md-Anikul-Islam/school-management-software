@@ -19,21 +19,30 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     @can('teacher-create')
-                        <a href="{{ route('teacher.index') }}" class="btn btn-primary"><span><i class="ri-arrow-go-back-line"></i></span>Back</a>
+                        <a href="{{ route('teacher.index') }}" class="btn btn-primary"><span><i
+                                    class="ri-arrow-go-back-line"></i></span>Back</a>
                     @endcan
+                    <a href="{{ route('teacher.profilePdf', $teacher->id) }}" class="btn btn-primary">Download Profile
+                        (PDF)</a>
                 </div>
             </div>
             <div class="card-body">
                 <!-- Navigation Tabs -->
                 <ul class="nav nav-tabs" id="teacherTabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">Profile</button>
+                        <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                                type="button" role="tab" aria-controls="profile" aria-selected="true">Profile
+                        </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="routine-tab" data-bs-toggle="tab" data-bs-target="#routine" type="button" role="tab" aria-controls="routine" aria-selected="false">Routine</button>
+                        <button class="nav-link" id="routine-tab" data-bs-toggle="tab" data-bs-target="#routine"
+                                type="button" role="tab" aria-controls="routine" aria-selected="false">Routine
+                        </button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="document-tab" data-bs-toggle="tab" data-bs-target="#document" type="button" role="tab" aria-controls="document" aria-selected="false">Document</button>
+                        <button class="nav-link" id="document-tab" data-bs-toggle="tab" data-bs-target="#document"
+                                type="button" role="tab" aria-controls="document" aria-selected="false">Document
+                        </button>
                     </li>
                 </ul>
 
@@ -44,7 +53,8 @@
                         <div class="row">
                             <div class="col-md-4 text-center">
                                 @if($teacher->photo)
-                                    <img src="{{ asset('uploads/teachers/' . $teacher->photo) }}" alt="{{ $teacher->name }}" class="img-thumbnail" width="150">
+                                    <img src="{{ asset('uploads/teachers/' . $teacher->photo) }}"
+                                         alt="{{ $teacher->name }}" class="img-thumbnail" width="150">
                                 @else
                                     <p>No Image</p>
                                 @endif
@@ -123,7 +133,9 @@
 
                     <!-- Document Tab -->
                     <div class="tab-pane fade" id="document" role="tabpanel" aria-labelledby="document-tab">
-                        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#documentUploadModal">Add Document</button>
+                        <button class="btn btn-primary mb-3" data-bs-toggle="modal"
+                                data-bs-target="#documentUploadModal">Add Document
+                        </button>
                         <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -140,7 +152,8 @@
                                     <td>{{ $document->title }}</td>
                                     <td>{{ $document->created_at->format('d M Y') }}</td>
                                     <td>
-                                        <a href="{{ route('teacher.downloadDocument', $document->id) }}" class="btn btn-primary btn-sm">Download</a>
+                                        <a href="{{ route('teacher.downloadDocument', $document->id) }}"
+                                           class="btn btn-primary btn-sm">Download</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -153,7 +166,8 @@
     </div>
 
     <!-- Document Upload Modal -->
-    <div class="modal fade" id="documentUploadModal" tabindex="-1" aria-labelledby="documentUploadModalLabel" aria-hidden="true">
+    <div class="modal fade" id="documentUploadModal" tabindex="-1" aria-labelledby="documentUploadModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -162,7 +176,8 @@
                 </div>
                 <div class="modal-body">
                     <!-- Traditional Laravel Form -->
-                    <form action="{{ route('teacher.uploadDocument', ['id' => $teacher->id]) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('teacher.uploadDocument', ['id' => $teacher->id]) }}" method="POST"
+                          enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="file" class="form-label">File *</label>

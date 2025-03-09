@@ -26,15 +26,25 @@ class SubjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $pageTitle = 'Subject List';
-        if(auth()->user()->hasRole('Super Admin')){
-            $subjects = Subject::latest()->get();
-        } else {
-            $subjects = Subject::where('school_id', Auth::id())->get();
+        $classes = ClassName::all();
+
+        $subjects = Subject::join('class_names', 'subjects.class_id', '=', 'class_names.id')
+            ->select('subjects.*', 'class_names.name as class_name');
+
+        if ($request->filled('class_id')) {
+            $subjects->where('subjects.class_id', $request->class_id);
         }
-        return view('admin.pages.subject.index', compact('pageTitle', 'subjects'));
+
+        if (!auth()->user()->hasRole('Super Admin')) {
+            $subjects->where('subjects.school_id', Auth::id());
+        }
+
+        $subjects = $subjects->latest()->get();
+
+        return view('admin.pages.subject.index', compact('subjects', 'pageTitle', 'classes'));
     }
 
     /**
@@ -67,7 +77,6 @@ class SubjectController extends Controller
                 'name' => 'required',
                 'subject_author' => 'required',
                 'subject_code' => 'required',
-                'status' => 'required',
             ]);
             $subject = new Subject();
             $subject->class_id = $request->class_id;
@@ -128,7 +137,6 @@ class SubjectController extends Controller
                 'name' => 'required',
                 'subject_author' => 'required',
                 'subject_code' => 'required',
-                'status' => 'required',
             ]);
             $subject = Subject::find($id);
             $subject->class_id = $request->class_id;
@@ -139,7 +147,6 @@ class SubjectController extends Controller
             $subject->name = $request->name;
             $subject->subject_author = $request->subject_author;
             $subject->subject_code = $request->subject_code;
-            $subject->status = $request->status;
             $subject->school_id = Auth::id() ?? Auth::user()->school_id;
             $subject->updated_by = Auth::id();
             $subject->save();

@@ -72,6 +72,11 @@
                         <input type="text" class="form-control" id="subject_code" name="subject_code" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="mt-3">
+                        <div class="alert alert-info">
+                            <strong>Note:</strong> Create a class and teacher before creating a new subject
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

@@ -59,7 +59,7 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                     <div class="mt-3">
                         <div class="alert alert-info">
-                            <strong>Note:</strong> Create a class and teacher before create a new section
+                            <strong>Note:</strong> Create a class and teacher before creating a new section
                         </div>
                     </div>
                 </form>

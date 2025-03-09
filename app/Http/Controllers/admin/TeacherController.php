@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Document;
 use App\Models\Teacher;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
@@ -152,6 +153,15 @@ class TeacherController extends Controller
         $teacher = Teacher::findOrFail($id);
         $documents = Document::where('uploader_id', $teacher->id . '_' . $teacher->email)->get();
         return view('admin.pages.teacher.show', compact('teacher', 'documents'));
+    }
+
+    public function downloadProfilePdf($id)
+    {
+        $teacher = Teacher::findOrFail($id);
+
+        $pdf = Pdf::loadView('admin.pages.teacher.teacher_profile_pdf', compact('teacher'));
+
+        return $pdf->download('teacher_profile_' . $teacher->name . '.pdf');
     }
 
     /**
