@@ -2843,6 +2843,107 @@ select.form-control {
   }
 }
 
+.social-part {
+  margin-bottom: 100px;
+  background: no-repeat center/cover;
+}
+@media (max-width: 767px) {
+  .social-part {
+    margin-bottom: 80px;
+  }
+}
+@media (max-width: 575px) {
+  .social-part {
+    margin-bottom: 60px;
+  }
+}
+
+.social-overlay {
+  padding: 80px 16px;
+  background: var(--primary-linear-gradient);
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .social-overlay {
+    padding: 60px 16px;
+  }
+}
+@media (max-width: 575px) {
+  .social-overlay {
+    padding: 40px 16px;
+  }
+}
+.social-overlay span {
+  width: 90px;
+  height: 3px;
+  margin-bottom: 10px;
+  display: inline-block;
+  background-color: var(--white);
+}
+.social-overlay h2 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  color: var(--white);
+}
+@media (max-width: 575px) {
+  .social-overlay h2 {
+    font-size: 28px;
+  }
+}
+.social-overlay p {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 45px;
+  color: var(--white);
+}
+@media (max-width: 575px) {
+  .social-overlay p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+}
+.social-overlay nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 60px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+@media (max-width: 575px) {
+  .social-overlay nav {
+    gap: 24px;
+  }
+}
+.social-overlay nav a {
+  font-size: 80px;
+  color: var(--white);
+  -webkit-transition: -webkit-transform 0.3s linear;
+  transition: -webkit-transform 0.3s linear;
+  transition: transform 0.3s linear;
+  transition: transform 0.3s linear, -webkit-transform 0.3s linear;
+}
+@media (max-width: 767px) {
+  .social-overlay nav a {
+    font-size: 60px;
+  }
+}
+@media (max-width: 575px) {
+  .social-overlay nav a {
+    font-size: 36px;
+  }
+}
+.social-overlay nav a:hover {
+  -webkit-transform: translateY(-8px);
+          transform: translateY(-8px);
+}
+
 .footer-section {
   background-size: cover;
   background-position: center;
