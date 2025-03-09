@@ -56,7 +56,18 @@
       enabled: true,
     },
   });
+  // Magnific popup Video js
+  $(document).ready(function () {
+    $(".popup-youtube").magnificPopup({
+      disableOn: 200,
+      type: "iframe",
+      mainClass: "mfp-fade",
+      removalDelay: 160,
+      preloader: false,
 
+      fixedContentPos: false,
+    });
+  });
   
 
 })(jQuery);
