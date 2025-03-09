@@ -1,0 +1,20 @@
+// teachers part 
+
+.teacher-part {
+    margin-bottom: 100px;
+  
+    @media (max-width: 767px) {
+      margin-bottom: 80px;
+    }
+  
+    @media (max-width: 575px) {
+      margin-bottom: 60px;
+    }
+  
+    .teacher-card {
+      @media (max-width: 575px) {
+        width: 270px;
+      }
+    }
+  }
+  

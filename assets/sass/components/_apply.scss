@@ -1,0 +1,42 @@
+.apply-part {
+    margin-bottom: 180px;
+  
+    @media (max-width: 991px) {
+      margin-bottom: 100px;
+    }
+  
+    @media (max-width: 767px) {
+      margin-bottom: 80px;
+    }
+  
+    @media (max-width: 575px) {
+      margin-bottom: 60px;
+    }
+  
+    .apply-content {
+      width: 100%;
+      padding: 40px;
+      max-width: 740px;
+      border-radius: 4px;
+      margin: 0 auto;
+      background-color: var(--secondary);
+    }
+  
+    h2 {
+      margin-bottom: 20px;
+      color: var(--white);
+    }
+  
+    p {
+      font-size: 18px;
+      line-height: 28px;
+      margin-bottom: 30px;
+      color: var(--white);
+  
+      @media (max-width: 767px) {
+        font-size: 16px;
+        line-height: 26px;
+      }
+    }
+  }
+  

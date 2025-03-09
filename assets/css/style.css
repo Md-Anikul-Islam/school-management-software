@@ -810,8 +810,7 @@ select.form-control {
   padding: 28px;
   width: 100%;
   height: 100%;
-  background: -webkit-gradient(linear, left top, left bottom, from(rgba(250, 94, 1, 0)), to(rgba(250, 94, 1, 0.6)));
-  background: linear-gradient(180deg, rgba(250, 94, 1, 0) 0%, rgba(250, 94, 1, 0.6) 100%);
+  background: var(--primary-linear-gradient);
   transition: all linear 0.3s;
   -webkit-transition: all linear 0.3s;
   -moz-transition: all linear 0.3s;
@@ -2642,150 +2641,187 @@ select.form-control {
   }
 }
 
-/*=============================
-	06. Service CSS start
-===============================*/
-.service-section .service-card {
-  padding: 51px 31px 65px 31px;
-  background: white;
-  -webkit-box-shadow: var(--shadow);
-          box-shadow: var(--shadow);
-  border: 1px solid var(--border-color);
-  -webkit-transition: var(--transition);
-  transition: var(--transition);
+.apply-part {
+  margin-bottom: 180px;
 }
-.service-section .service-card:hover {
-  border-color: #0044eb;
+@media (max-width: 991px) {
+  .apply-part {
+    margin-bottom: 100px;
+  }
 }
-.service-section .service-card .title {
-  margin-top: 30px;
-  margin-bottom: 14px;
-  color: var(--secondary) !important;
-  font-size: 24px;
-  line-height: 26px;
-  text-align: center;
+@media (max-width: 767px) {
+  .apply-part {
+    margin-bottom: 80px;
+  }
 }
-.service-section .service-card .desc {
-  font-size: 16;
-  line-height: 26.4px;
-  text-align: center;
+@media (max-width: 575px) {
+  .apply-part {
+    margin-bottom: 60px;
+  }
 }
-.service-section .service-btn {
-  margin-top: 60px;
+.apply-part .apply-content {
+  width: 100%;
+  padding: 40px;
+  max-width: 740px;
+  border-radius: 4px;
+  margin: 0 auto;
+  background-color: var(--secondary);
+}
+.apply-part h2 {
+  margin-bottom: 20px;
+  color: var(--white);
+}
+.apply-part p {
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 30px;
+  color: var(--white);
+}
+@media (max-width: 767px) {
+  .apply-part p {
+    font-size: 16px;
+    line-height: 26px;
+  }
 }
 
-.service-section-two .services-slider-two .slick-dots {
+.principal-part {
+  margin-bottom: 100px;
+  background-color: var(--primary-slate);
+}
+@media (max-width: 767px) {
+  .principal-part {
+    margin-bottom: 80px;
+  }
+}
+@media (max-width: 575px) {
+  .principal-part {
+    margin-bottom: 60px;
+  }
+}
+
+.principal-group {
+  gap: 120px;
+  padding-block: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  list-style-type: none;
-  margin-top: 75px;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
-.service-section-two .services-slider-two .slick-dots .slick-active button {
-  width: 100px;
-  border-radius: 50px;
-  background-color: var(--tertiary);
+@media (max-width: 991px) {
+  .principal-group {
+    gap: 60px;
+  }
 }
-.service-section-two .services-slider-two .slick-dots li:first-child button {
-  border-top-left-radius: 50px;
-  border-bottom-left-radius: 50px;
+@media (max-width: 767px) {
+  .principal-group {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
-.service-section-two .services-slider-two .slick-dots li:last-child button {
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-}
-.service-section-two .services-slider-two .slick-dots li button {
-  background-color: var(--bg-one);
-  width: 50px;
-  height: 10px;
-  font-size: 0;
-  border: 0;
-}
-.service-section-two .services-slider-two .slick-list {
-  padding: 20px 0;
-  margin: -20px 0;
-}
-.service-section-two .service-card {
-  height: 100% !important;
-  -webkit-box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
-          box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.05);
-  -webkit-transition: var(--transition);
-  transition: var(--transition);
-  border-bottom: 3px solid transparent;
-  margin: 0 15px;
-}
-.service-section-two .service-card:hover {
-  border-color: var(--tertiary);
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-.service-section-two .service-card:hover .img img {
-  scale: 1.1;
-}
-.service-section-two .service-card .img {
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-}
-.service-section-two .service-card .img img {
-  -webkit-transition: var(--transition);
-  transition: var(--transition);
-}
-.service-section-two .service-card .box-icon {
-  bottom: -40px;
-}
-.service-section-two .service-card .box-icon i {
-  color: white !important;
-  font-size: 24px;
-}
-.service-section-two .service-card .service-text {
-  padding: 60px 40px 40px 40px;
-}
-.service-section-two .service-card .service-text .service-title {
-  margin-bottom: 30px;
-  font-size: 22px;
-  font-style: normal;
-  line-height: 36px; /* 163.636% */
+@media (max-width: 575px) {
+  .principal-group {
+    gap: 30px;
+    padding-block: 30px;
+  }
 }
 
-/*=============================
-	08. Why CSS Start
-===============================*/
-.why-section .why-card {
-  width: 100%;
-  height: 100%;
-  -webkit-transition: var(--transition);
-  transition: var(--transition);
+.principal-media {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  margin-top: -160px;
 }
-.why-section .why-card:hover {
-  -webkit-box-shadow: var(--shadow);
-          box-shadow: var(--shadow);
-  background: var(--tertiary) !important;
-  border-color: var(--tertiary) !important;
-  -webkit-transform: translateY(-5px);
-          transform: translateY(-5px);
+@media (max-width: 991px) {
+  .principal-media {
+    margin-top: 0px;
+  }
 }
-.why-section .why-card:hover .why-desc {
-  color: white !important;
+.principal-media img {
+  width: 450px;
+  border-radius: 4px;
 }
-.why-section .why-card .why-content .number {
-  font-size: 50px;
-  line-height: 60px;
-  font-weight: 700;
-  color: var(--secondary) !important;
-  text-align: left !important;
+@media (max-width: 991px) {
+  .principal-media img {
+    width: 300px;
+  }
 }
-.why-section .why-card .why-content .why-title {
-  margin-bottom: 15px;
+@media (max-width: 767px) {
+  .principal-media img {
+    width: 100%;
+  }
 }
-.why-section .why-card .why-content .why-desc {
-  -webkit-transition: var(--transition);
-  transition: var(--transition);
+
+.principal-content h2 {
+  margin-bottom: 20px;
+}
+.principal-content p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+  font-style: italic;
+  font-family: none;
+  margin-bottom: 30px;
+}
+.principal-content dl {
+  position: relative;
+  padding-left: 50px;
+  margin-bottom: 0px;
+}
+.principal-content dl::before {
+  content: "";
+  width: 32px;
+  height: 1px;
+  display: inline-block;
+  position: absolute;
+  top: 18px;
+  left: 0px;
+  background-color: var(--secondary);
+}
+.principal-content dl dt {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: capitalize;
+}
+@media (max-width: 575px) {
+  .principal-content dl dt {
+    font-size: 20px;
+  }
+}
+.principal-content dl dd {
+  font-size: 16px;
+  margin-bottom: 0px;
+  color: var(--primary);
+}
+@media (max-width: 575px) {
+  .principal-content dl dd {
+    font-size: 14px;
+  }
+}
+
+.teacher-part {
+  margin-bottom: 100px;
+}
+@media (max-width: 767px) {
+  .teacher-part {
+    margin-bottom: 80px;
+  }
+}
+@media (max-width: 575px) {
+  .teacher-part {
+    margin-bottom: 60px;
+  }
+}
+@media (max-width: 575px) {
+  .teacher-part .teacher-card {
+    width: 270px;
+  }
 }
 
 .footer-section {
