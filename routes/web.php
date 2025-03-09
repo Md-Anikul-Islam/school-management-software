@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\admin\AdminDashboardController;
+use App\Http\Controllers\admin\ClassNameController;
+use App\Http\Controllers\admin\SectionNameContoller;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\StudentController;
+use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\TeacherController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -46,6 +49,30 @@ Route::middleware('auth')->group(callback: function () {
     Route::post('/teacher/{id}/upload-document', [TeacherController::class, 'uploadDocument'])->name('teacher.uploadDocument');
     Route::get('/teacher/download-document/{id}', [TeacherController::class, 'downloadDocument'])->name('teacher.downloadDocument');
     Route::post('/teacher/{id}/update-routine', [TeacherController::class, 'updateRoutine'])->name('teacher.updateRoutine');
+
+    //className
+    Route::get('/class-list', [ClassNameController::class, 'index'])->name('class.index');
+    Route::get('/class-create', [ClassNameController::class, 'create'])->name('class.create');
+    Route::post('/class-store', [ClassNameController::class, 'store'])->name('class.store');
+    Route::get('/class-edit/{id}', [ClassNameController::class, 'edit'])->name('class.edit');
+    Route::put('/class-update/{id}', [ClassNameController::class, 'update'])->name('class.update');
+    Route::delete('/class-delete/{id}', [ClassNameController::class, 'destroy'])->name('class.destroy');
+
+    //section
+    Route::get('/section-list', [SectionNameContoller::class, 'index'])->name('section.index');
+    Route::get('/section-create', [SectionNameContoller::class, 'create'])->name('section.create');
+    Route::post('/section-store', [SectionNameContoller::class, 'store'])->name('section.store');
+    Route::get('/section-edit/{id}', [SectionNameContoller::class, 'edit'])->name('section.edit');
+    Route::put('/section-update/{id}', [SectionNameContoller::class, 'update'])->name('section.update');
+    Route::delete('/section-delete/{id}', [SectionNameContoller::class, 'destroy'])->name('section.destroy');
+
+    //subject
+    Route::get('/subject-list', [SubjectController::class, 'index'])->name('subject.index');
+    Route::get('/subject-create', [SubjectController::class, 'create'])->name('subject.create');
+    Route::post('/subject-store', [SubjectController::class, 'store'])->name('subject.store');
+    Route::get('/subject-edit/{id}', [SubjectController::class, 'edit'])->name('subject.edit');
+    Route::put('/subject-update/{id}', [SubjectController::class, 'update'])->name('subject.update');
+    Route::delete('/subject-delete/{id}', [SubjectController::class, 'destroy'])->name('subject.destroy');
 
 
     //Role and User Section

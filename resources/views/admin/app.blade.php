@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Dashboard | Admin Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
-    <meta content="SDMGA" name="author" />
+    <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description"/>
+    <meta content="SDMGA" name="author"/>
     <link rel="shortcut icon" href="{{asset('backend/images/favicon.ico')}}">
     <!-- Select2 css -->
-    <link href="{{asset('backend/vendor/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/vendor/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
     <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Datatables css -->
-    <link href="{{asset('backend/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('backend/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/vendor/datatables.net-bs5/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{asset('backend/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{asset('backend/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css')}}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{asset('backend/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css')}}"
+          rel="stylesheet" type="text/css"/>
+    <link href="{{asset('backend/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{{asset('backend/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet"
+          type="text/css"/>
     <link rel="stylesheet" href="{{asset('backend/vendor/daterangepicker/daterangepicker.css')}}">
-    <link rel="stylesheet" href="{{asset('backend/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css')}}">
+    <link rel="stylesheet"
+          href="{{asset('backend/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css')}}">
     <script src="{{asset('backend/js/config.js')}}"></script>
-    <link href="{{asset('backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style" />
-    <link href="{{asset('backend/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-style"/>
+    <link href="{{asset('backend/css/icons.min.css')}}" rel="stylesheet" type="text/css"/>
     {{-- Custom Css File here --}}
     <script src="{{asset('backend/js/chart.js')}}"></script>
     <script src="{{asset('backend/js/echarts.min.js')}}"></script>
@@ -55,7 +62,8 @@
                     @php
                         $admin = auth()->user();
                     @endphp
-                    <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#" role="button"
+                    <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#"
+                       role="button"
                        aria-haspopup="false" aria-expanded="false">
                         <span class="d-lg-block d-none">
                               <h5 class="my-0 fw-normal">{{$admin->name}}
@@ -71,7 +79,8 @@
                             <i class="ri-account-circle-line fs-18 align-middle me-1"></i>
                             <span>My Account</span>
                         </a>
-                        <a href="{{ route('logout') }}" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a href="{{ route('logout') }}" class="dropdown-item"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
                             <span>Logout</span>
                         </a>
@@ -105,7 +114,8 @@
                 </li>
                 @can('resource-list')
                     <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
+                        <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
                             <i class="ri-pages-line"></i>
                             <span> Resource </span>
                             <span class="menu-arrow"></span>
@@ -113,9 +123,9 @@
                         <div class="collapse" id="sidebarPages">
                             <ul class="side-nav-second-level">
 
-                                    <li>
-                                        <a href="#">News</a>
-                                    </li>
+                                <li>
+                                    <a href="#">News</a>
+                                </li>
 
                             </ul>
                         </div>
@@ -123,12 +133,12 @@
                 @endcan
 
                 @can('slider-list')
-                <li class="side-nav-item">
-                    <a href="{{route('slider.list')}}" class="side-nav-link">
-                        <i class="ri-dashboard-3-line"></i>
-                        <span> Slider </span>
-                    </a>
-                </li>
+                    <li class="side-nav-item">
+                        <a href="{{route('slider.list')}}" class="side-nav-link">
+                            <i class="ri-dashboard-3-line"></i>
+                            <span> Slider </span>
+                        </a>
+                    </li>
                 @endcan
 
                 @can('student-list')
@@ -149,10 +159,51 @@
                     </li>
                 @endcan
 
+                @can('academics-module')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages2" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-school-line"></i>
+                            <span>Academic</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages2">
+                            <ul class="side-nav-second-level">
+                                @can('class-list')
+                                    <li>
+                                        <a href="{{ route('class.index') }}">
+                                            <i class="ri-home-smile-2-fill"></i>
+                                            <span>Class</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('section-list')
+                                    <li>
+                                        <a href="{{ route('section.index') }}">
+                                            <i class="ri-bar-chart-2-fill"></i>
+                                            <span>Section</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('subject-list')
+                                    <li>
+                                        <a href="{{ route('subject.index') }}">
+                                            <i class="ri-bar-chart-2-fill"></i>
+                                            <span>Subject</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
 
                 @can('role-and-permission-list')
                     <li class="side-nav-item">
-                        <a data-bs-toggle="collapse" href="#sidebarPages1" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
+                        <a data-bs-toggle="collapse" href="#sidebarPages1" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
                             <i class="ri-rotate-lock-line"></i>
                             <span>Permission Manage </span>
                             <span class="menu-arrow"></span>
@@ -189,7 +240,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <script>document.write(new Date().getFullYear())</script> © Admin Dashboard</b>
+                        <script>document.write(new Date().getFullYear())</script>
+                        © Admin Dashboard</b>
                     </div>
                 </div>
             </div>
@@ -197,7 +249,7 @@
     </div>
 </div>
 
-
+{{-- font awesome here --}}
 <script src="{{asset('backend/js/vendor.min.js')}}"></script>
 <!-- Dropzone File Upload js -->
 <script src="{{asset('backend/vendor/dropzone/min/dropzone.min.js')}}"></script>
@@ -209,7 +261,8 @@
 <script src="{{asset('backend/vendor/daterangepicker/daterangepicker.js')}}"></script>
 <script src="{{asset('backend/vendor/apexcharts/apexcharts.min.js')}}"></script>
 <script src="{{asset('backend/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
-<script src="{{asset('backend/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js')}}"></script>
+<script
+    src="{{asset('backend/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js')}}"></script>
 <!-- Ckeditor Here -->
 <script src="{{asset('backend/js/sdmg.ckeditor.js')}}"></script>
 <!-- Datatables js -->
@@ -233,7 +286,7 @@
 <script src="{{asset('backend/js/app.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.form-control[multiple]').select2({
             allowClear: true
         });

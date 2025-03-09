@@ -142,8 +142,10 @@
                                 </form>
                             </td>
                             <td>
+                                @can('teacher-edit')
                                 <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-info"><i
                                         class="ri-edit-line"></i></a>
+                                @endcan
                                 <a href="{{ route('teacher.show', $teacher->id) }}" class="btn btn-primary"><i
                                         class="ri-eye-fill"></i></a>
                                 @can('teacher-delete')

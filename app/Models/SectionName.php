@@ -11,7 +11,10 @@ class SectionName extends Model
     use HasFactory, SoftDeletes;
     protected $fillable = [
         'name',
-        'status',
+        'capacity',
+        'class_id',
+        'teacher_id',
+        'note',
         'school_id',
         'created_by',
         'updated_by',
@@ -20,5 +23,15 @@ class SectionName extends Model
     public function students()
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+
+    public function className()
+    {
+        return $this->belongsTo(ClassName::class);
     }
 }

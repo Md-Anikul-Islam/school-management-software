@@ -19,7 +19,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     @can('teacher-create')
-                        <a href="{{ route('teacher.index') }}" class="btn btn-primary">Go Back</a>
+                        <a href="{{ route('teacher.index') }}" class="btn btn-primary"><span><i class="ri-arrow-go-back-line"></i></span>Back</a>
                     @endcan
                 </div>
             </div>
@@ -41,9 +41,8 @@
                     <div class="mb-3">
                         <label for="gender" class="form-label">Gender</label>
                         <select class="form-control" id="gender" name="gender" required>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
-                            <option value="3">Other</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                     </div>
                     <div class="mb-3">

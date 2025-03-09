@@ -18,8 +18,8 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    @can('teacher-create')
-                        <a href="{{ route('teacher.index') }}" class="btn btn-primary">Go Back</a>
+                    @can('teacher-edit')
+                        <a href="{{ route('teacher.index') }}" class="btn btn-primary"><span><i class="ri-arrow-go-back-line"></i></span>Back</a>
                     @endcan
                 </div>
             </div>

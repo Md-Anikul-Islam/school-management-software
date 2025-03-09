@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ClassName;
 use App\Models\Subject;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -27,7 +29,11 @@ class SubjectController extends Controller
     public function index()
     {
         $pageTitle = 'Subject List';
-        $subjects = Subject::latest()->paginate(10);
+        if(auth()->user()->hasRole('Super Admin')){
+            $subjects = Subject::latest()->get();
+        } else {
+            $subjects = Subject::where('school_id', Auth::id())->get();
+        }
         return view('admin.pages.subject.index', compact('pageTitle', 'subjects'));
     }
 
@@ -36,7 +42,14 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.subject.add');
+        if(auth()->user()->hasRole('Super Admin')){
+            $classes = ClassName::latest()->get();
+            $teachers = Teacher::latest()->get();
+        } else {
+            $classes = ClassName::where('school_id', Auth::id())->latest()->get();
+            $teachers = Teacher::where('school_id', Auth::id())->latest()->get();
+        }
+        return view('admin.pages.subject.add', compact('classes', 'teachers'));
     }
 
     /**
@@ -87,10 +100,17 @@ class SubjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $subject = Subject::find($id);
-        return view('admin.pages.subject.edit', compact('subject'));
+        if(auth()->user()->hasRole('Super Admin')){
+            $classes = ClassName::latest()->get();
+            $teachers = Teacher::latest()->get();
+        } else {
+            $classes = ClassName::where('school_id', Auth::id())->latest()->get();
+            $teachers = Teacher::where('school_id', Auth::id())->latest()->get();
+        }
+        return view('admin.pages.subject.edit', compact('subject', 'classes', 'teachers'));
     }
 
     /**

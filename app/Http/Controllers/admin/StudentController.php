@@ -30,7 +30,11 @@ class StudentController extends Controller
     public function index()
     {
         $pageTitle = 'Student List';
-        $students = Student::latest()->paginate(10);
+        if(auth()->user()->hasRole('Super Admin')){
+            $students = Student::latest()->paginate(10);
+        } else {
+            $students = Student::where('school_id', Auth::id())->get();
+        }
         return view('admin.pages.student.index', compact('pageTitle', 'students'));
     }
 

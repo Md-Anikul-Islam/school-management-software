@@ -18,7 +18,6 @@ class Subject extends Model
         'subject_author',
         'name',
         'subject_code',
-        'status',
         'school_id',
         'created_by',
         'updated_by',

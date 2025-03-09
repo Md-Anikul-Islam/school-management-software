@@ -19,7 +19,7 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     @can('teacher-create')
-                        <a href="{{ route('teacher.index') }}" class="btn btn-primary">Go Back</a>
+                        <a href="{{ route('teacher.index') }}" class="btn btn-primary"><span><i class="ri-arrow-go-back-line"></i></span>Back</a>
                     @endcan
                 </div>
             </div>
@@ -66,10 +66,10 @@
                                         <td>{{ $teacher->address }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Username</th>
-                                        <td>{{ $teacher->username }}</td>
-                                        <th></th>
-                                        <td></td>
+                                        <th>Gender</th>
+                                        <td>{{ $teacher->gender }}</td>
+                                        <th>Phone</th>
+                                        <td>{{ $teacher->phone }}</td>
                                     </tr>
                                 </table>
                             </div>

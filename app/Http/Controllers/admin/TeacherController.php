@@ -30,7 +30,11 @@ class TeacherController extends Controller
     public function index()
     {
         $pageTitle = 'Teacher List';
-        $teachers = Teacher::latest()->paginate(10);
+        if(auth()->user()->hasRole('Super Admin')){
+            $teachers = Teacher::latest()->get();
+        } else {
+            $teachers = Teacher::where('school_id', Auth::id())->get();
+        }
         return view('admin.pages.teacher.index', compact('teachers', 'pageTitle'));
     }
 

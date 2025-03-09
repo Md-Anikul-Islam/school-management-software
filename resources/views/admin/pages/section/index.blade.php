@@ -14,32 +14,47 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">School</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Management</a></li>
-                        <li class="breadcrumb-item active">Class List</li>
+                        <li class="breadcrumb-item active">{{ $pageTitle }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Class List</h4>
+                <h4 class="page-title">{{ $pageTitle }}</h4>
             </div>
         </div>
     </div>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <div class="d-flex justify-content-between">
-                    @can('class-create')
-                        <a href="{{ route('class.create') }}" class="btn btn-primary"><span><i
-                                    class="ri-add-fill"></i></span>Add Class</a>
-                    @endcan
-                    <div class="d-flex justify-content-between">
-                        <div class="btn-group">
-                            <button style="background-color:darkblue;" class="btn text-nowrap text-light"
-                                    onclick="exportTableToPDF('class.pdf')">
-                                Export As PDF
-                            </button>
-                            <!-- Export To CSV -->
-                            <button style="background-color: darkgreen" class="btn btn-info text-nowrap"
-                                    onclick="exportTableToCSV('class.csv')">
-                                Export To CSV
-                            </button>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between gap-1">
+                        @can('class-create')
+                            <a href="{{ route('class.create') }}" class="btn btn-primary"><span><i
+                                        class="ri-add-fill"></i></span>Add Class</a>
+                        @endcan
+                        <form action="{{ route('section.index') }}" method="GET" class="d-flex gap-2">
+                            <select class="form-control" name="class_id" onchange="this.form.submit()">
+                                <option value="">Filter by Class</option>
+                                @foreach($classes as $class)
+                                    <option
+                                        value="{{ $class->id }}" {{ request('class_id') == $class->id ? 'selected' : '' }}>
+                                        {{ $class->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </form>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <div class="btn-group">
+                                <button style="background-color:darkblue;" class="btn text-nowrap text-light"
+                                        onclick="exportTableToPDF('section.pdf')">
+                                    Export As PDF
+                                </button>
+                                <!-- Export To CSV -->
+                                <button style="background-color: darkgreen" class="btn btn-info text-nowrap"
+                                        onclick="exportTableToCSV('section.csv')">
+                                    Export To CSV
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,49 +65,46 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Class Numeric</th>
+                        <th>Class</th>
+                        <th>Capacity</th>
                         <th>Teacher</th>
                         <th>Note</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($classes as $class)
+                    @foreach ($sections as $section)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $class->name }}</td>
-                            <td>{{ $class->class_numeric }}</td>
-                            <td>{{ $class->teacher->name ?? 'N/A' }}</td>
-                            <td>{{ $class->note }}</td>
+                            <td>{{ $section->name }}</td>
+                            <td>{{ $section->class_name ?? 'None' }}</td> <!-- Show "None" if class_name is null -->
+                            <td>{{ $section->capacity }}</td>
+                            <td>{{ $section->teacher->name ?? 'N/A' }}</td>
+                            <td>{{ $section->note }}</td>
                             <td>
-                                @can('class-edit')
-                                    <a href="{{ route('class.edit', $class->id) }}" class="btn btn-info"><i
-                                            class="ri-edit-line"></i></a>
-                                @endcan
-                                @can('class-delete')
+                                <a href="{{ route('section.edit', $section->id) }}" class="btn btn-info"><i class="ri-edit-line"></i></a>
+                                @can('section-delete')
                                     <a class="btn btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#danger-header-modal{{ $class->id }}"><i
-                                            class="ri-delete-bin-6-fill"></i></a>
-                                    <div id="danger-header-modal{{ $class->id }}" class="modal fade" tabindex="-1"
-                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $class->id }}"
+                                       data-bs-target="#danger-header-modal{{ $section->id }}"><i class="ri-delete-bin-6-fill"></i></a>
+                                    <div id="danger-header-modal{{ $section->id }}" class="modal fade" tabindex="-1"
+                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $section->id }}"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header modal-colored-header bg-danger">
                                                     <h4 class="modal-title"
-                                                        id="danger-header-modalLabel{{ $class->id }}">Delete</h4>
+                                                        id="danger-header-modalLabel{{ $section->id }}">Delete</h4>
                                                     <button type="button" class="btn-close btn-close-white"
                                                             data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h5 class="mt-0">Are you sure you want to delete this class?</h5>
+                                                    <h5 class="mt-0">Are you sure you want to delete this section?</h5>
                                                 </div>
                                                 <div class="modal-footer">
-
                                                     <button type="button" class="btn btn-light"
                                                             data-bs-dismiss="modal">Close
                                                     </button>
-                                                    <form action="{{ route('class.destroy', $class->id) }}"
+                                                    <form action="{{ route('section.destroy', $section->id) }}"
                                                           method="post">
                                                         @csrf
                                                         @method('DELETE')
@@ -111,7 +123,6 @@
             </div>
         </div>
     </div>
-
     <script type="text/javascript">
         // Excel Print
         function downloadCSV(csv, filename) {

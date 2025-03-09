@@ -33,4 +33,14 @@ class Teacher extends Model
     {
         return $this->hasMany(Subject::class);
     }
+
+    public function section()
+    {
+        return $this->hasMany(SectionName::class);
+    }
+
+    public function class()
+    {
+        return $this->hasMany(ClassName::class);
+    }
 }
