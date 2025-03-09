@@ -2824,6 +2824,25 @@ select.form-control {
   }
 }
 
+.event-part {
+  margin-bottom: 100px;
+}
+@media (max-width: 767px) {
+  .event-part {
+    margin-bottom: 80px;
+  }
+}
+@media (max-width: 575px) {
+  .event-part {
+    margin-bottom: 60px;
+  }
+}
+@media (max-width: 991px) {
+  .event-part .event-card {
+    width: 300px;
+  }
+}
+
 .footer-section {
   background-size: cover;
   background-position: center;
