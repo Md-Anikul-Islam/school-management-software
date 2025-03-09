@@ -2824,6 +2824,30 @@ select.form-control {
   }
 }
 
+.teacher-part-two {
+  padding-top: 80px;
+  padding-bottom: 40px;
+}
+@media (max-width: 991px) {
+  .teacher-part-two {
+    padding-top: 60px;
+  }
+}
+@media (max-width: 767px) {
+  .teacher-part-two {
+    padding-top: 40px;
+    padding-bottom: 20px;
+  }
+}
+.teacher-part-two .teacher-card {
+  margin-bottom: 50px;
+}
+@media (max-width: 767px) {
+  .teacher-part-two .teacher-card {
+    margin-bottom: 30px;
+  }
+}
+
 .event-part {
   margin-bottom: 100px;
 }
