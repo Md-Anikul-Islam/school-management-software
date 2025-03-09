@@ -1,6 +1,29 @@
 (function ($) {
   "use strict";
   
+  $(document).ready(function () {
+    // Available themes
+    const themes = ["pink", "orange", "blue", "green"];
+  
+    // Load the theme from localStorage and apply it
+    const storedTheme = localStorage.getItem("theme") || "pink";
+    $("html").attr("data-bs-theme", storedTheme);
+  
+    // Function to change theme
+    function changeTheme(theme) {
+      if (themes.includes(theme)) {
+        $("html").attr("data-bs-theme", theme);
+        localStorage.setItem("theme", theme);
+      }
+    }
+  
+    // Event listener for theme buttons
+    $(".theme-btn").on("click", function () {
+      const selectedTheme = $(this).attr("data-theme");
+      changeTheme(selectedTheme);
+    });
+  });
+  
    /* Odometer Activeate js */
   $(document).ready(function () {
     $(".odometer").appear(function () {

@@ -1,0 +1,43 @@
+// Theme switcher
+.theme-switcher {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    position: fixed;
+    transform: translate(170px, 0px);
+    top: 50%;
+    right: 0;
+    padding: 6px 10px;
+    overflow: hidden;
+    background-color: #0C1028;
+    color: #fff;
+    border-radius: 40px 0 0 40px;
+    z-index: 10;
+    transition: all 0.5s ease-in-out;
+    vertical-align: middle;
+  }
+  .theme-switcher:hover {
+    transform: translate(0px, 0px);
+  }
+  .theme-switcher span {
+    font-size: 30px;
+    color: var(--primary);
+    cursor: pointer;
+  }
+  .theme-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .theme-btn:hover {
+    transform: scale(1.1);
+  }
+  
+  .pink { background-color: #f44d7b; }
+  .orange { background-color: #fa5e01; }
+  .blue { background-color: #5c4df4; }
+  .green { background-color: #43bb32; }
