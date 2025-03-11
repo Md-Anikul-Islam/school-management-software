@@ -42,4 +42,9 @@ class ClassName extends Model
     {
         return $this->hasMany(Assignment::class);
     }
+
+    public function examSchedules()
+    {
+        return $this->hasMany(ExamSchedule::class, 'class_id');
+    }
 }

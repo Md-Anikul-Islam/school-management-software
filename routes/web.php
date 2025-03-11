@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\admin\AssignmentController;
 use App\Http\Controllers\admin\ClassNameController;
 use App\Http\Controllers\admin\ExamController;
+use App\Http\Controllers\admin\ExamScheduleController;
 use App\Http\Controllers\admin\SectionNameContoller;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\SubjectController;
@@ -92,6 +93,16 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/exam-edit/{id}', [ExamController::class, 'edit'])->name('exam.edit');
     Route::put('/exam-update/{id}', [ExamController::class, 'update'])->name('exam.update');
     Route::delete('/exam-delete/{id}', [ExamController::class, 'destroy'])->name('exam.destroy');
+
+    //exam schedule
+    Route::get('/exam-schedule-list', [ExamScheduleController::class, 'index'])->name('exam-schedule.index');
+    Route::get('/exam-schedule-create', [ExamScheduleController::class, 'create'])->name('exam-schedule.create');
+    Route::post('/exam-schedule-store', [ExamScheduleController::class, 'store'])->name('exam-schedule.store');
+    Route::get('/exam-schedule-edit/{id}', [ExamScheduleController::class, 'edit'])->name('exam-schedule.edit');
+    Route::put('/exam-schedule-update/{id}', [ExamScheduleController::class, 'update'])->name('exam-schedule.update');
+    Route::delete('/exam-schedule-delete/{id}', [ExamScheduleController::class, 'destroy'])->name('exam-schedule.destroy');
+    Route::get('/admin/fetch-sections', [ExamScheduleController::class, 'fetchSections'])->name('fetch.sections');
+    Route::get('/admin/fetch-subjects', [ExamScheduleController::class, 'fetchSubjects']);
 
 
     //Role and User Section

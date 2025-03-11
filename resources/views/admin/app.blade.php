@@ -226,6 +226,15 @@
                                     </li>
                                 @endcan
                             </ul>
+                            <ul class="side-nav-second-level">
+                                @can('exam-schedule-list')
+                                    <li>
+                                        <a href="{{ route('exam-schedule.index') }}">
+                                            <i class="ri-home-smile-2-fill"></i>
+                                            <span>Exam Schedule</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
                         </div>
                     </li>
                 @endcan

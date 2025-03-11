@@ -18,4 +18,9 @@ class Exam extends Model
         'created_by',
         'updated_by',
     ];
+
+    public function examSchedules()
+    {
+        return $this->hasMany(ExamSchedule::class, 'exam_id');
+    }
 }

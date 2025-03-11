@@ -96,6 +96,12 @@ class PermissionTableSeeder extends Seeder
             'exam-create',
             'exam-edit',
             'exam-delete',
+
+            //exam schedule
+            'exam-schedule-list',
+            'exam-schedule-create',
+            'exam-schedule-edit',
+            'exam-schedule-delete',
         ];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {
