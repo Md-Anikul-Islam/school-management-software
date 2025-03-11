@@ -87,6 +87,15 @@ class PermissionTableSeeder extends Seeder
             'assignment-edit',
             'assignment-delete',
             'assignment-download',
+
+            //exam module
+            'exam-module',
+
+            //exam
+            'exam-list',
+            'exam-create',
+            'exam-edit',
+            'exam-delete',
         ];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {

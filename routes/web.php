@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\admin\AssignmentController;
 use App\Http\Controllers\admin\ClassNameController;
+use App\Http\Controllers\admin\ExamController;
 use App\Http\Controllers\admin\SectionNameContoller;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\SubjectController;
@@ -83,6 +84,14 @@ Route::middleware('auth')->group(callback: function () {
     Route::delete('/assignment-delete/{id}', [AssignmentController::class, 'destroy'])->name('assignment.destroy');
     Route::get('/admin/fetch-sections', [AssignmentController::class, 'fetchSections'])->name('fetch.sections');
     Route::get('/admin/fetch-subjects', [AssignmentController::class, 'fetchSubjects']);
+
+    //exam
+    Route::get('/exam-list', [ExamController::class, 'index'])->name('exam.index');
+    Route::get('/exam-create', [ExamController::class, 'create'])->name('exam.create');
+    Route::post('/exam-store', [ExamController::class, 'store'])->name('exam.store');
+    Route::get('/exam-edit/{id}', [ExamController::class, 'edit'])->name('exam.edit');
+    Route::put('/exam-update/{id}', [ExamController::class, 'update'])->name('exam.update');
+    Route::delete('/exam-delete/{id}', [ExamController::class, 'destroy'])->name('exam.destroy');
 
 
     //Role and User Section

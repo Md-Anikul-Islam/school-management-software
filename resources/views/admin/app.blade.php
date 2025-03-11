@@ -132,15 +132,6 @@
                     </li>
                 @endcan
 
-                @can('slider-list')
-                    <li class="side-nav-item">
-                        <a href="{{route('slider.list')}}" class="side-nav-link">
-                            <i class="ri-dashboard-3-line"></i>
-                            <span> Slider </span>
-                        </a>
-                    </li>
-                @endcan
-
                 @can('student-list')
                     <li class="side-nav-item">
                         <a href="#" class="side-nav-link">
@@ -210,6 +201,28 @@
                                         <a href="{{ route('assignment.index') }}">
                                             <i class="ri-bar-chart-2-fill"></i>
                                             <span>Assignment</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+                @can('exam-module')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages3" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-school-line"></i>
+                            <span>Exam</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages3">
+                            <ul class="side-nav-second-level">
+                                @can('exam-list')
+                                    <li>
+                                        <a href="{{ route('exam.index') }}">
+                                            <i class="ri-home-smile-2-fill"></i>
+                                            <span>Exam</span></a>
                                     </li>
                                 @endcan
                             </ul>
