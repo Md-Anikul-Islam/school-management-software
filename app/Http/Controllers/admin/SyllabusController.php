@@ -69,7 +69,7 @@ class SyllabusController extends Controller
             $syllabus->class_id = $request->class_id;
             $syllabus->date = date('Y-m-d');
             $syllabus->uploaded_by = Auth::id();
-            $syllabus->school_id = Auth::id() ?? Auth::user()->school_id;
+            $syllabus->school_id = Auth::user()->school_id ?? Auth::id();
             $syllabus->created_by = Auth::id();
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
@@ -110,7 +110,7 @@ class SyllabusController extends Controller
             $syllabus->class_id = $request->class_id;
             $syllabus->date = date('Y-m-d');
             $syllabus->uploaded_by = Auth::id();
-            $syllabus->school_id = Auth::id() ?? Auth::user()->school_id;
+            $syllabus->school_id = Auth::user()->school_id ?? Auth::id();
             $syllabus->updated_by = Auth::id();
             if ($request->hasFile('file')) {
                 $file = $request->file('file');

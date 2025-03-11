@@ -235,6 +235,15 @@
                                     </li>
                                 @endcan
                             </ul>
+                            <ul class="side-nav-second-level">
+                                @can('grade-list')
+                                    <li>
+                                        <a href="{{ route('grade.index') }}">
+                                            <i class="ri-home-smile-2-fill"></i>
+                                            <span>Exam Grade</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
                         </div>
                     </li>
                 @endcan

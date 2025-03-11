@@ -100,7 +100,7 @@ class SubjectController extends Controller
             $subject->name = $request->name;
             $subject->subject_author = $request->subject_author;
             $subject->subject_code = $request->subject_code;
-            $subject->school_id = Auth::id() ?? Auth::user()->school_id;
+            $subject->school_id = Auth::user()->school_id ?? Auth::id();
             $subject->created_by = Auth::id();
             $subject->teacher_ids = json_encode($request->teacher_id);
             $subject->save();
@@ -161,7 +161,7 @@ class SubjectController extends Controller
             $subject->name = $request->name;
             $subject->subject_author = $request->subject_author;
             $subject->subject_code = $request->subject_code;
-            $subject->school_id = Auth::id() ?? Auth::user()->school_id;
+            $subject->school_id = Auth::user()->school_id ?? Auth::id();
             $subject->updated_by = Auth::id();
             $subject->teacher_ids = json_encode($request->teacher_id);
             $subject->save();

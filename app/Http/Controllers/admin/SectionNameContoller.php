@@ -72,7 +72,7 @@ class SectionNameContoller extends Controller
             $section->class_id = $request->class_id;
             $section->teacher_id = $request->teacher_id;
             $section->note = $request->note;
-            $section->school_id = Auth::id();
+            $section->school_id = Auth::user()->school_id ?? Auth::id();
             $section->created_by = Auth::id();
             $section->save();
             toastr()->success('Data has been saved successfully!');
@@ -110,7 +110,7 @@ class SectionNameContoller extends Controller
             $section->class_id = $request->class_id;
             $section->teacher_id = $request->teacher_id;
             $section->note = $request->note;
-            $section->school_id = Auth::id();
+            $section->school_id = Auth::user()->school_id ?? Auth::id();
             $section->updated_by = Auth::id();
             $section->save();
             toastr()->success('Data has been updated successfully!');

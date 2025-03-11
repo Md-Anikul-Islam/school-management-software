@@ -46,7 +46,7 @@ class ExamController extends Controller
             $exam->date = $request->date;
             $exam->note = $request->note;
             $exam->do_not_delete = $request->has('do_not_delete') ? 1 : 0;;
-            $exam->school_id = Auth::id() ?? Auth::user()->school_id;
+            $exam->school_id = Auth::user()->school_id ?? Auth::id();
             $exam->created_by = Auth::id();
             $exam->save();
             toastr()->success('Data has been saved successfully!');
@@ -74,7 +74,7 @@ class ExamController extends Controller
             $exam->date = $request->date;
             $exam->note = $request->note;
             $exam->do_not_delete = $request->has('do_not_delete') ? 1 : 0;
-            $exam->school_id = Auth::id() ?? Auth::user()->school_id;
+            $exam->school_id = Auth::user()->school_id ?? Auth::id();
             $exam->updated_by = Auth::id();
             $exam->save();
             toastr()->success('Data has been updated successfully!');

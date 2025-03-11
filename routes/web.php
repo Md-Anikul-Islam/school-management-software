@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\AssignmentController;
 use App\Http\Controllers\admin\ClassNameController;
 use App\Http\Controllers\admin\ExamController;
 use App\Http\Controllers\admin\ExamScheduleController;
+use App\Http\Controllers\admin\GradeController;
 use App\Http\Controllers\admin\SectionNameContoller;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\SubjectController;
@@ -103,6 +104,14 @@ Route::middleware('auth')->group(callback: function () {
     Route::delete('/exam-schedule-delete/{id}', [ExamScheduleController::class, 'destroy'])->name('exam-schedule.destroy');
     Route::get('/admin/fetch-sections', [ExamScheduleController::class, 'fetchSections'])->name('fetch.sections');
     Route::get('/admin/fetch-subjects', [ExamScheduleController::class, 'fetchSubjects']);
+
+    //grade
+    Route::get('/grade-list', [GradeController::class, 'index'])->name('grade.index');
+    Route::get('/grade-create', [GradeController::class, 'create'])->name('grade.create');
+    Route::post('/grade-store', [GradeController::class, 'store'])->name('grade.store');
+    Route::get('/grade-edit/{id}', [GradeController::class, 'edit'])->name('grade.edit');
+    Route::put('/grade-update/{id}', [GradeController::class, 'update'])->name('grade.update');
+    Route::delete('/grade-delete/{id}', [GradeController::class, 'destroy'])->name('grade.destroy');
 
 
     //Role and User Section

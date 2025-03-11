@@ -80,7 +80,7 @@ class TeacherController extends Controller
             $teacher->photo = $fileName;
             $teacher->username = $request->username;
             $teacher->password = $request->password;
-            $teacher->school_id = Auth::id() ?? Auth::user()->school_id;
+            $teacher->school_id = Auth::user()->school_id ?? Auth::id();
             $teacher->created_by = Auth::id();
             $teacher->save();
             toastr()->success('Data has been saved successfully!');
@@ -212,7 +212,7 @@ class TeacherController extends Controller
             $teacher->photo = $fileName;
             $teacher->username = $request->username;
             $teacher->password = $request->password;
-            $teacher->school_id = Auth::id() ?? Auth::user()->school_id;
+            $teacher->school_id = Auth::user()->school_id ?? Auth::id();
             $teacher->created_by = Auth::id();
             $teacher->save();
             toastr()->success('Data has been saved successfully!');

@@ -91,7 +91,7 @@ class AssignmentController extends Controller
             $assignment->section_id = json_encode($request->section_id); // Convert array to JSON
             $assignment->subject_id = $request->subject_id;
             $assignment->created_by = Auth::id();
-            $assignment->school_id = Auth::id() ?? Auth::user()->school_id;
+            $assignment->school_id = Auth::user()->school_id ?? Auth::id();
 
             if ($request->hasFile('file')) {
                 $file = $request->file('file');
@@ -136,7 +136,7 @@ class AssignmentController extends Controller
             $assignment->section_id = json_encode($request->section_id); // Convert array to JSON
             $assignment->subject_id = $request->subject_id;
             $assignment->updated_by = Auth::id();
-            $assignment->school_id = Auth::id() ?? Auth::user()->school_id;
+            $assignment->school_id = Auth::user()->school_id ?? Auth::id();
 
             if ($request->hasFile('file')) {
                 $file = $request->file('file');

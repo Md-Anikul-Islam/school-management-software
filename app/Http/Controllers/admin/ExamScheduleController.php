@@ -78,7 +78,7 @@ class ExamScheduleController extends Controller
             $examSchedule->time_from = $request->time_from;
             $examSchedule->time_to = $request->time_to;
             $examSchedule->room_no = $request->room_no;
-            $examSchedule->school_id = Auth::id() ?? Auth::user()->school_id;
+            $examSchedule->school_id = Auth::user()->school_id ?? Auth::id();
             $examSchedule->created_by = Auth::user()->id;
             $examSchedule->save();
             toastr()->success('Data has been saved successfully!');
@@ -122,7 +122,7 @@ class ExamScheduleController extends Controller
             $examSchedule->time_from = $request->time_from;
             $examSchedule->time_to = $request->time_to;
             $examSchedule->room_no = $request->room_no;
-            $examSchedule->school_id = Auth::id() ?? Auth::user()->school_id;
+            $examSchedule->school_id = Auth::user()->school_id ?? Auth::id();
             $examSchedule->updated_by = Auth::user()->id;
             $examSchedule->save();
             toastr()->success('Data has been updated successfully!');
