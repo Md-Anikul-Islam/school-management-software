@@ -3681,6 +3681,93 @@ select.form-control {
   }
 }
 
+.event-part-two {
+  padding-block: 70px;
+}
+@media (max-width: 991px) {
+  .event-part-two {
+    padding-block: 50px;
+  }
+}
+.event-part-two h2 {
+  margin-bottom: 12px;
+}
+
+.event-group {
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--line);
+}
+
+.event-meta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 24px;
+  padding-bottom: 30px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--line);
+}
+.event-meta button {
+  height: 36px;
+  border-radius: 4px;
+  padding-inline: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--white);
+  background-color: var(--primary);
+}
+.event-meta span {
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.event-details {
+  width: 100%;
+  max-width: 740px;
+  margin: 0 auto;
+}
+.event-details img {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+  margin-bottom: 40px;
+}
+.event-details p span {
+  margin-top: 25px;
+}
+.event-details h3 {
+  margin-top: 30px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.recent-part {
+  margin-bottom: 80px;
+}
+@media (max-width: 991px) {
+  .recent-part {
+    margin-bottom: 60px;
+  }
+}
+@media (max-width: 767px) {
+  .recent-part {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .event-card {
+    width: 290px;
+  }
+}
+
 /*=============================
  Contact Page CSS Start
 ===============================*/
