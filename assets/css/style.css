@@ -3532,6 +3532,68 @@ select.form-control {
   margin-bottom: 30px;
 }
 
+.notice-part-two {
+  padding-block: 70px;
+}
+@media (max-width: 991px) {
+  .notice-part-two {
+    padding-block: 50px;
+  }
+}
+.notice-part-two h2 {
+  margin-bottom: 12px;
+}
+
+.notice-meta {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 24px;
+  padding-bottom: 30px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--line);
+}
+.notice-meta button {
+  height: 36px;
+  border-radius: 4px;
+  padding-inline: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--white);
+  background-color: var(--primary);
+}
+.notice-meta span {
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.notice-details {
+  width: 100%;
+  max-width: 740px;
+  margin: 0 auto;
+}
+.notice-details img {
+  width: 100%;
+  display: block;
+  border-radius: 4px;
+  margin-bottom: 40px;
+}
+.notice-details p span {
+  margin-top: 25px;
+}
+.notice-details h3 {
+  margin-top: 30px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
 .blog-part-two {
   padding-block: 70px;
 }
