@@ -40,9 +40,8 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="teacher_id" class="form-label">Teacher</label>
-                        <select class="form-control" id="teacher_id" name="teacher_id" required>
-                            <option value="">Select Teacher</option>
+                        <label for="teacher_id" class="form-label">Teachers</label>
+                        <select class="form-control" id="teacher_id" name="teacher_id[]" multiple required>
                             @foreach($teachers as $teacher)
                                 <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
                             @endforeach

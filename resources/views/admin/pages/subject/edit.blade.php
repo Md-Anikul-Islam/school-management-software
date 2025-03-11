@@ -41,11 +41,10 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="teacher_id" class="form-label">Teacher</label>
-                        <select class="form-control" id="teacher_id" name="teacher_id" required>
-                            <option value="">Select Teacher</option>
+                        <label for="teacher_id" class="form-label">Teachers</label>
+                        <select class="form-control" id="teacher_id" name="teacher_id[]" multiple required>
                             @foreach($teachers as $teacher)
-                                <option value="{{ $teacher->id }}" {{ $subject->teacher_id == $teacher->id ? 'selected' : '' }}>{{ $teacher->name }}</option>
+                                <option value="{{ $teacher->id }}" {{ in_array($teacher->id, json_decode($subject->teacher_ids ?? '[]')) ? 'selected' : '' }}>{{ $teacher->name }}</option>
                             @endforeach
                         </select>
                     </div>

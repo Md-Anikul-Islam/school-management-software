@@ -79,7 +79,17 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $assignment->title }}</td>
                             <td>{{ $assignment->class->name ?? 'N/A' }}</td>
-                            <td>{{ $assignment->sectionNames ?? 'N/A' }}</td>
+                            <td>
+                                @if($assignment->sectionNames)
+                                    <ul>
+                                        @foreach(json_decode($assignment->sectionNames) as $sectionName)
+                                            <li>{{ $sectionName }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    N/A
+                                @endif
+                            </td>
                             <td>{{ $assignment->subject->name ?? 'N/A' }}</td>
                             <td>{{ $assignment->deadline }}</td>
                             <td>

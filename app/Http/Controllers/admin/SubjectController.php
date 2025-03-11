@@ -23,6 +23,7 @@ class SubjectController extends Controller
             return $next($request);
         })->only('index');
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -37,11 +38,25 @@ class SubjectController extends Controller
             $subjects->where('class_id', $request->class_id);
         }
 
-        if(!auth()->user()->hasRole('Super Admin')){
+        if (!auth()->user()->hasRole('Super Admin')) {
             $subjects->where('school_id', Auth::id())->orWhere('school_id', Auth::user()->school_id);
         }
 
         $subjects = $subjects->latest()->get();
+
+        $subjects->each(function ($subject) {
+            if ($subject->teacher_ids) {
+                $teacherIds = json_decode($subject->teacher_ids, true);
+                if ($teacherIds && is_array($teacherIds)) {
+                    $teacherNames = Teacher::whereIn('id', $teacherIds)->pluck('name')->toArray();
+                    $subject->teacherNames = !empty($teacherNames) ? json_encode($teacherNames) : null;
+                } else {
+                    $subject->teacherNames = null;
+                }
+            } else {
+                $subject->teacherNames = null;
+            }
+        });
 
         return view('admin.pages.subject.index', compact('subjects', 'pageTitle', 'classes'));
     }
@@ -51,7 +66,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        if(auth()->user()->hasRole('Super Admin')){
+        if (auth()->user()->hasRole('Super Admin')) {
             $classes = ClassName::latest()->get();
             $teachers = Teacher::latest()->get();
         } else {
@@ -69,7 +84,7 @@ class SubjectController extends Controller
         try {
             $request->validate([
                 'class_id' => 'required',
-                'teacher_id' => 'required',
+                'teacher_id' => 'required|array',
                 'type' => 'required',
                 'pass_mark' => 'required',
                 'final_mark' => 'required',
@@ -79,7 +94,6 @@ class SubjectController extends Controller
             ]);
             $subject = new Subject();
             $subject->class_id = $request->class_id;
-            $subject->teacher_id = $request->teacher_id;
             $subject->type = $request->type ?? 'Mandatory';
             $subject->pass_mark = $request->pass_mark;
             $subject->final_mark = $request->final_mark;
@@ -88,7 +102,9 @@ class SubjectController extends Controller
             $subject->subject_code = $request->subject_code;
             $subject->school_id = Auth::id() ?? Auth::user()->school_id;
             $subject->created_by = Auth::id();
+            $subject->teacher_ids = json_encode($request->teacher_id);
             $subject->save();
+
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
@@ -111,7 +127,7 @@ class SubjectController extends Controller
     public function edit($id)
     {
         $subject = Subject::find($id);
-        if(auth()->user()->hasRole('Super Admin')){
+        if (auth()->user()->hasRole('Super Admin')) {
             $classes = ClassName::latest()->get();
             $teachers = Teacher::latest()->get();
         } else {
@@ -129,7 +145,7 @@ class SubjectController extends Controller
         try {
             $request->validate([
                 'class_id' => 'required',
-                'teacher_id' => 'required',
+                'teacher_id' => 'required|array',
                 'type' => 'required',
                 'pass_mark' => 'required',
                 'final_mark' => 'required',
@@ -139,7 +155,6 @@ class SubjectController extends Controller
             ]);
             $subject = Subject::find($id);
             $subject->class_id = $request->class_id;
-            $subject->teacher_id = $request->teacher_id;
             $subject->type = $request->type ?? 'Mandatory';
             $subject->pass_mark = $request->pass_mark;
             $subject->final_mark = $request->final_mark;
@@ -148,7 +163,9 @@ class SubjectController extends Controller
             $subject->subject_code = $request->subject_code;
             $subject->school_id = Auth::id() ?? Auth::user()->school_id;
             $subject->updated_by = Auth::id();
+            $subject->teacher_ids = json_encode($request->teacher_id);
             $subject->save();
+
             toastr()->success('Data has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {

@@ -78,7 +78,17 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $subject->name }}</td>
                             <td>{{ $subject->class->name ?? 'N/A' }}</td>
-                            <td>{{ $subject->teacher->name ?? 'N/A' }}</td>
+                            <td>
+                                @if($subject->teacherNames)
+                                    <ul>
+                                        @foreach(json_decode($subject->teacherNames) as $teacherName)
+                                            <li>{{ $teacherName }}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                    N/A
+                                @endif
+                            </td>
                             <td>{{ $subject->type == 'mandatory' ? 'Mandatory' : 'Optional' }}</td>
                             <td>{{ $subject->subject_code }}</td>
                             <td>

@@ -47,9 +47,9 @@ class AssignmentController extends Controller
 
             if ($sectionIds && is_array($sectionIds)) {
                 $sectionNames = SectionName::whereIn('id', $sectionIds)->pluck('name')->toArray();
-                $assignment->sectionNames = !empty($sectionNames) ? implode(', ', $sectionNames) : 'N/A';
+                $assignment->sectionNames = !empty($sectionNames) ? json_encode($sectionNames) : null; //Store json encoded data.
             } else {
-                $assignment->sectionNames = 'N/A';
+                $assignment->sectionNames = null;
             }
         });
 
