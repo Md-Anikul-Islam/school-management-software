@@ -36,7 +36,7 @@ class SectionNameContoller extends Controller
         }
 
         if(!auth()->user()->hasRole('Super Admin')){
-            $sections->where('school_id', Auth::id());
+            $sections->where('school_id', Auth::id())->orWhere('school_id', Auth::user()->school_id);
         }
 
         $sections = $sections->latest()->get();
@@ -51,8 +51,8 @@ class SectionNameContoller extends Controller
             $classes = ClassName::all();
             $teachers = Teacher::all();
         } else {
-            $classes = ClassName::where('school_id', Auth::id())->get();
-            $teachers = Teacher::where('school_id', Auth::id())->get();
+            $classes = ClassName::where('school_id', Auth::id())->orWhere('school_id', Auth::user()->school_id)->get();
+            $teachers = Teacher::where('school_id', Auth::id())->orWhere('school_id', Auth::user()->school_id)->get();
         }
         return view('admin.pages.section.add', compact('classes', 'teachers'));
     }

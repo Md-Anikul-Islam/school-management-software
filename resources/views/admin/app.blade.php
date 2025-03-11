@@ -143,7 +143,7 @@
 
                 @can('student-list')
                     <li class="side-nav-item">
-                        <a href="{{route('student.index')}}" class="side-nav-link">
+                        <a href="#" class="side-nav-link">
                             <i class="ri-user-2-line"></i>
                             <span> Student </span>
                         </a>
@@ -201,6 +201,15 @@
                                         <a href="{{ route('syllabus.index') }}">
                                             <i class="ri-bar-chart-2-fill"></i>
                                             <span>Syllabus</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('assignment-list')
+                                    <li>
+                                        <a href="{{ route('assignment.index') }}">
+                                            <i class="ri-bar-chart-2-fill"></i>
+                                            <span>Assignment</span></a>
                                     </li>
                                 @endcan
                             </ul>

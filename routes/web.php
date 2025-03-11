@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\admin\AdminDashboardController;
+use App\Http\Controllers\admin\AssignmentController;
 use App\Http\Controllers\admin\ClassNameController;
 use App\Http\Controllers\admin\SectionNameContoller;
 use App\Http\Controllers\admin\SliderController;
-use App\Http\Controllers\admin\StudentController;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\SyllabusController;
 use App\Http\Controllers\admin\TeacherController;
@@ -27,16 +27,6 @@ Route::middleware('auth')->group(callback: function () {
 
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/unauthorized-action', [AdminDashboardController::class, 'unauthorized'])->name('unauthorized.action');
-
-    //student
-    Route::get('/student-list', [StudentController::class, 'index'])->name('student.index');
-    Route::get('/student-create', [StudentController::class, 'create'])->name('student.create');
-    Route::post('/student-store', [StudentController::class, 'store'])->name('student.store');
-    Route::get('/student-edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
-    Route::get('/student-show/{id}', [StudentController::class, 'show'])->name('student.show');
-    Route::put('/student-update/{id}', [StudentController::class, 'update'])->name('student.update');
-    Route::delete('/student-delete/{id}', [StudentController::class, 'destroy'])->name('student.destroy');
-    Route::put('/student-update-status/{id}', [StudentController::class, 'update_status'])->name('student.update_status');
 
     //teacher
     Route::get('/teacher-list', [TeacherController::class, 'index'])->name('teacher.index');
@@ -83,6 +73,16 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/syllabus-edit/{id}', [SyllabusController::class, 'edit'])->name('syllabus.edit');
     Route::put('/syllabus-update/{id}', [SyllabusController::class, 'update'])->name('syllabus.update');
     Route::delete('/syllabus-delete/{id}', [SyllabusController::class, 'destroy'])->name('syllabus.destroy');
+
+    //assignment
+    Route::get('/assignment-list', [AssignmentController::class, 'index'])->name('assignment.index');
+    Route::get('/assignment-create', [AssignmentController::class, 'create'])->name('assignment.create');
+    Route::post('/assignment-store', [AssignmentController::class, 'store'])->name('assignment.store');
+    Route::get('/assignment-edit/{id}', [AssignmentController::class, 'edit'])->name('assignment.edit');
+    Route::put('/assignment-update/{id}', [AssignmentController::class, 'update'])->name('assignment.update');
+    Route::delete('/assignment-delete/{id}', [AssignmentController::class, 'destroy'])->name('assignment.destroy');
+    Route::get('/admin/fetch-sections', [AssignmentController::class, 'fetchSections'])->name('fetch.sections');
+    Route::get('/admin/fetch-subjects', [AssignmentController::class, 'fetchSubjects']);
 
 
     //Role and User Section

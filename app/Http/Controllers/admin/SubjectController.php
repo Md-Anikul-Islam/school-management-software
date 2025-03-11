@@ -38,7 +38,7 @@ class SubjectController extends Controller
         }
 
         if(!auth()->user()->hasRole('Super Admin')){
-            $subjects->where('school_id', Auth::id());
+            $subjects->where('school_id', Auth::id())->orWhere('school_id', Auth::user()->school_id);
         }
 
         $subjects = $subjects->latest()->get();
@@ -55,8 +55,8 @@ class SubjectController extends Controller
             $classes = ClassName::latest()->get();
             $teachers = Teacher::latest()->get();
         } else {
-            $classes = ClassName::where('school_id', Auth::id())->latest()->get();
-            $teachers = Teacher::where('school_id', Auth::id())->latest()->get();
+            $classes = ClassName::where('school_id', Auth::id())->orWhere('school_id', Auth::user()->school_id)->latest()->get();
+            $teachers = Teacher::where('school_id', Auth::id())->orWhere('school_id', Auth::user()->school_id)->latest()->get();
         }
         return view('admin.pages.subject.add', compact('classes', 'teachers'));
     }

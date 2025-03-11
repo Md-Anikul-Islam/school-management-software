@@ -34,4 +34,9 @@ class SectionName extends Model
     {
         return $this->belongsTo(ClassName::class);
     }
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }

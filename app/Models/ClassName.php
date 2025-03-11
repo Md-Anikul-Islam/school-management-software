@@ -33,4 +33,13 @@ class ClassName extends Model
     {
         return $this->hasMany(SectionName::class);
     }
+
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class);
+    }
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }

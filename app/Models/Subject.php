@@ -37,4 +37,9 @@ class Subject extends Model
     {
         return $this->belongsTo(ClassName::class, 'class_id');
     }
+
+    public function assignments()
+    {
+        return $this->hasMany(Assignment::class);
+    }
 }

@@ -40,12 +40,14 @@ class PermissionTableSeeder extends Seeder
 
             //student
             'student-list',
+            'student-show',
             'student-create',
             'student-edit',
             'student-delete',
 
             //teacher
             'teacher-list',
+            'teacher-show',
             'teacher-create',
             'teacher-edit',
             'teacher-delete',
@@ -73,10 +75,18 @@ class PermissionTableSeeder extends Seeder
 
             //syllabus
             'syllabus-list',
+            'syllabus-download',
             'syllabus-create',
             'syllabus-edit',
             'syllabus-delete',
 
+            //assignment
+            'assignment-list',
+            'assignment-show',
+            'assignment-create',
+            'assignment-edit',
+            'assignment-delete',
+            'assignment-download',
         ];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {

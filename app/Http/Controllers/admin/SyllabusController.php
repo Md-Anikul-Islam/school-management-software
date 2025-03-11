@@ -35,7 +35,7 @@ class SyllabusController extends Controller
         }
 
         if(!auth()->user()->hasRole('Super Admin')){
-            $syllabi->where('school_id', Auth::id());
+            $syllabi->where('school_id', Auth::id())->orWhere('school_id', Auth::user()->school_id);
         }
 
         $syllabi = $syllabi->latest()->get();
@@ -49,7 +49,7 @@ class SyllabusController extends Controller
         if(auth()->user()->hasRole('Super Admin')){
             $classes = ClassName::all();
         } else {
-            $classes = ClassName::where('school_id', Auth::id())->get();
+            $classes = ClassName::where('school_id', Auth::id())->orWhere('school_id', Auth::user()->school_id)->get();
         }
         return view('admin.pages.syllabus.add', compact('classes'));
     }

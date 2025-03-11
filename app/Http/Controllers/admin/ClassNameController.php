@@ -66,7 +66,7 @@ class ClassNameController extends Controller
         if(auth()->user()->hasRole('Super Admin')){
             $teachers = Teacher::latest()->get();
         } else {
-            $teachers = Teacher::where('school_id', Auth::id())->get();
+            $teachers = Teacher::where('school_id', Auth::id())->orWhere('school_id', Auth::user()->school_id)->get();
         }
         return view('admin.pages.class.edit', compact('class', 'teachers'));
     }
