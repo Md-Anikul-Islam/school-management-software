@@ -21,7 +21,7 @@ class Syllabus extends Model
         'updated_by',
     ];
 
-    public function className()
+    public function class()
     {
         return $this->belongsTo(ClassName::class, 'class_id', 'id');
     }

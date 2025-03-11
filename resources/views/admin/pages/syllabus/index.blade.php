@@ -78,7 +78,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $syllabus->title }}</td>
-                            <td>{{ $syllabus->class_name }}</td>
+                            <td>{{ $syllabus->class->name }}</td>
                             <td>{{ $syllabus->description }}</td>
                             <td>{{ $syllabus->date }}</td>
                             <td>{{ $syllabus->user->name ?? 'N/A' }}</td>

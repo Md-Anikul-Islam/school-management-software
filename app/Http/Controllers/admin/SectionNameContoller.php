@@ -29,21 +29,21 @@ class SectionNameContoller extends Controller
         $pageTitle = 'Section List';
         $classes = ClassName::all();
 
-        $sections = SectionName::join('class_names', 'section_names.class_id', '=', 'class_names.id')
-            ->select('section_names.*', 'class_names.name as class_name');
+        $sections = SectionName::with('class');
 
-        if ($request->filled('class_id')) {
-            $sections->where('section_names.class_id', $request->class_id);
+        if ($request->class_id !== null && $request->class_id !== '') {
+            $sections->where('class_id', $request->class_id);
         }
 
-        if (!auth()->user()->hasRole('Super Admin')) {
-            $sections->where('section_names.school_id', Auth::id());
+        if(!auth()->user()->hasRole('Super Admin')){
+            $sections->where('school_id', Auth::id());
         }
 
         $sections = $sections->latest()->get();
 
         return view('admin.pages.section.index', compact('sections', 'pageTitle', 'classes'));
     }
+
 
     public function create()
     {

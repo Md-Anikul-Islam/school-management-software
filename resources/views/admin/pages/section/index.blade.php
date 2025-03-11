@@ -77,7 +77,7 @@
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $section->name }}</td>
-                            <td>{{ $section->class_name ?? 'None' }}</td> <!-- Show "None" if class_name is null -->
+                            <td>{{ $section->class->name ?? 'None' }}</td> <!-- Show "None" if class_name is null -->
                             <td>{{ $section->capacity }}</td>
                             <td>{{ $section->teacher->name ?? 'N/A' }}</td>
                             <td>{{ $section->note }}</td>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -25,12 +26,10 @@ class StudentController extends Controller
         })->only('index');
     }
 
-
-
     public function index()
     {
         $pageTitle = 'Student List';
-        if(auth()->user()->hasRole('Super Admin')){
+        if (auth()->user()->hasRole('Super Admin')) {
             $students = Student::latest()->paginate(10);
         } else {
             $students = Student::where('school_id', Auth::id())->get();
@@ -53,12 +52,14 @@ class StudentController extends Controller
     {
         try {
             $request->validate([
-                'photo' => 'required',
                 'name' => 'required',
+                'class_id' => 'required',
+                'section_id' => 'required',
+                'reg_no' => 'required',
                 'roll' => 'required',
-                'email' => 'required',
             ]);
 
+            $filename = null;
             if ($request->hasFile('photo')) {
                 $file = $request->file('photo');
                 $filename = date('ymdhis') . '.' . $file->getClientOriginalExtension();
@@ -66,20 +67,40 @@ class StudentController extends Controller
             }
 
             $student = new Student();
-            $student->photo = $filename;
             $student->name = $request->name;
-            $student->roll = $request->roll;
+            $student->guardian_id = $request->guardian_id;
+            $student->admission_date = $request->admission_date;
+            $student->dob = $request->dob;
+            $student->gender = $request->gender;
+            $student->blood_group_id = $request->blood_group_id;
+            $student->religion = $request->religion;
             $student->email = $request->email;
+            $student->phone = $request->phone;
+            $student->address = $request->address;
+            $student->city = $request->city;
+            $student->country_id = $request->country_id;
+            $student->class_id = $request->class_id;
+            $student->section_id = $request->section_id;
+            $student->group_id = $request->group_id;
+            $student->optional_subject_id = $request->optional_subject_id;
+            $student->reg_no = $request->reg_no;
+            $student->roll = $request->roll;
+            $student->photo = $filename;
+            $student->extra_curricular_activities = $request->extra_curricular_activities;
+            $student->remarks = $request->remarks;
+            $student->username = $request->username;
+            $student->password = $request->password;
+            $student->status = $request->status ?? 1;
             $student->school_id = Auth::id() ?? Auth::user()->school_id;
             $student->created_by = Auth::id();
             $student->save();
+
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
         }
     }
-
 
     /**
      * Display the specified resource.
@@ -107,14 +128,15 @@ class StudentController extends Controller
         try {
             $request->validate([
                 'name' => 'required',
+                'class_id' => 'required',
+                'section_id' => 'required',
+                'reg_no' => 'required',
                 'roll' => 'required',
-                'email' => 'required',
             ]);
 
             $student = Student::find($id);
 
-            $filename = $request->photo ?? "";
-
+            $filename = $student->photo ?? "";
             if ($request->hasFile('photo')) {
                 if (File::exists(public_path('uploads/students/' . $student->photo))) {
                     File::delete(public_path('uploads/students/' . $student->photo));
@@ -124,14 +146,34 @@ class StudentController extends Controller
                 $file->move(public_path('uploads/students/'), $filename);
             }
 
-            $student->photo = $filename;
             $student->name = $request->name;
-            $student->roll = $request->roll;
+            $student->guardian_id = $request->guardian_id;
+            $student->admission_date = $request->admission_date;
+            $student->dob = $request->dob;
+            $student->gender = $request->gender;
+            $student->blood_group_id = $request->blood_group_id;
+            $student->religion = $request->religion;
             $student->email = $request->email;
+            $student->phone = $request->phone;
+            $student->address = $request->address;
+            $student->city = $request->city;
+            $student->country_id = $request->country_id;
+            $student->class_id = $request->class_id;
+            $student->section_id = $request->section_id;
+            $student->group_id = $request->group_id;
+            $student->optional_subject_id = $request->optional_subject_id;
+            $student->reg_no = $request->reg_no;
+            $student->roll = $request->roll;
+            $student->photo = $filename;
+            $student->extra_curricular_activities = $request->extra_curricular_activities;
+            $student->remarks = $request->remarks;
+            $student->username = $request->username;
+            $student->password = $request->password;
+            $student->status = $request->status ?? $student->status;
             $student->updated_by = Auth::id();
             $student->save();
 
-            toastr()->success('Data has been saved successfully!');
+            toastr()->success('Data has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
             toastr()->error('Something went wrong! Please try again');
@@ -139,6 +181,9 @@ class StudentController extends Controller
         }
     }
 
+    /**
+     * Update the status of the specified resource.
+     */
     public function update_status(Request $request, $id)
     {
         try {
@@ -154,9 +199,6 @@ class StudentController extends Controller
         }
     }
 
-
-
-
     /**
      * Remove the specified resource from storage.
      */
@@ -165,7 +207,7 @@ class StudentController extends Controller
         try {
             $student = Student::find($id);
             $student->delete();
-            toastr()->success('Data has been saved successfully!');
+            toastr()->success('Data has been deleted successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());

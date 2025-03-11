@@ -31,15 +31,14 @@ class SubjectController extends Controller
         $pageTitle = 'Subject List';
         $classes = ClassName::all();
 
-        $subjects = Subject::join('class_names', 'subjects.class_id', '=', 'class_names.id')
-            ->select('subjects.*', 'class_names.name as class_name');
+        $subjects = Subject::with('class');
 
-        if ($request->filled('class_id')) {
-            $subjects->where('subjects.class_id', $request->class_id);
+        if ($request->class_id !== null && $request->class_id !== '') {
+            $subjects->where('class_id', $request->class_id);
         }
 
-        if (!auth()->user()->hasRole('Super Admin')) {
-            $subjects->where('subjects.school_id', Auth::id());
+        if(!auth()->user()->hasRole('Super Admin')){
+            $subjects->where('school_id', Auth::id());
         }
 
         $subjects = $subjects->latest()->get();

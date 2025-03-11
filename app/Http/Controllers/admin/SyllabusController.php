@@ -28,21 +28,21 @@ class SyllabusController extends Controller
         $pageTitle = 'Syllabus List';
         $classes = ClassName::all();
 
-        $syllabi = Syllabus::join('class_names', 'syllabi.class_id', '=', 'class_names.id')
-            ->select('syllabi.*', 'class_names.name as class_name');
+        $syllabi = Syllabus::with('class');
 
-        if ($request->filled('class_id')) {
-            $syllabi->where('syllabi.class_id', $request->class_id);
+        if ($request->class_id !== null && $request->class_id !== '') {
+            $syllabi->where('class_id', $request->class_id);
         }
 
-        if (!auth()->user()->hasRole('Super Admin')) {
-            $syllabi->where('syllabi.school_id', Auth::id());
+        if(!auth()->user()->hasRole('Super Admin')){
+            $syllabi->where('school_id', Auth::id());
         }
 
         $syllabi = $syllabi->latest()->get();
 
         return view('admin.pages.syllabus.index', compact('syllabi', 'pageTitle', 'classes'));
     }
+
 
     public function create()
     {

@@ -30,7 +30,7 @@ class SectionName extends Model
         return $this->belongsTo(Teacher::class);
     }
 
-    public function className()
+    public function class()
     {
         return $this->belongsTo(ClassName::class);
     }
