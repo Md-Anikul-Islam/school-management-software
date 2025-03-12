@@ -14,10 +14,10 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">School</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Management</a></li>
-                        <li class="breadcrumb-item active">Class List</li>
+                        <li class="breadcrumb-item active">{{ $pageTitle }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Class List</h4>
+                <h4 class="page-title">{{ $pageTitle }}</h4>
             </div>
         </div>
     </div>

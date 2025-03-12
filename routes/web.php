@@ -2,16 +2,20 @@
 
 use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\admin\AssignmentController;
+use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ClassNameController;
 use App\Http\Controllers\admin\ExamController;
 use App\Http\Controllers\admin\ExamScheduleController;
 use App\Http\Controllers\admin\GradeController;
 use App\Http\Controllers\admin\GuardianController;
+use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SectionNameContoller;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\SubjectController;
+use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\admin\SyllabusController;
 use App\Http\Controllers\admin\TeacherController;
+use App\Http\Controllers\admin\WarehouseController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -125,6 +129,40 @@ Route::middleware('auth')->group(callback: function () {
     Route::post('/guardian/{id}/upload-document', [GuardianController::class, 'uploadDocument'])->name('guardian.uploadDocument');
     Route::get('/guardian/download-document/{id}', [GuardianController::class, 'downloadDocument'])->name('guardian.downloadDocument');
     Route::get('/guardians/{id}/profile-pdf', [GuardianController::class, 'downloadProfilePdf'])->name('guardian.profilePdf');
+
+    //category
+    Route::get('/category-list', [CategoryController::class, 'index'])->name('category.index');
+    Route::get('/category-create', [CategoryController::class, 'create'])->name('category.create');
+    Route::post('/category-store', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/category-edit/{id}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::put('/category-update/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/category-delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+
+    //product
+    Route::get('/product-list', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/product-create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/product-store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/product-edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('/product-update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/product-delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+    //warehouse
+    Route::get('/warehouse-list', [WarehouseController::class, 'index'])->name('warehouse.index');
+    Route::get('/warehouse-create', [WarehouseController::class, 'create'])->name('warehouse.create');
+    Route::post('/warehouse-store', [WarehouseController::class, 'store'])->name('warehouse.store');
+    Route::get('/warehouse-edit/{id}', [WarehouseController::class, 'edit'])->name('warehouse.edit');
+    Route::put('/warehouse-update/{id}', [WarehouseController::class, 'update'])->name('warehouse.update');
+    Route::delete('/warehouse-delete/{id}', [WarehouseController::class, 'destroy'])->name('warehouse.destroy');
+
+    //supplier
+    Route::get('/supplier-list', [SupplierController::class, 'index'])->name('supplier.index');
+    Route::get('/supplier-create', [SupplierController::class, 'create'])->name('supplier.create');
+    Route::post('/supplier-store', [SupplierController::class, 'store'])->name('supplier.store');
+    Route::get('/supplier-edit/{id}', [SupplierController::class, 'edit'])->name('supplier.edit');
+    Route::put('/supplier-update/{id}', [SupplierController::class, 'update'])->name('supplier.update');
+    Route::delete('/supplier-delete/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
+
+
 
     //Role and User Section
     Route::resource('roles', RoleController::class);

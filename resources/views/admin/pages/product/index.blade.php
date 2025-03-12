@@ -25,18 +25,18 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    @can('grade-create')
-                        <a href="{{ route('grade.create') }}" class="btn btn-primary"><span><i
-                                    class="ri-add-fill"></i></span>Add Grade</a>
+                    @can('product-create')
+                        <a href="{{ route('product.create') }}" class="btn btn-primary"><span><i
+                                    class="ri-add-fill"></i></span>Add Product</a>
                     @endcan
                     <div class="d-flex justify-content-between">
                         <div class="btn-group">
                             <button style="background-color:darkblue;" class="btn text-nowrap text-light"
-                                    onclick="exportTableToPDF('grade.pdf')">
+                                    onclick="exportTableToPDF('product.pdf')">
                                 Export As PDF
                             </button>
                             <button style="background-color: darkgreen" class="btn btn-info text-nowrap"
-                                    onclick="exportTableToCSV('grade.csv')">
+                                    onclick="exportTableToCSV('product.csv')">
                                 Export To CSV
                             </button>
                         </div>
@@ -48,52 +48,52 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Grade Name</th>
-                        <th>Grade Point</th>
-                        <th>Mark From</th>
-                        <th>Mark Upto</th>
-                        <th>Note</th>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Buying Price</th>
+                        <th>Selling Price</th>
+                        <th>Description</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($grades as $grade)
+                    @foreach ($products as $product)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $grade->grade_name }}</td>
-                            <td>{{ $grade->grade_point }}</td>
-                            <td>{{ $grade->mark_from }}</td>
-                            <td>{{ $grade->mark_upto }}</td>
-                            <td>{{ $grade->note }}</td>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->category->name }}</td>
+                            <td>{{ $product->buying_price }}</td>
+                            <td>{{ $product->selling_price }}</td>
+                            <td>{{ $product->description }}</td>
                             <td>
-                                @can('grade-edit')
-                                    <a href="{{ route('grade.edit', $grade->id) }}" class="btn btn-info"><i
+                                @can('product-edit')
+                                    <a href="{{ route('product.edit', $product->id) }}" class="btn btn-info"><i
                                             class="ri-edit-line"></i></a>
                                 @endcan
-                                @can('grade-delete')
+                                @can('product-delete')
                                     <a class="btn btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#danger-header-modal{{ $grade->id }}"><i
+                                       data-bs-target="#danger-header-modal{{ $product->id }}"><i
                                             class="ri-delete-bin-6-fill"></i></a>
-                                    <div id="danger-header-modal{{ $grade->id }}" class="modal fade" tabindex="-1"
-                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $grade->id }}"
+                                    <div id="danger-header-modal{{ $product->id }}" class="modal fade" tabindex="-1"
+                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $product->id }}"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header modal-colored-header bg-danger">
                                                     <h4 class="modal-title"
-                                                        id="danger-header-modalLabel{{ $grade->id }}">Delete</h4>
+                                                        id="danger-header-modalLabel{{ $product->id }}">Delete</h4>
                                                     <button type="button" class="btn-close btn-close-white"
                                                             data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h5 class="mt-0">Are you sure you want to delete this grade?</h5>
+                                                    <h5 class="mt-0">Are you sure you want to delete this product?</h5>
                                                 </div>
                                                 <div class="modal-footer">
 
                                                     <button type="button" class="btn btn-light"
                                                             data-bs-dismiss="modal">Close
                                                     </button>
-                                                    <form action="{{ route('grade.destroy', $grade->id) }}"
+                                                    <form action="{{ route('product.destroy', $product->id) }}"
                                                           method="post">
                                                         @csrf
                                                         @method('DELETE')

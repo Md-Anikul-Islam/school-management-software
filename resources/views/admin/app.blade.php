@@ -258,6 +258,56 @@
                 @endcan
 
 
+                @can('inventory-module')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages4" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-school-line"></i>
+                            <span>Inventory</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages4">
+                            <ul class="side-nav-second-level">
+                                @can('exam-list')
+                                    <li>
+                                        <a href="{{ route('category.index') }}">
+                                            <i class="ri-home-smile-2-fill"></i>
+                                            <span>Category</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('exam-schedule-list')
+                                    <li>
+                                        <a href="{{ route('product.index') }}">
+                                            <i class="ri-home-smile-2-fill"></i>
+                                            <span>Product</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('warehouse-list')
+                                    <li>
+                                        <a href="{{ route('warehouse.index') }}">
+                                            <i class="ri-home-smile-2-fill"></i>
+                                            <span>Warehouse</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('supplier-list')
+                                    <li>
+                                        <a href="{{ route('supplier.index') }}">
+                                            <i class="ri-home-smile-2-fill"></i>
+                                            <span>Supplier</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+
                 @can('role-and-permission-list')
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages1" aria-expanded="false"

@@ -36,11 +36,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="mark_from" class="form-label">Mark From</label>
-                        <input type="number" class="form-control" id="mark_from" name="mark_from" required>
+                        <input type="number" class="form-control" id="mark_from" name="mark_from" required min="0" max="100">
                     </div>
                     <div class="mb-3">
                         <label for="mark_upto" class="form-label">Mark Upto</label>
-                        <input type="number" class="form-control" id="mark_upto" name="mark_upto" required>
+                        <input type="number" class="form-control" id="mark_upto" name="mark_upto" required min="0" max="100">
                     </div>
                     <div class="mb-3">
                         <label for="note" class="form-label">Note</label>
