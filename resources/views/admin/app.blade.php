@@ -135,7 +135,7 @@
                 @can('student-list')
                     <li class="side-nav-item">
                         <a href="#" class="side-nav-link">
-                            <i class="ri-user-2-line"></i>
+                            <i class="ri-user-3-line"></i>
                             <span> Student </span>
                         </a>
                     </li>
@@ -144,7 +144,7 @@
                 @can('guardian-list')
                     <li class="side-nav-item">
                         <a href="{{route('guardian.index')}}" class="side-nav-link">
-                            <i class="ri-user-2-line"></i>
+                            <i class="ri-parent-line"></i>
                             <span> Parents </span>
                         </a>
                     </li>
@@ -153,7 +153,7 @@
                 @can('teacher-list')
                     <li class="side-nav-item">
                         <a href="{{route('teacher.index')}}" class="side-nav-link">
-                            <i class="ri-user-2-line"></i>
+                            <i class="ri-user-settings-line"></i>
                             <span> Teacher </span>
                         </a>
                     </li>
@@ -163,8 +163,7 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages2" aria-expanded="false"
                            aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-school-line"></i>
-                            <span>Academic</span>
+                            <i class="ri-graduation-cap-line"></i> <span>Academic</span>
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages2">
@@ -172,8 +171,7 @@
                                 @can('class-list')
                                     <li>
                                         <a href="{{ route('class.index') }}">
-                                            <i class="ri-home-smile-2-fill"></i>
-                                            <span>Class</span></a>
+                                            <i class="ri-group-line"></i> <span>Class</span></a>
                                     </li>
                                 @endcan
                             </ul>
@@ -181,8 +179,7 @@
                                 @can('section-list')
                                     <li>
                                         <a href="{{ route('section.index') }}">
-                                            <i class="ri-bar-chart-2-fill"></i>
-                                            <span>Section</span></a>
+                                            <i class="ri-stack-line"></i> <span>Section</span></a>
                                     </li>
                                 @endcan
                             </ul>
@@ -190,8 +187,7 @@
                                 @can('subject-list')
                                     <li>
                                         <a href="{{ route('subject.index') }}">
-                                            <i class="ri-bar-chart-2-fill"></i>
-                                            <span>Subject</span></a>
+                                            <i class="ri-book-open-line"></i> <span>Subject</span></a>
                                     </li>
                                 @endcan
                             </ul>
@@ -199,8 +195,7 @@
                                 @can('syllabus-list')
                                     <li>
                                         <a href="{{ route('syllabus.index') }}">
-                                            <i class="ri-bar-chart-2-fill"></i>
-                                            <span>Syllabus</span></a>
+                                            <i class="ri-file-list-3-line"></i> <span>Syllabus</span></a>
                                     </li>
                                 @endcan
                             </ul>
@@ -208,8 +203,7 @@
                                 @can('assignment-list')
                                     <li>
                                         <a href="{{ route('assignment.index') }}">
-                                            <i class="ri-bar-chart-2-fill"></i>
-                                            <span>Assignment</span></a>
+                                            <i class="ri-task-line"></i> <span>Assignment</span></a>
                                     </li>
                                 @endcan
                             </ul>
@@ -221,7 +215,7 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages3" aria-expanded="false"
                            aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-school-line"></i>
+                            <i class="ri-file-text-line"></i>
                             <span>Exam</span>
                             <span class="menu-arrow"></span>
                         </a>
@@ -230,7 +224,7 @@
                                 @can('exam-list')
                                     <li>
                                         <a href="{{ route('exam.index') }}">
-                                            <i class="ri-home-smile-2-fill"></i>
+                                            <i class="ri-test-tube-line"></i>
                                             <span>Exam</span></a>
                                     </li>
                                 @endcan
@@ -239,7 +233,7 @@
                                 @can('exam-schedule-list')
                                     <li>
                                         <a href="{{ route('exam-schedule.index') }}">
-                                            <i class="ri-home-smile-2-fill"></i>
+                                            <i class="ri-calendar-event-line"></i>
                                             <span>Exam Schedule</span></a>
                                     </li>
                                 @endcan
@@ -248,7 +242,7 @@
                                 @can('grade-list')
                                     <li>
                                         <a href="{{ route('grade.index') }}">
-                                            <i class="ri-home-smile-2-fill"></i>
+                                            <i class="ri-line-chart-line"></i>
                                             <span>Exam Grade</span></a>
                                     </li>
                                 @endcan
@@ -262,25 +256,25 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages4" aria-expanded="false"
                            aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-school-line"></i>
+                            <i class="ri-archive-line"></i>
                             <span>Inventory</span>
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages4">
                             <ul class="side-nav-second-level">
-                                @can('exam-list')
+                                @can('category-list')
                                     <li>
                                         <a href="{{ route('category.index') }}">
-                                            <i class="ri-home-smile-2-fill"></i>
+                                            <i class="ri-price-tag-3-line"></i>
                                             <span>Category</span></a>
                                     </li>
                                 @endcan
                             </ul>
                             <ul class="side-nav-second-level">
-                                @can('exam-schedule-list')
+                                @can('product-list')
                                     <li>
                                         <a href="{{ route('product.index') }}">
-                                            <i class="ri-home-smile-2-fill"></i>
+                                            <i class="ri-shopping-bag-line"></i>
                                             <span>Product</span></a>
                                     </li>
                                 @endcan
@@ -289,7 +283,7 @@
                                 @can('warehouse-list')
                                     <li>
                                         <a href="{{ route('warehouse.index') }}">
-                                            <i class="ri-home-smile-2-fill"></i>
+                                            <i class="ri-store-2-line"></i>
                                             <span>Warehouse</span></a>
                                     </li>
                                 @endcan
@@ -298,7 +292,7 @@
                                 @can('supplier-list')
                                     <li>
                                         <a href="{{ route('supplier.index') }}">
-                                            <i class="ri-home-smile-2-fill"></i>
+                                            <i class="ri-truck-line"></i>
                                             <span>Supplier</span></a>
                                     </li>
                                 @endcan
