@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Document;
 use App\Models\Guardian;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -34,8 +36,7 @@ class GuardianController extends Controller
 
     public function create()
     {
-        $pageTitle = 'Add Guardian';
-        return view('admin.pages.guardian.add', compact('pageTitle'));
+        return view('admin.pages.guardian.add');
     }
 
     public function store(Request $request)
@@ -49,12 +50,16 @@ class GuardianController extends Controller
                 'mother_profession' => 'required',
                 'phone' => 'required',
                 'address' => 'required',
-                'photo' => 'required',
                 'username' => 'required',
                 'password' => 'required',
             ]);
 
             $guardian = new Guardian();
+            if ($request->hasFile('photo')) {
+                $file = $request->file('photo');
+                $fileName = time() . '.' . $file->getClientOriginalExtension();
+                $file->move('uploads/guardians/', $fileName);
+            }
             $guardian->name = $request->name;
             $guardian->father_name = $request->father_name;
             $guardian->mother_name = $request->mother_name;
@@ -63,14 +68,9 @@ class GuardianController extends Controller
             $guardian->email = $request->email;
             $guardian->phone = $request->phone;
             $guardian->address = $request->address;
-            if ($request->hasFile('photo')) {
-                $file = $request->file('photo');
-                $fileName = time() . '.' . $file->getClientOriginalExtension();
-                $file->move('uploads/guardians/', $fileName);
-                $guardian->photo = $fileName;
-            }
+            $guardian->photo = $fileName;
             $guardian->username = $request->username;
-            $guardian->password = Hash::make($request->password);
+            $guardian->password = $request->password;
             $guardian->school_id = Auth::user()->school_id ?? Auth::id();
             $guardian->created_by = Auth::user()->id;
             $guardian->save();
@@ -84,19 +84,53 @@ class GuardianController extends Controller
 
     public function show($id)
     {
-        $pageTitle = 'Guardian Details';
         $guardian = Guardian::find($id);
-        if (!$guardian) {
-            return redirect()->back()->with('error', 'Guardian not found.');
+        $documents = Document::where('uploader_id', $guardian->id . '_' . $guardian->phone)->get();
+        return view('admin.pages.guardian.show', compact( 'guardian', 'documents'));
+    }
+
+    public function uploadDocument(Request $request, $id)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:pdf,doc,docx,xls,xlsx,ppt,pptx,txt,jpg,jpeg,png',
+        ]);
+
+        $guardian = Guardian::findOrFail($id);
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = time() . '_' . $file->getClientOriginalName(); // Correct file name with extension
+            $filePath = $file->move('uploads/guardians', $fileName); // Move the file with the correct name
+
+            Document::create([
+                'title' => $fileName,
+                'file_path' => $filePath,
+                'uploader_id' => $guardian->id . '_' . $guardian->phone,
+            ]);
+
+            toastr()->success('Data has been saved successfully!');
+            return redirect()->back();
         }
-        return view('admin.pages.guardian.show', compact('pageTitle', 'guardian'));
+
+        return redirect()->back()->with('error', 'File upload failed.');
+    }
+
+    public function downloadDocument($id)
+    {
+        $document = Document::findOrFail($id);
+        $filePath = public_path($document->file_path);
+
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        }
+
+        return redirect()->back()->with('error', 'File not found.');
     }
 
     public function edit($id)
     {
-        $pageTitle = 'Edit Guardian';
         $guardian = Guardian::find($id);
-        return view('admin.pages.guardian.edit', compact('pageTitle', 'guardian'));
+        return view('admin.pages.guardian.edit', compact('guardian'));
     }
 
     public function update(Request $request, $id)
@@ -110,13 +144,22 @@ class GuardianController extends Controller
                 'mother_profession' => 'required',
                 'phone' => 'required',
                 'address' => 'required',
-                'photo' => 'required',
                 'username' => 'required',
                 'password' => 'required',
             ]);
 
 
             $guardian = Guardian::find($id);
+            $fileName = $request->photo ?? "";
+
+            if ($request->hasFile('photo')) {
+                if (File::exists(public_path('uploads/guardians/' . $guardian->photo))) {
+                    File::delete(public_path('uploads/guardians/' . $guardian->photo));
+                }
+                $file = $request->file('photo');
+                $fileName = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/guardians/'), $fileName);
+            }
             $guardian->name = $request->name;
             $guardian->father_name = $request->father_name;
             $guardian->mother_name = $request->mother_name;
@@ -125,17 +168,9 @@ class GuardianController extends Controller
             $guardian->email = $request->email;
             $guardian->phone = $request->phone;
             $guardian->address = $request->address;
-            if ($request->hasFile('photo')) {
-                if (File::exists(public_path('uploads/guardians/' . $guardian->photo))) {
-                    File::delete(public_path('uploads/guardians/' . $guardian->photo));
-                }
-                $file = $request->file('photo');
-                $filename = date('ymdhis') . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads/guardians/'), $filename);
-                $guardian->photo = $filename;
-            }
+            $guardian->photo = $fileName;
             $guardian->username = $request->username;
-            $guardian->password = Hash::make($request->password);
+            $guardian->password = $request->password;
             $guardian->school_id = Auth::user()->school_id ?? Auth::id();
             $guardian->created_by = Auth::user()->id;
             $guardian->save();
@@ -145,6 +180,28 @@ class GuardianController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong. Please try again.');
         }
+    }
+
+    public function update_status($id)
+    {
+        try {
+            $guardian = Guardian::find($id);
+            $guardian->status = !$guardian->status;
+            $guardian->save();
+            toastr()->success('Status has been updated successfully!');
+            return redirect()->back();
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
+        }
+    }
+
+    public function downloadProfilePdf($id)
+    {
+        $guardian = Guardian::findOrFail($id);
+
+        $pdf = Pdf::loadView('admin.pages.guardian.guardian_profile_pdf', compact('guardian'));
+
+        return $pdf->download('guardian_profile_' . $guardian->name . '.pdf');
     }
 
     public function destroy($id)

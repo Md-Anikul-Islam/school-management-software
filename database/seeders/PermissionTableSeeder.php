@@ -108,6 +108,13 @@ class PermissionTableSeeder extends Seeder
             'grade-create',
             'grade-edit',
             'grade-delete',
+
+            //guardian
+            'guardian-list',
+            'guardian-show',
+            'guardian-create',
+            'guardian-edit',
+            'guardian-delete',
         ];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {

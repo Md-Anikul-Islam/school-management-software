@@ -46,9 +46,8 @@
                     <div class="mb-3">
                         <label for="gender" class="form-label">Gender</label>
                         <select class="form-control" id="gender" name="gender" required>
-                            <option value="1" {{ $teacher->gender == 1 ? 'selected' : '' }}>Male</option>
-                            <option value="2" {{ $teacher->gender == 2 ? 'selected' : '' }}>Female</option>
-                            <option value="3" {{ $teacher->gender == 3 ? 'selected' : '' }}>Other</option>
+                            <option value="Male" {{ $teacher->gender == 'Male' ? 'selected' : '' }}>Male</option>
+                            <option value="Female" {{ $teacher->gender == 'Female' ? 'selected' : '' }}>Female</option>
                         </select>
                     </div>
                     <div class="mb-3">

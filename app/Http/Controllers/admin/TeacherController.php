@@ -197,8 +197,8 @@ class TeacherController extends Controller
                     File::delete(public_path('uploads/teachers/' . $teacher->photo));
                 }
                 $file = $request->file('photo');
-                $filename = date('ymdhis') . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads/teachers/'), $filename);
+                $fileName = time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('uploads/teachers/'), $fileName);
             }
             $teacher->name = $request->name;
             $teacher->designation = $request->designation;

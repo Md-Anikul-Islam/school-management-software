@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\ClassNameController;
 use App\Http\Controllers\admin\ExamController;
 use App\Http\Controllers\admin\ExamScheduleController;
 use App\Http\Controllers\admin\GradeController;
+use App\Http\Controllers\admin\GuardianController;
 use App\Http\Controllers\admin\SectionNameContoller;
 use App\Http\Controllers\admin\SliderController;
 use App\Http\Controllers\admin\SubjectController;
@@ -42,7 +43,6 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/teacher-update-status/{id}', [TeacherController::class, 'update_status'])->name('teacher.update_status');
     Route::post('/teacher/{id}/upload-document', [TeacherController::class, 'uploadDocument'])->name('teacher.uploadDocument');
     Route::get('/teacher/download-document/{id}', [TeacherController::class, 'downloadDocument'])->name('teacher.downloadDocument');
-    Route::post('/teacher/{id}/update-routine', [TeacherController::class, 'updateRoutine'])->name('teacher.updateRoutine');
     Route::get('/teachers/{id}/profile-pdf', [TeacherController::class, 'downloadProfilePdf'])->name('teacher.profilePdf');
 
     //className
@@ -113,6 +113,18 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/grade-update/{id}', [GradeController::class, 'update'])->name('grade.update');
     Route::delete('/grade-delete/{id}', [GradeController::class, 'destroy'])->name('grade.destroy');
 
+    //guardian
+    Route::get('/guardian-list', [GuardianController::class, 'index'])->name('guardian.index');
+    Route::get('/guardian-create', [GuardianController::class, 'create'])->name('guardian.create');
+    Route::post('/guardian-store', [GuardianController::class, 'store'])->name('guardian.store');
+    Route::get('/guardian-edit/{id}', [GuardianController::class, 'edit'])->name('guardian.edit');
+    Route::put('/guardian-update/{id}', [GuardianController::class, 'update'])->name('guardian.update');
+    Route::delete('/guardian-delete/{id}', [GuardianController::class, 'destroy'])->name('guardian.destroy');
+    Route::get('/guardian-show/{id}', [GuardianController::class, 'show'])->name('guardian.show');
+    Route::put('/guardian-update-status/{id}', [GuardianController::class, 'update_status'])->name('guardian.update_status');
+    Route::post('/guardian/{id}/upload-document', [GuardianController::class, 'uploadDocument'])->name('guardian.uploadDocument');
+    Route::get('/guardian/download-document/{id}', [GuardianController::class, 'downloadDocument'])->name('guardian.downloadDocument');
+    Route::get('/guardians/{id}/profile-pdf', [GuardianController::class, 'downloadProfilePdf'])->name('guardian.profilePdf');
 
     //Role and User Section
     Route::resource('roles', RoleController::class);
