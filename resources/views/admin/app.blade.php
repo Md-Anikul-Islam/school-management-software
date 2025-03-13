@@ -307,7 +307,7 @@
                         <a data-bs-toggle="collapse" href="#sidebarPages5" aria-expanded="false"
                            aria-controls="sidebarPages" class="side-nav-link">
                             <i class="ri-archive-line"></i>
-                            <span>Inventory</span>
+                            <span>Hostel</span>
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages5">
@@ -317,6 +317,15 @@
                                         <a href="{{ route('hostel.index') }}">
                                             <i class="ri-price-tag-3-line"></i>
                                             <span>Hostel</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('hostel-category-list')
+                                    <li>
+                                        <a href="{{ route('hostel-category.index') }}">
+                                            <i class="ri-shopping-bag-line"></i>
+                                            <span>Category</span></a>
                                     </li>
                                 @endcan
                             </ul>

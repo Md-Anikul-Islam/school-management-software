@@ -25,14 +25,17 @@ class GradeController extends Controller
     public function index()
     {
         $pageTitle = 'Grade List';
-        $grades = Grade::all();
+       if(auth()->user()->hasRole('Super Admin')) {
+            $grades = Grade::all();
+        } else {
+            $grades = Grade::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+        }
         return view('admin.pages.grade.index', compact('pageTitle', 'grades'));
     }
 
     public function create()
     {
-        $pageTitle = 'Add Grade';
-        return view('admin.pages.grade.add', compact('pageTitle'));
+        return view('admin.pages.grade.add');
     }
 
     public function store(Request $request)

@@ -38,7 +38,7 @@ class ExamScheduleController extends Controller
         }
 
         if (!auth()->user()->hasRole('Super Admin')) {
-            $examSchedules->where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::user()->school_id);
+            $examSchedules->where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id());
         }
 
         $examSchedules = $examSchedules->get();
@@ -49,9 +49,15 @@ class ExamScheduleController extends Controller
     {
         $pageTitle = 'Add Exam Schedule';
         $classes = ClassName::all();
-        $exam = Exam::all();
-        $subjects = Subject::all();
-        $sections = SectionName::all();
+        if(auth()->user()->hasRole('Super Admin')) {
+            $exam = Exam::all();
+            $subjects = Subject::all();
+            $sections = SectionName::all();
+        } else {
+            $exam = Exam::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+            $subjects = Subject::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+            $sections = SectionName::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+        }
         return view('admin.pages.examSchedule.add', compact('pageTitle', 'classes', 'exam', 'subjects', 'sections'));
     }
 
@@ -93,9 +99,15 @@ class ExamScheduleController extends Controller
     {
         $pageTitle = 'Edit Exam Schedule';
         $classes = ClassName::all();
-        $exam = Exam::all();
-        $subjects = Subject::all();
-        $sections = SectionName::all();
+        if(auth()->user()->hasRole('Super Admin')) {
+            $exam = Exam::all();
+            $subjects = Subject::all();
+            $sections = SectionName::all();
+        } else {
+            $exam = Exam::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+            $subjects = Subject::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+            $sections = SectionName::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+        }
         $examSchedule = ExamSchedule::find($id);
         return view('admin.pages.examSchedule.edit', compact('pageTitle', 'classes', 'exam', 'subjects', 'sections', 'examSchedule'));
     }

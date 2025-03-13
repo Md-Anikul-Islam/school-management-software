@@ -152,6 +152,20 @@ class PermissionTableSeeder extends Seeder
             'hostel-edit',
             'hostel-delete',
 
+            //hostel category
+            'hostel-category-list',
+            'hostel-category-create',
+            'hostel-category-edit',
+            'hostel-category-delete',
+
+            //hostel room
+            'hostel-room-list',
+            'hostel-room-show',
+            'hostel-room-create',
+            'hostel-room-edit',
+            'hostel-room-delete',
+            'hostel-room-assign',
+
 
         ];
         foreach ($permissions as $permission) {

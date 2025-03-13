@@ -25,7 +25,11 @@ class WarehouseController extends Controller
     public function index()
     {
         $pageTitle = 'Warehouse List';
-        $warehouses = Warehouse::latest()->get();
+        if (auth()->user()->hasRole('Super Admin')) {
+            $warehouses = Warehouse::latest()->get();
+        } else {
+            $warehouses = Warehouse::where('school_id', Auth::id())->orWhere('school_id', Auth::user()->school_id)->get();
+        }
         return view('admin.pages.warehouse.index', compact('pageTitle', 'warehouses'));
     }
 

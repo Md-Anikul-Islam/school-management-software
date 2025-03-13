@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\ExamScheduleController;
 use App\Http\Controllers\admin\GradeController;
 use App\Http\Controllers\admin\GuardianController;
 use App\Http\Controllers\admin\HostelController;
+use App\Http\Controllers\admin\HostelCategoryController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SectionNameContoller;
 use App\Http\Controllers\admin\SliderController;
@@ -170,6 +171,14 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/hostel-edit/{id}', [HostelController::class, 'edit'])->name('hostel.edit');
     Route::put('/hostel-update/{id}', [HostelController::class, 'update'])->name('hostel.update');
     Route::delete('/hostel-delete/{id}', [HostelController::class, 'destroy'])->name('hostel.destroy');
+
+    //hostel category
+    Route::get('/hostel-category-list', [HostelCategoryController::class, 'index'])->name('hostel-category.index');
+    Route::get('/hostel-category-create', [HostelCategoryController::class, 'create'])->name('hostel-category.create');
+    Route::post('/hostel-category-store', [HostelCategoryController::class, 'store'])->name('hostel-category.store');
+    Route::get('/hostel-category-edit/{id}', [HostelCategoryController::class, 'edit'])->name('hostel-category.edit');
+    Route::put('/hostel-category-update/{id}', [HostelCategoryController::class, 'update'])->name('hostel-category.update');
+    Route::delete('/hostel-category-delete/{id}', [HostelCategoryController::class, 'destroy'])->name('hostel-category.destroy');
 
 
 

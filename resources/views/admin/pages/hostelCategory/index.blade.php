@@ -14,10 +14,10 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">School</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Management</a></li>
-                        <li class="breadcrumb-item active">Hostels</li>
+                        <li class="breadcrumb-item active">Hostel Categories</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Hostels</h4>
+                <h4 class="page-title">Hostel Categories</h4>
             </div>
         </div>
     </div>
@@ -25,18 +25,18 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    @can('hostel-create')
-                        <a href="{{ route('hostel.create') }}" class="btn btn-primary"><span><i
-                                    class="ri-add-fill"></i></span>Add Hostel</a>
+                    @can('hostel-category-create')
+                        <a href="{{ route('hostel-category.create') }}" class="btn btn-primary"><span><i
+                                    class="ri-add-fill"></i></span>Add Hostel Category</a>
                     @endcan
                     <div class="d-flex justify-content-between">
                         <div class="btn-group">
                             <button style="background-color:darkblue;" class="btn text-nowrap text-light"
-                                    onclick="exportTableToPDF('hostels.pdf', 'Hostels')">
+                                    onclick="exportTableToPDF('hostel_categories.pdf', 'Hostel Categories')">
                                 Export As PDF
                             </button>
                             <button style="background-color: darkgreen" class="btn btn-info text-nowrap"
-                                    onclick="exportTableToCSV('hostels.csv')">
+                                    onclick="exportTableToCSV('hostel_categories.csv')">
                                 Export To CSV
                             </button>
                         </div>
@@ -49,49 +49,49 @@
                     <tr>
                         <th>#</th>
                         <th>Hostel Name</th>
-                        <th>Type</th>
-                        <th>Address</th>
+                        <th>Class Type</th>
+                        <th>Hostel Fee</th>
                         <th>Note</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($hostels as $hostel)
+                    @foreach ($hostelCategories as $hostelCategory)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $hostel->name }}</td>
-                            <td>{{ $hostel->type }}</td>
-                            <td>{{ $hostel->address }}</td>
-                            <td>{{ $hostel->note }}</td>
+                            <td>{{ $hostelCategory->hostel->name }}</td>
+                            <td>{{ $hostelCategory->class_type }}</td>
+                            <td>{{ $hostelCategory->hostel_fee }}</td>
+                            <td>{{ $hostelCategory->note }}</td>
                             <td>
-                                @can('hostel-edit')
-                                    <a href="{{ route('hostel.edit', $hostel->id) }}" class="btn btn-info"><i
+                                @can('hostel-category-edit')
+                                    <a href="{{ route('hostel-category.edit', $hostelCategory->id) }}" class="btn btn-info"><i
                                             class="ri-edit-line"></i></a>
                                 @endcan
-                                @can('hostel-delete')
+                                @can('hostel-category-delete')
                                     <a class="btn btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#danger-header-modal{{ $hostel->id }}"><i
+                                       data-bs-target="#danger-header-modal{{ $hostelCategory->id }}"><i
                                             class="ri-delete-bin-6-fill"></i></a>
-                                    <div id="danger-header-modal{{ $hostel->id }}" class="modal fade" tabindex="-1"
-                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $hostel->id }}"
+                                    <div id="danger-header-modal{{ $hostelCategory->id }}" class="modal fade" tabindex="-1"
+                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $hostelCategory->id }}"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header modal-colored-header bg-danger">
                                                     <h4 class="modal-title"
-                                                        id="danger-header-modalLabel{{ $hostel->id }}">Delete</h4>
+                                                        id="danger-header-modalLabel{{ $hostelCategory->id }}">Delete</h4>
                                                     <button type="button" class="btn-close btn-close-white"
                                                             data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h5 class="mt-0">Are you sure you want to delete this hostel?</h5>
+                                                    <h5 class="mt-0">Are you sure you want to delete this hostel category?</h5>
                                                 </div>
                                                 <div class="modal-footer">
 
                                                     <button type="button" class="btn btn-light"
                                                             data-bs-dismiss="modal">Close
                                                     </button>
-                                                    <form action="{{ route('hostel.destroy', $hostel->id) }}"
+                                                    <form action="{{ route('hostel-category.destroy', $hostelCategory->id) }}"
                                                           method="post">
                                                         @csrf
                                                         @method('DELETE')

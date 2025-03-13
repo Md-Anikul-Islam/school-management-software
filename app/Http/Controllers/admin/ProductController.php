@@ -26,7 +26,11 @@ class ProductController extends Controller
     public function index()
     {
         $pageTitle = 'Product List';
-        $products = Product::latest()->get();
+        if(auth()->user()->hasRole('Super Admin')) {
+            $products = Product::all();
+        } else {
+            $products = Product::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::user()->school_id)->get();
+        }
         return view('admin.pages.product.index', compact('pageTitle', 'products'));
     }
 
@@ -66,7 +70,11 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        $categories = Category::all();
+        if(auth()->user()->hasRole('Super Admin')) {
+            $categories = Category::all();
+        } else {
+            $categories = Category::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::user()->school_id)->get();
+        }
         return view('admin.pages.product.edit', compact('product', 'categories'));
     }
 

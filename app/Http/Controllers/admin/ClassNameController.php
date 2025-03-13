@@ -25,8 +25,9 @@ class ClassNameController extends Controller
 
     public function index()
     {
+        $pageTitle = 'Class List';
         $classes = ClassName::latest()->get();
-        return view('admin.pages.class.index', compact('classes'));
+        return view('admin.pages.class.index', compact('classes', 'pageTitle'));
     }
 
     public function create()

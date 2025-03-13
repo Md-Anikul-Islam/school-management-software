@@ -37,7 +37,7 @@ class AssignmentController extends Controller
         }
 
         if (!auth()->user()->hasRole('Super Admin')) {
-            $assignments->where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::user()->school_id);
+            $assignments->where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id());
         }
 
         $assignments = $assignments->get();
@@ -58,13 +58,12 @@ class AssignmentController extends Controller
 
     public function create()
     {
-        if(auth()->user()->hasRole('super-admin')){
-            $classes = ClassName::all();
+        $classes = ClassName::all();
+        if (auth()->user()->hasRole('super-admin')) {
             $subjects = Subject::all();
-        } else
-        {
-            $classes = ClassName::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::user()->school_id)->get();
-            $subjects = Subject::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::user()->school_id)->get();
+        } else {
+
+            $subjects = Subject::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
         }
 
         return view('admin.pages.assignment.add', compact('classes', 'subjects'));

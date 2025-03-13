@@ -25,7 +25,11 @@ class HostelController extends Controller
     public function index()
     {
         $pageTitle = 'Hostel List';
-        $hostels = Hostel::all();
+        if(auth()->user()->hasRole('Super Admin')) {
+            $hostels = Hostel::all();
+        } else {
+            $hostels = Hostel::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+        }
         return view('admin.pages.hostel.index', compact('hostels', 'pageTitle'));
     }
 

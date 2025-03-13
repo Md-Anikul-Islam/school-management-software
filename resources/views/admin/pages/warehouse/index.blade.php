@@ -32,7 +32,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="btn-group">
                             <button style="background-color:darkblue;" class="btn text-nowrap text-light"
-                                    onclick="exportTableToPDF('warehouse.pdf')">
+                                    onclick="exportTableToPDF('warehouse.pdf', 'Warehouse List')">
                                 Export As PDF
                             </button>
                             <button style="background-color: darkgreen" class="btn btn-info text-nowrap"
@@ -153,12 +153,15 @@
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
     <script>
-        function exportTableToPDF(filename) {
+        function exportTableToPDF(filename, heading) { // Added 'heading' parameter
             const {jsPDF} = window.jspdf;
             const doc = new jsPDF();
+
+            // Add the heading
+            doc.text(heading, doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' }); // Centered heading
+
             let rows = document.querySelectorAll("table tr");
             let data = [];
             for (let i = 0; i < rows.length; i++) {
@@ -170,7 +173,8 @@
             }
             doc.autoTable({
                 head: [data[0]],
-                body: data.slice(1)
+                body: data.slice(1),
+                startY: 30 // Start the table below the heading
             });
             doc.save(filename);
         }

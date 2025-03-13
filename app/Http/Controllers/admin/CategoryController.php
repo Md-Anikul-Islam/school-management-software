@@ -25,7 +25,11 @@ class CategoryController extends Controller
     public function index()
     {
         $pageTitle = 'Category List';
-        $categories = Category::all();
+        if(auth()->user()->hasRole('Super Admin')) {
+            $categories = Category::all();
+        } else {
+            $categories = Category::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+        }
         return view('admin.pages.category.index', compact('pageTitle', 'categories'));
     }
 

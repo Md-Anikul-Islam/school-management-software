@@ -30,7 +30,11 @@ class GuardianController extends Controller
     public function index()
     {
         $pageTitle = 'Guardian List';
-        $guardians = Guardian::all();
+        if(auth()->user()->hasRole('Super Admin')) {
+            $guardians = Guardian::all();
+        } else {
+            $guardians = Guardian::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+        }
         return view('admin.pages.guardian.index', compact('pageTitle', 'guardians'));
     }
 

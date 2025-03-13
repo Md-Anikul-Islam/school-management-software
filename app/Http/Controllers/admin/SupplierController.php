@@ -25,7 +25,11 @@ class SupplierController extends Controller
     public function index()
     {
         $pageTitle = 'Supplier List';
-        $suppliers = Supplier::latest()->get();
+        if(auth()->user()->hasRole('Super Admin')){
+            $suppliers = Supplier::all();
+        } else {
+            $suppliers = Supplier::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+        }
         return view('admin.pages.supplier.index', compact('pageTitle', 'suppliers'));
     }
 

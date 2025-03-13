@@ -25,7 +25,11 @@ class ExamController extends Controller
     public function index()
     {
         $pageTitle = 'Exams List';
-        $exams = Exam::all();
+        if(auth()->user()->hasRole('Super Admin')) {
+            $exams = Exam::all();
+        } else {
+            $exams = Exam::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+        }
         return view('admin.pages.exam.index', compact('pageTitle', 'exams'));
     }
 
