@@ -78,7 +78,8 @@ class SectionNameContoller extends Controller
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 
@@ -116,7 +117,8 @@ class SectionNameContoller extends Controller
             toastr()->success('Data has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 
@@ -128,7 +130,8 @@ class SectionNameContoller extends Controller
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 

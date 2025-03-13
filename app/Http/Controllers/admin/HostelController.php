@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Exam;
+use App\Models\Hostel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class ExamController extends Controller
+class HostelController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if (!Gate::allows('exam-list')) {
+            if (!Gate::allows('hostel-list')) {
                 return redirect()->route('unauthorized.action');
             }
 
@@ -24,34 +24,36 @@ class ExamController extends Controller
 
     public function index()
     {
-        $pageTitle = 'Exams List';
-        $exams = Exam::all();
-        return view('admin.pages.exam.index', compact('pageTitle', 'exams'));
+        $pageTitle = 'Hostel List';
+        $hostels = Hostel::all();
+        return view('admin.pages.hostel.index', compact('hostels', 'pageTitle'));
     }
 
     public function create()
     {
-        return view('admin.pages.exam.add');
+        return view('admin.pages.hostel.add');
     }
 
     public function store(Request $request)
     {
-        try{
+        try {
             $request->validate([
                 'name' => 'required',
-                'date' => 'required',
+                'type' => 'required',
+                'address' => 'required',
             ]);
-            $exam = new Exam();
-            $exam->name = $request->name;
-            $exam->date = $request->date;
-            $exam->note = $request->note;
-            $exam->do_not_delete = $request->has('do_not_delete') ? 1 : 0;;
-            $exam->school_id = Auth::user()->school_id ?? Auth::id();
-            $exam->created_by = Auth::id();
-            $exam->save();
+
+            $hostel = new Hostel();
+            $hostel->name = $request->name;
+            $hostel->type = $request->type;
+            $hostel->address = $request->address;
+            $hostel->note = $request->note;
+            $hostel->school_id = Auth::user()->school_id ?? Auth::id();
+            $hostel->created_by = Auth::id();
+            $hostel->save();
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
         }
@@ -59,28 +61,30 @@ class ExamController extends Controller
 
     public function edit($id)
     {
-        $exam = Exam::find($id);
-        return view('admin.pages.exam.edit', compact('exam'));
+        $hostel = Hostel::find($id);
+        return view('admin.pages.hostel.edit', compact('hostel'));
     }
 
     public function update(Request $request, $id)
     {
-        try{
+        try {
             $request->validate([
                 'name' => 'required',
-                'date' => 'required',
+                'type' => 'required',
+                'address' => 'required',
             ]);
-            $exam = Exam::find($id);
-            $exam->name = $request->name;
-            $exam->date = $request->date;
-            $exam->note = $request->note;
-            $exam->do_not_delete = $request->has('do_not_delete') ? 1 : 0;
-            $exam->school_id = Auth::user()->school_id ?? Auth::id();
-            $exam->updated_by = Auth::id();
-            $exam->save();
+
+            $hostel = Hostel::find($id);
+            $hostel->name = $request->name;
+            $hostel->type = $request->type;
+            $hostel->address = $request->address;
+            $hostel->note = $request->note;
+            $hostel->school_id = Auth::user()->school_id ?? Auth::id();
+            $hostel->updated_by = Auth::id();
+            $hostel->save();
             toastr()->success('Data has been updated successfully!');
             return redirect()->back();
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
         }
@@ -88,12 +92,12 @@ class ExamController extends Controller
 
     public function destroy($id)
     {
-        try{
-            $exam = Exam::find($id);
-            $exam->delete();
+        try {
+            $hostel = Hostel::find($id);
+            $hostel->delete();
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();
-        } catch (\Exception $e){
+        } catch (\Exception $e) {
             toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
         }

@@ -86,7 +86,8 @@ class TeacherController extends Controller
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
 
     }
@@ -103,7 +104,8 @@ class TeacherController extends Controller
             toastr()->success('Routine has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 
@@ -218,7 +220,8 @@ class TeacherController extends Controller
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 
@@ -231,7 +234,8 @@ class TeacherController extends Controller
             toastr()->success('Status has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 
@@ -246,7 +250,8 @@ class TeacherController extends Controller
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 }

@@ -108,7 +108,8 @@ class SubjectController extends Controller
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 
@@ -169,7 +170,8 @@ class SubjectController extends Controller
             toastr()->success('Data has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 
@@ -184,7 +186,8 @@ class SubjectController extends Controller
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong. ' . $e->getMessage());
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 }

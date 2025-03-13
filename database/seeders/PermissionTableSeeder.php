@@ -143,6 +143,15 @@ class PermissionTableSeeder extends Seeder
             'supplier-edit',
             'supplier-delete',
 
+            //hostel-module
+            'hostel-module',
+
+            //hostel
+            'hostel-list',
+            'hostel-create',
+            'hostel-edit',
+            'hostel-delete',
+
 
         ];
         foreach ($permissions as $permission) {

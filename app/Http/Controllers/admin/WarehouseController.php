@@ -55,7 +55,7 @@ class WarehouseController extends Controller
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            toastr()->error('Data cannot be saved!');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
         }
     }
@@ -87,7 +87,7 @@ class WarehouseController extends Controller
             toastr()->success('Data has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            toastr()->error('Data cannot be updated!');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
         }
     }
@@ -100,7 +100,7 @@ class WarehouseController extends Controller
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            toastr()->error('Data cannot be deleted!');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
         }
     }

@@ -81,7 +81,8 @@ class SyllabusController extends Controller
             toastr()->success('Data has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 
@@ -122,7 +123,8 @@ class SyllabusController extends Controller
             toastr()->success('Data has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 
@@ -134,7 +136,8 @@ class SyllabusController extends Controller
             toastr()->success('Data has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
+            return redirect()->back();
         }
     }
 }

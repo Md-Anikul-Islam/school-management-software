@@ -302,6 +302,29 @@
                 @endcan
 
 
+                @can('hostel-module')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages5" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-archive-line"></i>
+                            <span>Inventory</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages5">
+                            <ul class="side-nav-second-level">
+                                @can('hostel-list')
+                                    <li>
+                                        <a href="{{ route('hostel.index') }}">
+                                            <i class="ri-price-tag-3-line"></i>
+                                            <span>Hostel</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+
                 @can('role-and-permission-list')
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages1" aria-expanded="false"
