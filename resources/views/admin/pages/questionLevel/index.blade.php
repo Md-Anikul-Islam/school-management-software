@@ -14,10 +14,10 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">School</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Management</a></li>
-                        <li class="breadcrumb-item active">Question Groups</li>
+                        <li class="breadcrumb-item active">Question Levels</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Question Groups</h4>
+                <h4 class="page-title">Question Levels</h4>
             </div>
         </div>
     </div>
@@ -25,18 +25,18 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    @can('question-group-create')
-                        <a href="{{ route('question-group.create') }}" class="btn btn-primary"><span><i
-                                    class="ri-add-fill"></i></span>Add Question Group</a>
+                    @can('question-level-create')
+                        <a href="{{ route('question-level.create') }}" class="btn btn-primary"><span><i
+                                    class="ri-add-fill"></i></span>Add Question Level</a>
                     @endcan
                     <div class="d-flex justify-content-between">
-                        <div class="btn-group">
+                        <div class="btn-level">
                             <button style="background-color:darkblue;" class="btn text-nowrap text-light"
-                                    onclick="exportTableToPDF('question_group.pdf', 'Question Groups')">
+                                    onclick="exportTableToPDF('question_level.pdf', 'Question Levels')">
                                 Export As PDF
                             </button>
                             <button style="background-color: darkgreen" class="btn btn-info text-nowrap"
-                                    onclick="exportTableToCSV('question_group.csv')">
+                                    onclick="exportTableToCSV('question_level.csv')">
                                 Export To CSV
                             </button>
                         </div>
@@ -48,44 +48,44 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Question Group Title</th>
+                        <th>Question Level Title</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($questionGroups as $questionGroup)
+                    @foreach ($questionLevels as $questionLevel)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $questionGroup->title }}</td>
+                            <td>{{ $questionLevel->title }}</td>
                             <td>
-                                @can('question-group-edit')
-                                    <a href="{{ route('question-group.edit', $questionGroup->id) }}" class="btn btn-info"><i
+                                @can('question-level-edit')
+                                    <a href="{{ route('question-level.edit', $questionLevel->id) }}" class="btn btn-info"><i
                                             class="ri-edit-line"></i></a>
                                 @endcan
-                                @can('question-group-delete')
+                                @can('question-level-delete')
                                     <a class="btn btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#danger-header-modal{{ $questionGroup->id }}"><i
+                                       data-bs-target="#danger-header-modal{{ $questionLevel->id }}"><i
                                             class="ri-delete-bin-6-fill"></i></a>
-                                    <div id="danger-header-modal{{ $questionGroup->id }}" class="modal fade" tabindex="-1"
-                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $questionGroup->id }}"
+                                    <div id="danger-header-modal{{ $questionLevel->id }}" class="modal fade" tabindex="-1"
+                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $questionLevel->id }}"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header modal-colored-header bg-danger">
                                                     <h4 class="modal-title"
-                                                        id="danger-header-modalLabel{{ $questionGroup->id }}">Delete</h4>
+                                                        id="danger-header-modalLabel{{ $questionLevel->id }}">Delete</h4>
                                                     <button type="button" class="btn-close btn-close-white"
                                                             data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h5 class="mt-0">Are you sure you want to delete this question group?</h5>
+                                                    <h5 class="mt-0">Are you sure you want to delete this question level?</h5>
                                                 </div>
                                                 <div class="modal-footer">
 
                                                     <button type="button" class="btn btn-light"
                                                             data-bs-dismiss="modal">Close
                                                     </button>
-                                                    <form action="{{ route('question-group.destroy', $questionGroup->id) }}"
+                                                    <form action="{{ route('question-level.destroy', $questionLevel->id) }}"
                                                           method="post">
                                                         @csrf
                                                         @method('DELETE')

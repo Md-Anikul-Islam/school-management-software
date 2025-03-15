@@ -14,31 +14,35 @@
                     <ol class="breadcrumb m-0">
                         <li class="breadcrumb-item"><a href="javascript: void(0);">School</a></li>
                         <li class="breadcrumb-item"><a href="javascript: void(0);">Management</a></li>
-                        <li class="breadcrumb-item active">Question Groups</li>
+                        <li class="breadcrumb-item active">{{ $pageTitle }}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">Question Groups</h4>
+                <h4 class="page-title">{{ $pageTitle }}</h4>
             </div>
         </div>
     </div>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <div class="d-flex justify-content-between">
-                    @can('question-group-create')
-                        <a href="{{ route('question-group.create') }}" class="btn btn-primary"><span><i
-                                    class="ri-add-fill"></i></span>Add Question Group</a>
-                    @endcan
-                    <div class="d-flex justify-content-between">
-                        <div class="btn-group">
-                            <button style="background-color:darkblue;" class="btn text-nowrap text-light"
-                                    onclick="exportTableToPDF('question_group.pdf', 'Question Groups')">
-                                Export As PDF
-                            </button>
-                            <button style="background-color: darkgreen" class="btn btn-info text-nowrap"
-                                    onclick="exportTableToCSV('question_group.csv')">
-                                Export To CSV
-                            </button>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between gap-1">
+                        @can('question-bank-create')
+                            <a href="{{ route('question-bank.create') }}" class="btn btn-primary"><span><i
+                                        class="ri-add-fill"></i></span>Add Question Bank</a>
+                        @endcan
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <div class="btn-group">
+                                <button style="background-color:darkblue;" class="btn text-nowrap text-light"
+                                        onclick="exportTableToPDF('question_bank.pdf', 'Question Bank List')">
+                                    Export As PDF
+                                </button>
+                                <button style="background-color: darkgreen" class="btn btn-info text-nowrap"
+                                        onclick="exportTableToCSV('question_bank.csv')">
+                                    Export To CSV
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -48,44 +52,54 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Question Group Title</th>
+                        <th>Difficulty Level</th>
+                        <th>Question</th>
+                        <th>Question Group</th>
+                        <th>Question Type</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach ($questionGroups as $questionGroup)
+                    @forelse ($questionBanks as $questionBank)
                         <tr>
-                            <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $questionGroup->title }}</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $questionBank->questionLevel->title ?? 'N/A' }}</td>
+                            <td>{!! $questionBank->question !!}</td>
+                            <td>{{ $questionBank->questionGroup->title ?? 'N/A' }}</td>
+                            <td>{{ $questionBank->question_type }}</td>
                             <td>
-                                @can('question-group-edit')
-                                    <a href="{{ route('question-group.edit', $questionGroup->id) }}" class="btn btn-info"><i
+                                @can('question-bank-edit')
+                                    <a href="{{ route('question-bank.edit', $questionBank->id) }}" class="btn btn-info"><i
                                             class="ri-edit-line"></i></a>
                                 @endcan
-                                @can('question-group-delete')
+                                    @can('question-bank-show')
+                                        <a href="{{ route('question-bank.show', $questionBank->id) }}" class="btn btn-primary"><i
+                                                class="ri-eye-fill"></i></a>
+                                    @endcan
+                                @can('question-bank-delete')
                                     <a class="btn btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#danger-header-modal{{ $questionGroup->id }}"><i
+                                       data-bs-target="#danger-header-modal{{ $questionBank->id }}"><i
                                             class="ri-delete-bin-6-fill"></i></a>
-                                    <div id="danger-header-modal{{ $questionGroup->id }}" class="modal fade" tabindex="-1"
-                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $questionGroup->id }}"
+                                    <div id="danger-header-modal{{ $questionBank->id }}" class="modal fade" tabindex="-1"
+                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $questionBank->id }}"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header modal-colored-header bg-danger">
                                                     <h4 class="modal-title"
-                                                        id="danger-header-modalLabel{{ $questionGroup->id }}">Delete</h4>
+                                                        id="danger-header-modalLabel{{ $questionBank->id }}">Delete</h4>
                                                     <button type="button" class="btn-close btn-close-white"
                                                             data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h5 class="mt-0">Are you sure you want to delete this question group?</h5>
+                                                    <h5 class="mt-0">Are you sure you want to delete this
+                                                        question bank?</h5>
                                                 </div>
                                                 <div class="modal-footer">
-
                                                     <button type="button" class="btn btn-light"
                                                             data-bs-dismiss="modal">Close
                                                     </button>
-                                                    <form action="{{ route('question-group.destroy', $questionGroup->id) }}"
+                                                    <form action="{{ route('question-bank.destroy', $questionBank->id) }}"
                                                           method="post">
                                                         @csrf
                                                         @method('DELETE')
@@ -98,13 +112,16 @@
                                 @endcan
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="6" class="text-center">No question banks found.</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
     <script type="text/javascript">
         // Excel Print
         function downloadCSV(csv, filename) {

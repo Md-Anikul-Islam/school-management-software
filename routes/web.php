@@ -19,6 +19,9 @@ use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\admin\SyllabusController;
 use App\Http\Controllers\admin\TeacherController;
 use App\Http\Controllers\admin\WarehouseController;
+use App\Http\Controllers\admin\QuestionGroupController;
+use App\Http\Controllers\admin\QuestionLevelController;
+use App\Http\Controllers\admin\QuestionBankController;
 use App\Http\Controllers\FrontendAdmissionController;
 use App\Http\Controllers\FrontendBlogController;
 use App\Http\Controllers\FrontendContactController;
@@ -203,6 +206,31 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/hostel-category-edit/{id}', [HostelCategoryController::class, 'edit'])->name('hostel-category.edit');
     Route::put('/hostel-category-update/{id}', [HostelCategoryController::class, 'update'])->name('hostel-category.update');
     Route::delete('/hostel-category-delete/{id}', [HostelCategoryController::class, 'destroy'])->name('hostel-category.destroy');
+
+    //question group
+    Route::get('/question-group-list', [QuestionGroupController::class, 'index'])->name('question-group.index');
+    Route::get('/question-group-create', [QuestionGroupController::class, 'create'])->name('question-group.create');
+    Route::post('/question-group-store', [QuestionGroupController::class, 'store'])->name('question-group.store');
+    Route::get('/question-group-edit/{id}', [QuestionGroupController::class, 'edit'])->name('question-group.edit');
+    Route::put('/question-group-update/{id}', [QuestionGroupController::class, 'update'])->name('question-group.update');
+    Route::delete('/question-group-delete/{id}', [QuestionGroupController::class, 'destroy'])->name('question-group.destroy');
+
+    //question level
+    Route::get('/question-level-list', [QuestionLevelController::class, 'index'])->name('question-level.index');
+    Route::get('/question-level-create', [QuestionLevelController::class, 'create'])->name('question-level.create');
+    Route::post('/question-level-store', [QuestionLevelController::class, 'store'])->name('question-level.store');
+    Route::get('/question-level-edit/{id}', [QuestionLevelController::class, 'edit'])->name('question-level.edit');
+    Route::put('/question-level-update/{id}', [QuestionLevelController::class, 'update'])->name('question-level.update');
+    Route::delete('/question-level-delete/{id}', [QuestionLevelController::class, 'destroy'])->name('question-level.destroy');
+
+    //question bank
+    Route::get('/question-bank-list', [QuestionBankController::class, 'index'])->name('question-bank.index');
+    Route::get('/question-bank-create', [QuestionBankController::class, 'create'])->name('question-bank.create');
+    Route::post('/question-bank-store', [QuestionBankController::class, 'store'])->name('question-bank.store');
+    Route::get('/question-bank-show/{id}', [QuestionBankController::class, 'show'])->name('question-bank.show');
+    Route::get('/question-bank-edit/{id}', [QuestionBankController::class, 'edit'])->name('question-bank.edit');
+    Route::put('/question-bank-update/{id}', [QuestionBankController::class, 'update'])->name('question-bank.update');
+    Route::delete('/question-bank-delete/{id}', [QuestionBankController::class, 'destroy'])->name('question-bank.destroy');
 
 
 

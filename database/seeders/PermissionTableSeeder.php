@@ -172,11 +172,27 @@ class PermissionTableSeeder extends Seeder
             'hostel-member-create',
             'hostel-member-edit',
 
+            //online exam
+            'online-exam-module',
+
             //question group
             'question-group-list',
             'question-group-create',
             'question-group-edit',
             'question-group-delete',
+
+            //question level
+            'question-level-list',
+            'question-level-create',
+            'question-level-edit',
+            'question-level-delete',
+
+            //question bank
+            'question-bank-list',
+            'question-bank-show',
+            'question-bank-create',
+            'question-bank-edit',
+            'question-bank-delete',
 
 
         ];

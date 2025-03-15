@@ -251,7 +251,6 @@
                     </li>
                 @endcan
 
-
                 @can('inventory-module')
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages4" aria-expanded="false"
@@ -301,7 +300,6 @@
                     </li>
                 @endcan
 
-
                 @can('hostel-module')
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages5" aria-expanded="false"
@@ -333,6 +331,45 @@
                     </li>
                 @endcan
 
+                @can('online-exam-module')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages6" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-archive-line"></i>
+                            <span>Online Exam</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages6">
+                            <ul class="side-nav-second-level">
+                                @can('question-group-list')
+                                    <li>
+                                        <a href="{{ route('question-group.index') }}">
+                                            <i class="ri-price-tag-3-line"></i>
+                                            <span>Question Group</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('question-level-list')
+                                    <li>
+                                        <a href="{{ route('question-level.index') }}">
+                                            <i class="ri-shopping-bag-line"></i>
+                                            <span>Question Level</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('question-bank-list')
+                                    <li>
+                                        <a href="{{ route('question-bank.index') }}">
+                                            <i class="ri-store-2-line"></i>
+                                            <span>Question Bank</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
 
                 @can('role-and-permission-list')
                     <li class="side-nav-item">
