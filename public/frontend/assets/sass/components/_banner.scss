@@ -1,0 +1,208 @@
+/*=============================
+	03. Banner CSS start
+===============================*/
+
+.banner-part {
+  background-image: url("../../images/bg/hero.html");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.banner-carousel {
+  .owl-dots {
+    position: absolute;
+    display: flex;
+    gap: 24px;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    .owl-dot {
+      width: 30px;
+      height: 3px;
+      background-color: var(--white);
+      
+      &.active {
+        background-color: var(--primary);
+      }
+    }
+  }
+}
+
+.banner-overlay {
+  padding: 80px 0;
+  background: linear-gradient(0deg, rgba(52, 42, 37, 0.7), rgba(52, 42, 37, 0.7));
+  
+  @media (max-width: 991px) {
+    padding: 60px 0;
+  }
+  @media (max-width: 767px) {
+    padding: 40px 0;
+  }
+}
+
+.banner-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  padding-inline-end: 80px;
+  
+  @media (max-width: 991px) {
+    padding-inline-end: 0;
+  }
+  @media (max-width: 767px) {
+    gap: 80px;
+    padding: 30px 0;
+    flex-direction: column;
+  }
+}
+
+.banner-content {
+  width: 100%;
+  max-width: 550px;
+  
+  span {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 22px;
+    margin-bottom: 50px;
+    padding-top: 10px;
+    position: relative;
+    text-transform: uppercase;
+    color: var(--white);
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 34px;
+      height: 2px;
+      background-color: var(--white);
+    }
+    
+    @media (max-width: 767px) {
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 575px) {
+      margin-bottom: 36px;
+    }
+  }
+  
+  h1 {
+    color: var(--white);
+    margin-bottom: 20px;
+    text-transform: capitalize;
+    
+    @media (max-width: 767px) {
+      font-size: 42px;
+      line-height: 50px;
+      margin-bottom: 15px;
+    }
+  }
+  
+  p {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 45px;
+    color: var(--white);
+    
+    @media (max-width: 767px) {
+      font-size: 18px;
+      margin-bottom: 35px;
+    }
+  }
+}
+
+.banner-media {
+  display: flex;
+  gap: 20px;
+  flex-shrink: 0;
+  
+  @media (max-width: 991px) {
+    flex-direction: column;
+  }
+  @media (max-width: 767px) {
+    flex-direction: row;
+  }
+  
+  a {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    border-radius: 50%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    animation: grow 2s linear infinite;
+    
+    @media (max-width: 767px) {
+      width: 60px;
+      height: 60px;
+      line-height: 60px;
+    }
+    
+    i {
+      font-size: 24px;
+      color: var(--white);
+      
+      @media (max-width: 767px) {
+        font-size: 20px;
+      }
+    }
+  }
+  
+  span {
+    display: block;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: var(--white);
+    
+    @media (max-width: 767px) {
+      font-size: 18px;
+    }
+  }
+  
+  h3 {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 44px;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    color: var(--white);
+    
+    @media (max-width: 767px) {
+      font-size: 30px;
+      line-height: 36px;
+    }
+  }
+  
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--white);
+    
+    @media (max-width: 767px) {
+      font-size: 12px;
+    }
+  }
+}
+
+.banner-media-content {
+  width: 100%;
+  max-width: 170px;
+  
+  @media (max-width: 575px) {
+    max-width: 150px;
+  }
+}
+

@@ -1,0 +1,43 @@
+// Event Section CSS
+.event-part {
+    margin-bottom: 100px;
+  
+    @media (max-width: 767px) {
+      margin-bottom: 80px;
+    }
+  
+    @media (max-width: 575px) {
+      margin-bottom: 60px;
+    }
+  
+    .event-card {
+      @media (max-width: 991px) {
+        width: 300px;
+      }
+    }
+  }
+  // event part two
+
+  .event-part-two {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  
+    @media (max-width: 991px) {
+      padding-top: 60px;
+    }
+  
+    @media (max-width: 767px) {
+      padding-top: 40px;
+      padding-bottom: 20px;
+    }
+    .event-card {
+      margin-bottom: 50px;
+    
+      @media (max-width: 767px) {
+        margin-bottom: 30px;
+      }
+    }
+  }
+  
+  
+  

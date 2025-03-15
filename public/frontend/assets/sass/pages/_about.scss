@@ -1,0 +1,120 @@
+/*=============================
+	09. About Page CSS Start
+===============================*/
+.about-part-two {
+	padding-block: 100px;
+  
+	@media (max-width: 991px) {
+	  padding-block: 80px;
+	}
+	@media (max-width: 767px) {
+	  padding-block: 60px;
+	}
+	.about-content {
+	  width: 900px;
+	  padding: 40px 30px;
+	  border-radius: 4px;
+	  margin-top: 120px;
+	  background-color: var(--white);
+	  font-family: 'Times New Roman', Times, serif;
+	
+	  @media (max-width: 1199px) {
+		width: 770px;
+		margin-top: 80px;
+	  }
+	  @media (max-width: 991px) {
+		width: 100%;
+		margin-top: 40px;
+	  }
+	
+	  .section-title {
+		margin-bottom: 30px;
+	  }
+	
+	  p {
+		width: 100%;
+		max-width: 450px;
+		font-size: 18px;
+		line-height: 30px;
+	
+		@media (max-width: 1199px) {
+		  max-width: 418px;
+		}
+		@media (max-width: 991px) {
+		  max-width: 100%;
+		}
+	  }
+	}
+	.about-media img {
+	  width: 100%;
+	  border-radius: 4px;
+	}
+  }
+  
+/*=============================
+	 History CSS Start
+===============================*/
+
+.history-part {
+	background: center / cover no-repeat;
+  }
+  
+  .history-overlay {
+	padding: 60px 0;
+	background-color: rgba(0, 0, 0, 0.65);
+  }
+  
+  .history-content {
+	.section-title {
+	  margin-bottom: 70px;
+	  color: var(--white);
+	}
+  
+	h3 {
+	  color: var(--white);
+	  margin-bottom: 32px;
+	  text-transform: capitalize;
+	}
+  
+	p {
+	  font-size: 18px;
+	  font-weight: 600;
+	  line-height: 30px;
+	  color: var(--white);
+  
+	  @media (max-width: 767px) {
+		margin-bottom: 50px;
+	  }
+	}
+  }
+  
+  /*=============================
+	 Vision CSS Start
+	===============================*/
+  .vision-part {
+  	padding-block: 100px;
+
+  	@media (max-width: 991px) {
+  		padding-block: 80px;
+  	}
+
+  	@media (max-width: 767px) {
+  		padding-block: 60px;
+  	}
+  }
+
+  .vision-content {
+  	border-radius: 4px;
+  	padding: 40px 30px;
+  	background-color: var(--white);
+
+  	.section-title {
+  		margin-bottom: 16px;
+  	}
+
+  	p {
+  		font-size: 18px;
+  		line-height: 30px;
+  	}
+  }
+  

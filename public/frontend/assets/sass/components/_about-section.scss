@@ -1,0 +1,97 @@
+/*=============================
+	05. About CSS start
+===============================*/
+.about-part {
+  margin-bottom: 80px;
+
+  @media (max-width: 575px) {
+    margin-bottom: 60px;
+  }
+}
+
+.about-content {
+  width: 100%;
+  max-width: 550px;
+
+  @media (max-width: 767px) {
+    max-width: 100%;
+    margin-bottom: 50px;
+  }
+
+  h2 {
+    margin-bottom: 50px;
+
+    @media (max-width: 767px) {
+      margin-bottom: 20px;
+    }
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 30px;
+    margin-bottom: 45px;
+  }
+}
+
+.about-media {
+  img {
+    width: 100%;
+    max-width: 550px;
+    border-radius: 4px;
+    margin-inline-start: auto;
+    display: block;
+  }
+}
+
+.about-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 580px;
+  border-radius: 4px;
+  gap: 30px;
+  padding: 36px 50px;
+  margin-left: -40px;
+  margin-top: -60px;
+  position: relative;
+  background-color: var(--white);
+
+  @media (max-width: 1199px) {
+    margin: 0px;
+  }
+
+  @media (max-width: 767px) {
+    max-width: 100%;
+    padding: 30px 18px;
+  }
+
+  @media (max-width: 575px) {
+    gap: 16px;
+  }
+}
+
+.about-item {
+  text-align: center;
+
+  h4 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 15px;
+
+    @media (max-width: 575px) {
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+  }
+
+  p {
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: capitalize;
+
+    @media (max-width: 575px) {
+      font-size: 14px;
+    }
+  }
+}

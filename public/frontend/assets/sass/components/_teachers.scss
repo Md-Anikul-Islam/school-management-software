@@ -1,0 +1,44 @@
+// teachers part 
+
+.teacher-part {
+    margin-bottom: 100px;
+  
+    @media (max-width: 767px) {
+      margin-bottom: 80px;
+    }
+  
+    @media (max-width: 575px) {
+      margin-bottom: 60px;
+    }
+  
+    .teacher-card {
+      @media (max-width: 575px) {
+        width: 270px;
+      }
+    }
+  }
+  
+  
+  // techaer part two
+  .teacher-part-two {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  
+    @media (max-width: 991px) {
+      padding-top: 60px;
+    }
+  
+    @media (max-width: 767px) {
+      padding-top: 40px;
+      padding-bottom: 20px;
+    }
+    .teacher-card {
+      margin-bottom: 50px;
+    
+      @media (max-width: 767px) {
+        margin-bottom: 30px;
+      }
+    }
+  }
+  
+  

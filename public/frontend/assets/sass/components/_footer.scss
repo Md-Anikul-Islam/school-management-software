@@ -1,0 +1,87 @@
+.footer-section{
+    // background: url('../images/footer/footer.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 100px ;
+    background: var(--secondary);
+    .footer-top{
+        .footer-widget{
+            padding: 0 15px;
+            .widget-title{
+                font-size: 20px;
+                line-height: 30px;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                color: white !important;
+                position: relative;
+                padding-right: 10px;
+                display: inline-block;
+                margin-bottom: 10px;
+            }
+            ul{
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 10px;
+                li{
+                    color: white;
+                    a{
+                        font-size: 14px;
+                        line-height: 24px;
+                        color: white;
+                        text-transform: uppercase;
+                        letter-spacing: 0.16em;
+                        font-weight: 500;
+                        transition: var(--transition);
+                        &:hover{
+                            color: var(--primary);
+                        }
+                    }
+                }
+            }
+            .footer-desc{
+                font-size: 14px;
+                line-height: 24px;
+                color: white;
+            }
+            
+            .footer-social{
+                ul{
+                    li{
+                        display: inline-block;
+                        margin-right: 15px;
+                        a{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 40px;
+                            height: 40px;
+                            background: var(--primary);
+                            border-radius: 50%;
+                            transition: var(--transition);
+                            i{
+                                font-size: 18px;
+                                color: var(--white);
+                            }
+                            &:hover{
+                                background: var(--secondary);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .footer-bottom{
+        text-align: center;
+        padding: 20px 0;
+        background: var(--primary);
+        margin-top: 100px;
+        p{
+            color: white;
+            font-size: 14px;
+            line-height: 24px;
+        }
+    }
+}
