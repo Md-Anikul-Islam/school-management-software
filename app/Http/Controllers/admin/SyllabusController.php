@@ -46,6 +46,9 @@ class SyllabusController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('syllabus-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         if(auth()->user()->hasRole('Super Admin')){
             $classes = ClassName::all();
         } else {
@@ -88,6 +91,9 @@ class SyllabusController extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('syllabus-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         if(auth()->user()->hasRole('Super Admin')){
             $classes = ClassName::all();
         } else {

@@ -66,6 +66,9 @@ class SubjectController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('subject-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         if (auth()->user()->hasRole('Super Admin')) {
             $classes = ClassName::latest()->get();
             $teachers = Teacher::latest()->get();
@@ -118,6 +121,9 @@ class SubjectController extends Controller
      */
     public function show(string $id)
     {
+        if (!Gate::allows('subject-show')) {
+            return redirect()->route('unauthorized.action');
+        }
         $subject = Subject::find($id);
         return view('admin.pages.subject.show', compact('subject'));
     }
@@ -127,6 +133,9 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('subject-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $subject = Subject::find($id);
         if (auth()->user()->hasRole('Super Admin')) {
             $classes = ClassName::latest()->get();

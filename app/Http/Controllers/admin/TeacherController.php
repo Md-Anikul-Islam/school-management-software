@@ -44,6 +44,9 @@ class TeacherController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('teacher-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         return view('admin.pages.teacher.add');
     }
 
@@ -152,6 +155,9 @@ class TeacherController extends Controller
      */
     public function show($id)
     {
+        if (!Gate::allows('teacher-show')) {
+            return redirect()->route('unauthorized.action');
+        }
         $teacher = Teacher::findOrFail($id);
         $documents = Document::where('uploader_id', $teacher->id . '_' . $teacher->email)->get();
         return view('admin.pages.teacher.show', compact('teacher', 'documents'));
@@ -171,6 +177,9 @@ class TeacherController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('teacher-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $teacher = Teacher::find($id);
         return view('admin.pages.teacher.edit', compact('teacher'));
     }

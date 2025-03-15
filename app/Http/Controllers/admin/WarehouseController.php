@@ -35,6 +35,9 @@ class WarehouseController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('warehouse-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         return view('admin.pages.warehouse.add');
     }
 
@@ -66,6 +69,9 @@ class WarehouseController extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('warehouse-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $warehouse = Warehouse::find($id);
         return view('admin.pages.warehouse.edit', compact('warehouse'));
     }

@@ -35,6 +35,9 @@ class SupplierController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('supplier-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         return view('admin.pages.supplier.add');
     }
 
@@ -65,6 +68,9 @@ class SupplierController extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('supplier-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $supplier = Supplier::findOrFail($id);
         return view('admin.pages.supplier.edit', compact('supplier'));
     }
