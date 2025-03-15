@@ -47,6 +47,9 @@ class SectionNameContoller extends Controller
 
     public function create()
     {
+        if (!Gate::allows('section-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         if (auth()->user()->hasRole('Super Admin')) {
             $classes = ClassName::all();
             $teachers = Teacher::all();
@@ -85,6 +88,9 @@ class SectionNameContoller extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('section-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         if (auth()->user()->hasRole('Super Admin')) {
             $classes = ClassName::all();
             $teachers = Teacher::all();
