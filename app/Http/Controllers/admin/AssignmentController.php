@@ -58,6 +58,9 @@ class AssignmentController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('assignment-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         $classes = ClassName::all();
         if (auth()->user()->hasRole('super-admin')) {
             $subjects = Subject::all();
@@ -110,6 +113,9 @@ class AssignmentController extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('assignment-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $assignment = Assignment::find($id);
         $classes = ClassName::all();
         $assignment->section_id = json_decode($assignment->section_id); // Decode JSON to array

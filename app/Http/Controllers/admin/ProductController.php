@@ -36,6 +36,9 @@ class ProductController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('product-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         $categories = Category::all();
         return view('admin.pages.product.add', compact('categories'));
     }
@@ -69,6 +72,9 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('product-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $product = Product::find($id);
         if(auth()->user()->hasRole('Super Admin')) {
             $categories = Category::all();

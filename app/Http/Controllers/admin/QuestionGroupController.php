@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\QuestionGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
-class CategoryController extends Controller
+class QuestionGroupController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if (!Gate::allows('category-list')) {
+            if (!Gate::allows('question-group-list')) {
                 return redirect()->route('unauthorized.action');
             }
 
@@ -24,37 +24,30 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $pageTitle = 'Category List';
         if(auth()->user()->hasRole('Super Admin')) {
-            $categories = Category::all();
+            $questionGroups = QuestionGroup::all();
         } else {
-            $categories = Category::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+            $questionGroups = QuestionGroup::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::user()->school_id)->get();
         }
-        return view('admin.pages.category.index', compact('pageTitle', 'categories'));
+        return view('admin.pages.questionGroup.index');
     }
 
     public function create()
     {
-        if (!Gate::allows('category-create')) {
+        if (!Gate::allows('question-group-create')) {
             return redirect()->route('unauthorized.action');
         }
-        return view('admin.pages.category.add');
+        return view('admin.pages.questionGroup.create');
     }
 
     public function store(Request $request)
     {
-        try {
-            $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-            ]);
-
-            $category = new Category();
-            $category->name = $request->name;
-            $category->description = $request->description;
-            $category->school_id = Auth::user()->school_id ?? Auth::id();
-            $category->created_by = Auth::user()->id;
-            $category->save();
+        try{
+            $questionGroup = new QuestionGroup();
+            $questionGroup->title = $request->title;
+            $questionGroup->school_id = Auth::user()->school_id ?? Auth::id();
+            $questionGroup->created_by = Auth::user()->id;
+            $questionGroup->save();
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
@@ -65,27 +58,21 @@ class CategoryController extends Controller
 
     public function edit($id)
     {
-        if (!Gate::allows('category-edit')) {
+        if (!Gate::allows('question-group-edit')) {
             return redirect()->route('unauthorized.action');
         }
-        $category = Category::find($id);
-        return view('admin.pages.category.edit', compact('category'));
+        $questionGroup = QuestionGroup::find($id);
+        return view('admin.pages.questionGroup.edit', compact('questionGroup'));
     }
 
     public function update(Request $request, $id)
     {
-        try {
-            $request->validate([
-                'name' => 'required',
-                'description' => 'required',
-            ]);
-
-            $category = Category::find($id);
-            $category->name = $request->name;
-            $category->description = $request->description;
-            $category->school_id = Auth::user()->school_id ?? Auth::id();
-            $category->updated_by = Auth::user()->id;
-            $category->save();
+        try{
+            $questionGroup = QuestionGroup::find($id);
+            $questionGroup->title = $request->title;
+            $questionGroup->school_id = Auth::user()->school_id ?? Auth::id();
+            $questionGroup->updated_by = Auth::user()->id;
+            $questionGroup->save();
             toastr()->success('Data has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
@@ -96,9 +83,9 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        try {
-            $category = Category::find($id);
-            $category->delete();
+        try{
+            $questionGroup = QuestionGroup::find($id);
+            $questionGroup->delete();
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();
         } catch (\Exception $e) {

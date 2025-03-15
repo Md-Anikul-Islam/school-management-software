@@ -40,6 +40,9 @@ class GuardianController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('guardian-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         return view('admin.pages.guardian.add');
     }
 
@@ -89,6 +92,9 @@ class GuardianController extends Controller
 
     public function show($id)
     {
+        if (!Gate::allows('guardian-show')) {
+            return redirect()->route('unauthorized.action');
+        }
         $guardian = Guardian::find($id);
         $documents = Document::where('uploader_id', $guardian->id . '_' . $guardian->phone)->get();
         return view('admin.pages.guardian.show', compact( 'guardian', 'documents'));
@@ -134,6 +140,9 @@ class GuardianController extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('guardian-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $guardian = Guardian::find($id);
         return view('admin.pages.guardian.edit', compact('guardian'));
     }

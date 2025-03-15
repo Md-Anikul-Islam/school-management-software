@@ -32,6 +32,9 @@ class ClassNameController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('class-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         if(auth()->user()->hasRole('Super Admin')){
             $teachers = Teacher::latest()->get();
         } else {
@@ -64,6 +67,9 @@ class ClassNameController extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('class-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $class = ClassName::find($id);
         if(auth()->user()->hasRole('Super Admin')){
             $teachers = Teacher::latest()->get();

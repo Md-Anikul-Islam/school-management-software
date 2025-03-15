@@ -35,6 +35,9 @@ class HostelController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('hostel-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         return view('admin.pages.hostel.add');
     }
 
@@ -65,6 +68,9 @@ class HostelController extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('hostel-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $hostel = Hostel::find($id);
         return view('admin.pages.hostel.edit', compact('hostel'));
     }

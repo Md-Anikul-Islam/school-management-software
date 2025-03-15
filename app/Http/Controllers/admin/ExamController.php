@@ -35,6 +35,9 @@ class ExamController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('exam-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         return view('admin.pages.exam.add');
     }
 
@@ -63,6 +66,9 @@ class ExamController extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('exam-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $exam = Exam::find($id);
         return view('admin.pages.exam.edit', compact('exam'));
     }

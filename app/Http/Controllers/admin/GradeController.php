@@ -35,6 +35,9 @@ class GradeController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('grade-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         return view('admin.pages.grade.add');
     }
 
@@ -67,6 +70,9 @@ class GradeController extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('grade-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $pageTitle = 'Edit Grade';
         $grade = Grade::find($id);
         return view('admin.pages.grade.edit', compact('pageTitle', 'grade'));
