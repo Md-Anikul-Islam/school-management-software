@@ -132,15 +132,6 @@
                     </li>
                 @endcan
 
-                @can('student-list')
-                    <li class="side-nav-item">
-                        <a href="#" class="side-nav-link">
-                            <i class="ri-user-3-line"></i>
-                            <span> Student </span>
-                        </a>
-                    </li>
-                @endcan
-
                 @can('guardian-list')
                     <li class="side-nav-item">
                         <a href="{{route('guardian.index')}}" class="side-nav-link">
