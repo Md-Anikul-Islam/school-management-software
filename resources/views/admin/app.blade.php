@@ -132,6 +132,15 @@
                     </li>
                 @endcan
 
+                @can('student-list')
+                    <li class="side-nav-item">
+                        <a href="{{ route('student.index') }}" class="side-nav-link">
+                            <i class="ri-user-2-line"></i>
+                            <span> Student </span>
+                        </a>
+                    </li>
+                @endcan
+
                 @can('guardian-list')
                     <li class="side-nav-item">
                         <a href="{{route('guardian.index')}}" class="side-nav-link">
@@ -235,6 +244,48 @@
                                         <a href="{{ route('grade.index') }}">
                                             <i class="ri-line-chart-line"></i>
                                             <span>Exam Grade</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+                @can('mark-module')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages4" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-school-line"></i>
+                            <span>Mark</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages4">
+                            <ul class="side-nav-second-level">
+                                @can('mark-list')
+                                    <li>
+                                        <a href="{{ route('mark.index') }}">
+                                            <i class="ri-home-smile-2-fill"></i>
+                                            <span>Mark</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('mark-distribution-list')
+                                    <li>
+{{--                                        <a href="{{ route('mark-distribution.index') }}">--}}
+                                        <a href="#">
+                                            <i class="ri-home-smile-2-fill"></i>
+                                            <span>Mark Distribution</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('mark-promotion')
+                                    <li>
+{{--                                        <a href="{{ route('mark-promotion.index') }}">--}}
+                                        <a href="#">
+                                            <i class="ri-home-smile-2-fill"></i>
+                                            <span>Promotion</span></a>
                                     </li>
                                 @endcan
                             </ul>
@@ -451,6 +502,15 @@
     $(document).ready(function () {
         $('.form-control[multiple]').select2({
             allowClear: true
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.datepicker').daterangepicker({
+            singleDatePicker: true,
+            autoApply: true,
+            format: 'yyyy-mm-dd',
         });
     });
 </script>

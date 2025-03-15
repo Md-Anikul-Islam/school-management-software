@@ -12,8 +12,10 @@ use App\Http\Controllers\admin\GuardianController;
 use App\Http\Controllers\admin\HostelController;
 use App\Http\Controllers\admin\HostelCategoryController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\MarkController;
 use App\Http\Controllers\admin\SectionNameContoller;
 use App\Http\Controllers\admin\SliderController;
+use App\Http\Controllers\admin\StudentController;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\admin\SyllabusController;
@@ -232,6 +234,22 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/question-bank-update/{id}', [QuestionBankController::class, 'update'])->name('question-bank.update');
     Route::delete('/question-bank-delete/{id}', [QuestionBankController::class, 'destroy'])->name('question-bank.destroy');
 
+
+    //mark
+    Route::get('/mark-list', [MarkController::class, 'index'])->name('mark.index');
+    Route::get('/mark-create', [MarkController::class, 'create'])->name('mark.create');
+    Route::post('/mark-store', [MarkController::class, 'store'])->name('mark.store');
+    Route::get('/mark-edit/{id}', [MarkController::class, 'edit'])->name('mark.edit');
+    Route::put('/mark-update/{id}', [MarkController::class, 'update'])->name('mark.update');
+    Route::delete('/mark-delete/{id}', [MarkController::class, 'destroy'])->name('mark.destroy');
+
+    //student
+    Route::get('/student-list', [StudentController::class, 'index'])->name('student.index');
+    Route::get('/student-create', [StudentController::class, 'create'])->name('student.create');
+    Route::post('/student-store', [StudentController::class, 'store'])->name('student.store');
+    Route::get('/student-edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
+    Route::put('/student-update/{id}', [StudentController::class, 'update'])->name('student.update');
+    Route::delete('/student-delete/{id}', [StudentController::class, 'destroy'])->name('student.destroy');
 
 
     //Role and User Section

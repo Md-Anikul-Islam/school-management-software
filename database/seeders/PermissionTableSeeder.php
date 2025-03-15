@@ -195,6 +195,20 @@ class PermissionTableSeeder extends Seeder
             'question-bank-delete',
 
 
+
+            //mark module
+            'mark-module',
+
+            //mark
+            'mark-list',
+            'mark-create',
+            'mark-edit',
+            'mark-delete',
+
+            //mark distribution & promotion
+            'mark-distribution-list',
+            'mark-promotion',
+
         ];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {
