@@ -47,6 +47,9 @@ class ExamScheduleController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('exam-schedule-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         $pageTitle = 'Add Exam Schedule';
         $classes = ClassName::all();
         if(auth()->user()->hasRole('Super Admin')) {
@@ -97,6 +100,9 @@ class ExamScheduleController extends Controller
 
     public function edit($id)
     {
+        if (!Gate::allows('exam-schedule-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $pageTitle = 'Edit Exam Schedule';
         $classes = ClassName::all();
         if(auth()->user()->hasRole('Super Admin')) {

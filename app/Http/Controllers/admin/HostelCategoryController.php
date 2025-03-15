@@ -34,6 +34,9 @@ class HostelCategoryController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('hostel-category-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         if(auth()->user()->hasRole('Super Admin')){
             $hostels = Hostel::all();
         } else {
