@@ -26,6 +26,10 @@ class HostelMemberController extends Controller
 
     public function index()
     {
-
+        if(auth()->user()->hasRole('Super Admin')){
+            $students = Student::all();
+        } else {
+            $students = Student::where('school_id', Auth()->user()->school_id)->orWhere('school_id', Auth::id()->school_id)->get();
+        }
     }
 }
