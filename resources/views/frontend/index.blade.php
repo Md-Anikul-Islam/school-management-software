@@ -1,15 +1,6 @@
 @extends('frontend.layout')
 @section('content')
-
-<!-- THEME SWITHCHER -->
-<div class="theme-switcher">
-    <span class="d-flex justify-content-center align-items-center"><i class="fa-solid fa-palette"></i></span>
-    <button class="theme-btn pink" data-theme="pink"></button>
-    <button class="theme-btn orange" data-theme="orange"></button>
-    <button class="theme-btn blue" data-theme="blue"></button>
-    <button class="theme-btn green" data-theme="green"></button>
-</div>
-
+@include('frontend.color')
 
 <!-- Banner Section Start -->
 <section class="banner-carousel owl-carousel">
@@ -93,7 +84,6 @@
     </div>
 </section>
 
-
 <!-- Feature section start -->
 <section class="feature-part">
     <div class="feature-card">
@@ -117,7 +107,6 @@
             nurture well-rounded individuals.</p>
     </div>
 </section>
-
 
 <!-- About section start -->
 <section class="about-part">
@@ -171,7 +160,6 @@
     </div>
 </section>
 
-
 <!-- Principal section Start -->
 <section class="principal-part">
     <div class="container">
@@ -194,7 +182,6 @@
         </div>
     </div>
 </section>
-
 
 <!-- Teachers section Start -->
 <section class="teacher-part">
@@ -431,7 +418,6 @@
     </div>
 </section>
 
-
 <!-- Event section Start -->
 <section class="event-part">
     <div class="container">
@@ -503,9 +489,8 @@
     </div>
 </section>
 
-
 <!-- Social section Start -->
-<section class="social-part" data-background="assets/images/bg/social.jpg">
+<section class="social-part" data-background="{{URL::to('frontend/assets/images/bg/social.jpg')}}">
     <div class="social-overlay">
         <span></span>
         <h2>The School Community</h2>
@@ -520,7 +505,6 @@
         </nav>
     </div>
 </section>
-
 
 <!-- Gallery section Start -->
 <section class="gallery-part">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\admin\AdminDashboardController;
 use App\Http\Controllers\admin\AssignmentController;
 use App\Http\Controllers\admin\CategoryController;
@@ -18,7 +19,15 @@ use App\Http\Controllers\admin\SupplierController;
 use App\Http\Controllers\admin\SyllabusController;
 use App\Http\Controllers\admin\TeacherController;
 use App\Http\Controllers\admin\WarehouseController;
+use App\Http\Controllers\FrontendAdmissionController;
+use App\Http\Controllers\FrontendBlogController;
+use App\Http\Controllers\FrontendContactController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\FrontendEventController;
+use App\Http\Controllers\FrontendGalleryController;
+use App\Http\Controllers\FrontendNoticeController;
+use App\Http\Controllers\FrontendPrivacyController;
+use App\Http\Controllers\FrontendTeachersController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +38,17 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [FrontendController::class, 'index']);
+Route::get('/about-us', [AboutUsController::class, 'aboutUs'])->name('about');
+Route::get('/teachers', [FrontendTeachersController::class, 'teachers'])->name('teachers');
+Route::get('/privacy', [FrontendPrivacyController::class, 'privacy'])->name('privacy');
+Route::get('/notice', [FrontendNoticeController::class, 'notice'])->name('notice');
+Route::get('/gallery', [FrontendGalleryController::class, 'gallery'])->name('gallery');
+Route::get('/blog', [FrontendBlogController::class, 'blog'])->name('blog');
+Route::get('/blog/{slug}', [FrontendBlogController::class, 'blogDetails'])->name('blog.details');
+Route::get('/contact', [FrontendContactController::class, 'contact'])->name('contact');
+Route::get('/event', [FrontendEventController::class, 'event'])->name('event');
+Route::get('/event/{slug}', [FrontendEventController::class, 'eventDetails'])->name('event.details');
+Route::get('/admission', [FrontendAdmissionController::class, 'admission'])->name('admission');
 
 
 Route::middleware('auth')->group(callback: function () {

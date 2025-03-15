@@ -36,7 +36,7 @@
             <button type="button" class="header-menu">
                 <i class="lni lni-menu"></i>
             </button>
-            <a href="index.html" class="header-logo"><img
+            <a href="/" class="header-logo"><img
                     src="{{URL::to('frontend/assets/images/logo/logo.png')}}" alt="logo"></a>
             <nav class="header-nav">
                 <div class="header-nav-group">
@@ -47,69 +47,50 @@
                 </div>
                 <ul class="header-nav-list">
 
-                    <li
-                        class="header-nav-item ">
-                        <a href="index.html"
-                           class="header-nav-link">Home</a></li>
+                    <li class="header-nav-item {{ request()->is('/') ? 'active' : '' }}">
+                        <a href="/" class="header-nav-link">Home</a>
+                    </li>
 
+                    <li class="header-nav-item {{ request()->routeIs('about') ? 'active' : '' }}">
+                        <a href="{{ route('about') }}" class="header-nav-link">About</a>
+                    </li>
 
-                    <li
-                        class="header-nav-item ">
-                        <a href="/about.html"
-                           class="header-nav-link">About</a></li>
+                    <li class="header-nav-item {{ request()->routeIs('teachers') ? 'active' : '' }}">
+                        <a href="{{ route('teachers') }}" class="header-nav-link">Teachers</a>
+                    </li>
 
+                    <li class="header-nav-item {{ request()->routeIs('event') ? 'active' : '' }}">
+                        <a href="{{ route('event') }}" class="header-nav-link">Events</a>
+                    </li>
 
-                    <li
-                        class="header-nav-item ">
-                        <a href="/teachers.html"
-                           class="header-nav-link">Teachers</a></li>
+                    <li class="header-nav-item {{ request()->routeIs('gallery') ? 'active' : '' }}">
+                        <a href="{{ route('gallery') }}" class="header-nav-link">Gallery</a>
+                    </li>
 
+                    <li class="header-nav-item {{ request()->routeIs('blog') ? 'active' : '' }}">
+                        <a href="{{ route('blog') }}" class="header-nav-link">Blog</a>
+                    </li>
 
-                    <li
-                        class="header-nav-item ">
-                        <a href="/events.html"
-                           class="header-nav-link">Events</a></li>
+                    <li class="header-nav-item {{ request()->routeIs('admission') ? 'active' : '' }}">
+                        <a href="{{ route('admission') }}" class="header-nav-link">Admission</a>
+                    </li>
 
+                    <li class="header-nav-item {{ request()->routeIs('notice') ? 'active' : '' }}">
+                        <a href="{{ route('notice') }}" class="header-nav-link">Notice</a>
+                    </li>
 
-                    <li
-                        class="header-nav-item ">
-                        <a href="/gallery.html"
-                           class="header-nav-link">Gallery</a></li>
+                    <li class="header-nav-item {{ request()->routeIs('contact') ? 'active' : '' }}">
+                        <a href="{{ route('contact') }}" class="header-nav-link">Contact</a>
+                    </li>
 
-
-                    <li
-                        class="header-nav-item ">
-                        <a href="/blog.html"
-                           class="header-nav-link">Blog</a></li>
-
-
-                    <li
-                        class="header-nav-item ">
-                        <a href="/admission.html"
-                           class="header-nav-link">Admission</a></li>
-
-
-                    <li
-                        class="header-nav-item ">
-                        <a href="/notice-board.html"
-                           class="header-nav-link">Notice</a></li>
-
-
-                    <li
-                        class="header-nav-item ">
-                        <a href="/contact.html"
-                           class="header-nav-link">Contact</a></li>
-
-
-                    <li
-                        class="header-nav-item ">
-                        <a href="/privacy-policy.html"
-                           class="header-nav-link">Privacy Policy</a></li>
+                    <li class="header-nav-item {{ request()->routeIs('privacy') ? 'active' : '' }}">
+                        <a href="{{ route('privacy') }}" class="header-nav-link">Privacy Policy</a>
+                    </li>
 
 
                 </ul>
             </nav>
-            <a href="login.html" class="header-action-btn"
+            <a href="/login" class="header-action-btn"
             >
                 <img src="{{URL::to('frontend/assets/images/logo/icon.png')}}" alt="icon">
                 <span> login </span>
