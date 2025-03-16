@@ -24,6 +24,9 @@ use App\Http\Controllers\admin\WarehouseController;
 use App\Http\Controllers\admin\QuestionGroupController;
 use App\Http\Controllers\admin\QuestionLevelController;
 use App\Http\Controllers\admin\QuestionBankController;
+use App\Http\Controllers\admin\InstructionController;
+use App\Http\Controllers\admin\VendorController;
+use App\Http\Controllers\admin\LocationController;
 use App\Http\Controllers\FrontendAdmissionController;
 use App\Http\Controllers\FrontendBlogController;
 use App\Http\Controllers\FrontendContactController;
@@ -234,6 +237,16 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/question-bank-update/{id}', [QuestionBankController::class, 'update'])->name('question-bank.update');
     Route::delete('/question-bank-delete/{id}', [QuestionBankController::class, 'destroy'])->name('question-bank.destroy');
 
+    //instruction
+    Route::get('/instruction-list', [InstructionController::class, 'index'])->name('instruction.index');
+    Route::get('/instruction-show/{id}', [InstructionController::class, 'show'])->name('instruction.show');
+    Route::get('/instruction-create', [InstructionController::class, 'create'])->name('instruction.create');
+    Route::post('/instruction-store', [InstructionController::class, 'store'])->name('instruction.store');
+    Route::get('/instruction-edit/{id}', [InstructionController::class, 'edit'])->name('instruction.edit');
+    Route::put('/instruction-update/{id}', [InstructionController::class, 'update'])->name('instruction.update');
+    Route::delete('/instruction-delete/{id}', [InstructionController::class, 'destroy'])->name('instruction.destroy');
+
+
 
     //mark
     Route::get('/mark-list', [MarkController::class, 'index'])->name('mark.index');
@@ -251,6 +264,21 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/student-update/{id}', [StudentController::class, 'update'])->name('student.update');
     Route::delete('/student-delete/{id}', [StudentController::class, 'destroy'])->name('student.destroy');
 
+    //vendor
+    Route::get('/vendor-list', [VendorController::class, 'index'])->name('vendor.index');
+    Route::get('/vendor-create', [VendorController::class, 'create'])->name('vendor.create');
+    Route::post('/vendor-store', [VendorController::class, 'store'])->name('vendor.store');
+    Route::get('/vendor-edit/{id}', [VendorController::class, 'edit'])->name('vendor.edit');
+    Route::put('/vendor-update/{id}', [VendorController::class, 'update'])->name('vendor.update');
+    Route::delete('/vendor-delete/{id}', [VendorController::class, 'destroy'])->name('vendor.destroy');
+
+    //location
+    Route::get('/location-list', [LocationController::class, 'index'])->name('location.index');
+    Route::get('/location-create', [LocationController::class, 'create'])->name('location.create');
+    Route::post('/location-store', [LocationController::class, 'store'])->name('location.store');
+    Route::get('/location-edit/{id}', [LocationController::class, 'edit'])->name('location.edit');
+    Route::put('/location-update/{id}', [LocationController::class, 'update'])->name('location.update');
+    Route::delete('/location-delete/{id}', [LocationController::class, 'destroy'])->name('location.destroy');
 
     //Role and User Section
     Route::resource('roles', RoleController::class);

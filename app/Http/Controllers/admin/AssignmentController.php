@@ -10,6 +10,7 @@ use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Carbon\Carbon;
 
 class AssignmentController extends Controller
 {
@@ -88,7 +89,7 @@ class AssignmentController extends Controller
             $assignment = new Assignment();
             $assignment->title = $request->title;
             $assignment->description = $request->description;
-            $assignment->deadline = $request->deadline;
+            $assignment->deadline = Carbon::createFromFormat('m/d/Y', $request->deadline)->format('Y-m-d');
             $assignment->class_id = $request->class_id;
             $assignment->section_id = json_encode($request->section_id); // Convert array to JSON
             $assignment->subject_id = $request->subject_id;
@@ -137,7 +138,7 @@ class AssignmentController extends Controller
             $assignment = Assignment::find($id);
             $assignment->title = $request->title;
             $assignment->description = $request->description;
-            $assignment->deadline = $request->deadline;
+            $assignment->deadline = Carbon::createFromFormat('m/d/Y', $request->deadline)->format('Y-m-d');
             $assignment->class_id = $request->class_id;
             $assignment->section_id = json_encode($request->section_id); // Convert array to JSON
             $assignment->subject_id = $request->subject_id;

@@ -1,5 +1,24 @@
 @extends('admin.app')
 @section('admin_content')
+
+    {{-- Select2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <style>
+        .select2-container--default .select2-selection--single {
+            height: 38px; /* Same as Bootstrap .form-control */
+            border: 1px solid #ced4da; /* Same as Bootstrap input border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 6px 12px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 26px; /* Align text properly */
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 36px; /* Align arrow with input */
+        }
+    </style>
+
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
@@ -29,7 +48,7 @@
                     @method('PUT')
                     <div class="mb-3">
                         <label for="question_group_id" class="form-label">Question Group</label>
-                        <select class="form-control" id="question_group_id" name="question_group_id" required>
+                        <select class="form-control select2" id="question_group_id" name="question_group_id" required>
                             <option value="">Select Question Group</option>
                             @foreach($questionGroups as $group)
                                 <option value="{{ $group->id }}" {{ $questionBank->question_group_id == $group->id ? 'selected' : '' }}>{{ $group->title }}</option>
@@ -38,7 +57,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="question_level_id" class="form-label">Difficulty Level</label>
-                        <select class="form-control" id="question_level_id" name="question_level_id" required>
+                        <select class="form-control select2" id="question_level_id" name="question_level_id" required>
                             <option value="">Select Difficulty Level</option>
                             @foreach($questionLevels as $level)
                                 <option value="{{ $level->id }}" {{ $questionBank->question_level_id == $level->id ? 'selected' : '' }}>{{ $level->title }}</option>
@@ -47,11 +66,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="question" class="form-label">Question</label>
-                        <textarea class="form-control ck_editor" id="question" name="question" rows="3" required>{!! $questionBank->question !!}</textarea>
+                        <textarea class="form-control" id="question_{{$editorId}}" name="question" rows="3" required>{!! $questionBank->question !!}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="explanation" class="form-label">Explanation</label>
-                        <textarea class="form-control ck_editor" id="explanation" name="explanation" rows="3">{!! $questionBank->explanation !!}</textarea>
+                        <textarea class="form-control" id="explanation_{{$editorId}}" name="explanation" rows="3">{!! $questionBank->explanation !!}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="upload" class="form-label">Upload File</label>
@@ -109,22 +128,38 @@
         </div>
     </div>
 
+    <!-- Include jQuery (Required for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            if (typeof $.fn.select2 !== "undefined") {
+                $('.select2').select2();
+            } else {
+                console.error("Select2 not loaded");
+            }
+        });
+    </script>
+
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#question_{{$editorId}}'))
+            .catch(error => {
+                console.error(error);
+            });
+        ClassicEditor
+            .create(document.querySelector('#explanation_{{$editorId}}'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const textareas = document.querySelectorAll('.ck_editor');
-            textareas.forEach((textarea) => {
-                ClassicEditor
-                    .create(textarea)
-                    .then(editor => {
-                        console.log('Editor was initialized in', textarea.id);
-                    })
-                    .catch(error => {
-                        console.error('There was a problem initializing the editor in', textarea.id, error);
-                    });
-            });
-
             const questionTypeSelect = document.getElementById('question_type');
             const totalOptionsDiv = document.getElementById('total_options_div');
             const totalOptionsInput = document.getElementById('total_options');

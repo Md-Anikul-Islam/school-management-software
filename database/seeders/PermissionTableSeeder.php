@@ -116,7 +116,7 @@ class PermissionTableSeeder extends Seeder
             'guardian-edit',
             'guardian-delete',
 
-            //inventory
+            //inventory-module
             'inventory-module',
 
             //category
@@ -194,6 +194,13 @@ class PermissionTableSeeder extends Seeder
             'question-bank-edit',
             'question-bank-delete',
 
+            //instruction
+            'instruction-list',
+            'instruction-show',
+            'instruction-create',
+            'instruction-edit',
+            'instruction-delete',
+
 
 
             //mark module
@@ -208,6 +215,21 @@ class PermissionTableSeeder extends Seeder
             //mark distribution & promotion
             'mark-distribution-list',
             'mark-promotion',
+
+            //asset_management-module
+            'asset-management-module',
+
+            //vendor
+            'vendor-list',
+            'vendor-create',
+            'vendor-edit',
+            'vendor-delete',
+
+            //location
+            'location-list',
+            'location-create',
+            'location-edit',
+            'location-delete',
 
         ];
         foreach ($permissions as $permission) {

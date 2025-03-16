@@ -1,5 +1,25 @@
 @extends('admin.app')
 @section('admin_content')
+    {{-- Select2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Include Bootstrap Datepicker CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+    <style>
+        .select2-container--default .select2-selection--single {
+            height: 38px; /* Same as Bootstrap .form-control */
+            border: 1px solid #ced4da; /* Same as Bootstrap input border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 6px 12px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 26px; /* Align text properly */
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 36px; /* Align arrow with input */
+        }
+    </style>
     <div class="row">
         <div class="col-12">
             <div class="page-title-box">
@@ -29,7 +49,7 @@
                     @csrf
                     <div class="mb-3">
                         <label for="class_id" class="form-label">Class</label>
-                        <select class="form-control" id="class_id" name="class_id" required
+                        <select class="form-control select2" id="class_id" name="class_id" required
                                 onchange="fetchSectionsAndSubjects(this.value)">
                             <option value="">Select Class</option>
                             @foreach($classes as $class)
@@ -39,21 +59,21 @@
                     </div>
                     <div class="mb-3">
                         <label for="section_id" class="form-label">Section</label>
-                        <select class="form-control" id="section_id" name="section_id" required>
+                        <select class="form-control select2" id="section_id" name="section_id" required>
                             <option value="">Select Section</option>
                             <!-- Sections will be dynamically populated here -->
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="subject_id" class="form-label">Subject</label>
-                        <select class="form-control" id="subject_id" name="subject_id" required>
+                        <select class="form-control select2" id="subject_id" name="subject_id" required>
                             <option value="">Select Subject</option>
                             <!-- Subjects will be dynamically populated here -->
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="exam_id" class="form-label">Exam</label>
-                        <select class="form-control" id="exam_id" name="exam_id" required>
+                        <select class="form-control select2" id="exam_id" name="exam_id" required>
                             <option value="">Select Exam</option>
                             @foreach($exam as $ex)
                                 <option value="{{ $ex->id }}">{{ $ex->name }}</option>
@@ -62,7 +82,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="date" class="form-label">Date</label>
-                        <input type="date" class="form-control" id="date" name="date" required>
+                        <input type="text" class="form-control datepicker" id="date" name="date" required>
                     </div>
                     <div class="mb-3">
                         <label for="time_from" class="form-label">Time From</label>
@@ -81,6 +101,33 @@
             </div>
         </div>
     </div>
+
+    <!-- Include jQuery (Required for Select2) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <!-- Include Bootstrap Datepicker JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            if (typeof $.fn.select2 !== "undefined") {
+                $('.select2').select2();
+            } else {
+                console.error("Select2 not loaded");
+            }
+        });
+        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+    </script>
 
     <script>
         // Fetch sections and subjects based on the selected class

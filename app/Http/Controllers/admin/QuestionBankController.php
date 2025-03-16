@@ -136,6 +136,7 @@ class QuestionBankController extends Controller
         if (!Gate::allows('question-bank-edit')) {
             return redirect()->route('unauthorized.action');
         }
+        $editorId = (int) $id;
         $questionBank = QuestionBank::find($id);
         if(auth()->user()->hasRole('Super Admin')) {
             $questionGroups = QuestionGroup::all();
@@ -144,7 +145,7 @@ class QuestionBankController extends Controller
             $questionGroups = QuestionGroup::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
             $questionLevels = QuestionLevel::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
         }
-        return view('admin.pages.questionBank.edit', compact('questionBank', 'questionGroups', 'questionLevels'));
+        return view('admin.pages.questionBank.edit', compact('questionBank', 'questionGroups', 'questionLevels', 'editorId'));
     }
 
     public function update(Request $request, $id)
