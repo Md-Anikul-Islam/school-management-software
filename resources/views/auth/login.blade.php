@@ -94,7 +94,7 @@
                     </label>
                     <span class="pull-right">
                             <label>
-                                <a class="mb-2 forgotPass" href="#"> Forgot Password?</a>
+                                <a class="mb-2 forgotPass" href="{{route('password.request')}}">Forgot Password?</a>
                             </label>
                         </span>
                 </div>
