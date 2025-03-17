@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\ClassName;
 use App\Models\GroupName;
+use App\Models\Guardian;
 use App\Models\SectionName;
 use App\Models\Student;
 use App\Models\Subject;
@@ -53,7 +54,8 @@ class StudentController extends Controller
             $classNames = ClassName::all();
             $sections = SectionName::all();
             $groups = GroupName::all();
-            return view('admin.pages.student.add', compact('subjects', 'classNames', 'sections', 'groups'));
+            $guardians = Guardian::all();
+            return view('admin.pages.student.add', compact('subjects', 'classNames', 'sections', 'groups', 'guardians'));
         } catch (\Exception $e){
             toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
@@ -68,6 +70,7 @@ class StudentController extends Controller
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
+                'guardian_id' => 'required',
                 'admission_date' => 'required|date',
                 'dob' => 'required|date',
                 'gender' => 'required|integer',
@@ -95,8 +98,8 @@ class StudentController extends Controller
             $student = new Student();
             $student->name = $request->name;
             $student->guardian_id = $request->guardian_id;
-            $student->admission_date = Carbon::createFromFormat('m/d/Y', $request->admission_date)->format('Y-m-d');
-            $student->dob = Carbon::createFromFormat('m/d/Y', $request->dob)->format('Y-m-d');
+            $student->admission_date = $request->admission_date;
+            $student->dob = $request->dob;
             $student->gender = $request->gender;
             $student->blood_group_id = $request->blood_group_id;
             $student->religion = $request->religion;
@@ -147,7 +150,8 @@ class StudentController extends Controller
             $classNames = ClassName::all();
             $sections = SectionName::all();
             $groups = GroupName::all();
-            return view('admin.pages.student.edit', compact('student', 'subjects', 'classNames', 'sections', 'groups'));
+            $guardians = Guardian::all();
+            return view('admin.pages.student.edit', compact('student', 'subjects', 'classNames', 'sections', 'groups', 'guardians'));
         } catch (\Exception $e){
             toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
@@ -164,6 +168,7 @@ class StudentController extends Controller
 
             $request->validate([
                 'name' => 'required|string|max:255',
+                'guardian_id' => 'required',
                 'admission_date' => 'required|date',
                 'dob' => 'required|date',
                 'gender' => 'required|integer',
@@ -184,9 +189,17 @@ class StudentController extends Controller
                 'password' => 'nullable|string|min:6',
             ]);
 
-            // Handle File Upload
+            // Handle Photo Upload
             if ($request->hasFile('photo')) {
-                $student->photo = $request->file('photo')->store('uploads/students', 'public');
+                // Delete previous photo if it exists
+                if ($student->photo && file_exists(public_path('uploads/students/' . $student->photo))) {
+                    unlink(public_path('uploads/students/' . $student->photo));
+                }
+
+                // Store new photo
+                $fileName = time() . '.' . $request->photo->extension();
+                $request->photo->move(public_path('uploads/students'), $fileName);
+                $student->photo = $fileName;
             }
 
             // Update Student

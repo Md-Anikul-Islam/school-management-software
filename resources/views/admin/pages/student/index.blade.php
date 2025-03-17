@@ -79,7 +79,7 @@
                             <td>{{ $student->section->name }}</td>
                             <td>{{ ucfirst($student->gender) }}</td>
                             <td>{{ $student->phone }}</td>
-                            <td>{{ $student->guardian_name }}</td>
+                            <td>{{ $student->guardian->name }}</td>
                             <td>
                                 @can('student-edit')
                                     <a href="{{ route('student.edit', $student->id) }}" class="btn btn-info">
