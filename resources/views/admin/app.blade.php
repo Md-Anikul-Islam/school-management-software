@@ -421,8 +421,7 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages8" aria-expanded="false"
                            aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-archive-line"></i>
-                            <span>Asset Management</span>
+                            <i class="ri-briefcase-line"></i> <span>Asset Management</span>
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages8">
@@ -430,8 +429,7 @@
                                 @can('question-group-list')
                                     <li>
                                         <a href="{{ route('vendor.index') }}">
-                                            <i class="ri-price-tag-3-line"></i>
-                                            <span>Vendor</span></a>
+                                            <i class="ri-user-3-line"></i> <span>Vendor</span></a>
                                     </li>
                                 @endcan
                             </ul>
@@ -439,8 +437,61 @@
                                 @can('location-list')
                                     <li>
                                         <a href="{{ route('location.index') }}">
-                                            <i class="ri-shopping-bag-line"></i>
-                                            <span>Location</span></a>
+                                            <i class="ri-map-pin-line"></i> <span>Location</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('asset-category-list')
+                                    <li>
+                                        <a href="{{ route('asset-category.index') }}">
+                                            <i class="ri-folder-2-line"></i> <span>Asset Category</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('asset-list')
+                                    <li>
+                                        <a href="{{ route('asset.index') }}">
+                                            <i class="ri-stack-line"></i> <span>Asset</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('asset-assignment-list')
+                                    <li>
+                                        <a href="{{ route('asset-assignment.index') }}">
+                                            <i class="ri-exchange-line"></i> <span>Asset Assignment</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('purchase-list')
+                                    <li>
+                                        <a href="{{ route('purchase.index') }}">
+                                            <i class="ri-shopping-cart-line"></i> <span>Purchase</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+                @can('leave-application-module')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages9" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-calendar-2-line"></i>
+                            <span>Leave Application</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages9">
+                            <ul class="side-nav-second-level">
+                                @can('leave-category-list')
+                                    <li>
+                                        <a href="{{ route('leave-category.index') }}">
+                                            <i class="ri-list-settings-line"></i>
+                                            <span>Leave Category</span></a>
                                     </li>
                                 @endcan
                             </ul>

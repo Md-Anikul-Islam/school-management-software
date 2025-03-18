@@ -98,6 +98,9 @@ class ExamController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('exam-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try{
             $exam = Exam::find($id);
             $exam->delete();

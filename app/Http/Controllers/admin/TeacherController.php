@@ -253,6 +253,9 @@ class TeacherController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('teacher-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $teacher = Teacher::find($id);
             $teacher->delete();

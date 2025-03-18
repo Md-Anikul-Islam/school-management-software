@@ -221,6 +221,9 @@ class GuardianController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('guardian-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $guardian = Guardian::find($id);
             $guardian->delete();

@@ -104,6 +104,9 @@ class WarehouseController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('warehouse-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $warehouse = Warehouse::find($id);
             $warehouse->delete();

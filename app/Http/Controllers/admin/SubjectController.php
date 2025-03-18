@@ -189,6 +189,9 @@ class SubjectController extends Controller
      */
     public function destroy(string $id)
     {
+        if(!Gate::allows('subject-delete')){
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $subject = Subject::find($id);
             $subject->delete();

@@ -136,6 +136,9 @@ class SyllabusController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('syllabus-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $syllabus = Syllabus::find($id);
             $syllabus->delete();

@@ -51,6 +51,7 @@ class PermissionTableSeeder extends Seeder
             'teacher-create',
             'teacher-edit',
             'teacher-delete',
+            'teacher-status',
 
             //academics
             'academics-module',
@@ -115,6 +116,7 @@ class PermissionTableSeeder extends Seeder
             'guardian-create',
             'guardian-edit',
             'guardian-delete',
+            'guardian-status',
 
             //inventory-module
             'inventory-module',
@@ -230,6 +232,42 @@ class PermissionTableSeeder extends Seeder
             'location-create',
             'location-edit',
             'location-delete',
+
+            //asset category
+            'asset-category-list',
+            'asset-category-create',
+            'asset-category-edit',
+            'asset-category-delete',
+
+            //asset
+            'asset-list',
+            'asset-show',
+            'asset-create',
+            'asset-edit',
+            'asset-delete',
+
+            //asset assignment
+            'asset-assignment-list',
+            'asset-assignment-show',
+            'asset-assignment-create',
+            'asset-assignment-edit',
+            'asset-assignment-delete',
+
+            //purchase
+            'purchase-list',
+            'purchase-isapproved',
+            'purchase-create',
+            'purchase-edit',
+            'purchase-delete',
+
+            //leave-application-module
+            'leave-application-module',
+
+            //leave-category
+            'leave-category-list',
+            'leave-category-create',
+            'leave-category-edit',
+            'leave-category-delete',
 
         ];
         foreach ($permissions as $permission) {

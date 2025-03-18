@@ -113,6 +113,9 @@ class ProductController extends Controller
 
     public function destroy($id)
     {
+        if(!Gate::allows('product-delete')){
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $product = Product::find($id);
             $product->delete();

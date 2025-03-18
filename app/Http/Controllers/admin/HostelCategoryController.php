@@ -106,6 +106,9 @@ class HostelCategoryController extends Controller
 
     public function destroy($id)
     {
+        if(!Gate::allows('hostel-category-delete')){
+            return redirect()->route('unauthorized.action');
+        }
         try{
             $hostelCategory = HostelCategory::find($id);
             $hostelCategory->delete();

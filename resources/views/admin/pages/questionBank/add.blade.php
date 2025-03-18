@@ -153,9 +153,21 @@
                     const optionInput = document.createElement('div');
                     optionInput.classList.add('mb-3');
                     if (questionTypeSelect.value === 'Single Answer') {
-                        optionInput.innerHTML = `<label for="option_${i}" class="form-label">Option ${i}</label><div class="form-check"><input class="form-check-input" type="radio" name="correct_answer" id="correct_option_${i}" value="option_${i}"><input type="text" class="form-control" id="option_${i}" name="option_${i}"></div>`;
+                        optionInput.innerHTML = `
+                    <label for="option_${i}" class="form-label">Option ${i}</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="correct_answer" id="correct_option_${i}" value="${i - 1}">
+                        <input type="text" class="form-control" id="option_${i}" name="option_${i}">
+                    </div>
+                `;
                     } else if (questionTypeSelect.value === 'Multi Answer') {
-                        optionInput.innerHTML = `<label for="option_${i}" class="form-label">Option ${i}</label><div class="form-check"><input class="form-check-input" type="checkbox" name="correct_answers[]" id="correct_option_${i}" value="option_${i}"><input type="text" class="form-control" id="option_${i}" name="option_${i}"></div>`;
+                        optionInput.innerHTML = `
+                    <label for="option_${i}" class="form-label">Option ${i}</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="correct_answers[]" id="correct_option_${i}" value="${i - 1}">
+                        <input type="text" class="form-control" id="option_${i}" name="option_${i}">
+                    </div>
+                `;
                     }
                     optionsContainer.appendChild(optionInput);
                 }

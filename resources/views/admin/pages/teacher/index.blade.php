@@ -128,27 +128,29 @@
                             </td>
                             <td>{{ $teacher->name }}</td>
                             <td>{{ $teacher->email }}</td>
-                            <td>
-                                <form action="{{ route('teacher.update_status', $teacher->id) }}" method="POST"
-                                      class="status-form">
-                                    @csrf
-                                    @method('PUT')
-                                    <label class="switch">
-                                        <input type="checkbox" name="status" value="1"
-                                               {{ $teacher->status == 1 ? 'checked' : '' }}
-                                               onchange="this.form.submit()">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </form>
-                            </td>
+                            @can('teacher-status')
+                                <td>
+                                    <form action="{{ route('teacher.update_status', $teacher->id) }}" method="POST"
+                                          class="status-form">
+                                        @csrf
+                                        @method('PUT')
+                                        <label class="switch">
+                                            <input type="checkbox" name="status" value="1"
+                                                   {{ $teacher->status == 1 ? 'checked' : '' }}
+                                                   onchange="this.form.submit()">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </form>
+                                </td>
+                            @endcan
                             <td>
                                 @can('teacher-edit')
-                                <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-info"><i
-                                        class="ri-edit-line"></i></a>
+                                    <a href="{{ route('teacher.edit', $teacher->id) }}" class="btn btn-info"><i
+                                            class="ri-edit-line"></i></a>
                                 @endcan
                                 @can('teacher-show')
-                                <a href="{{ route('teacher.show', $teacher->id) }}" class="btn btn-primary"><i
-                                        class="ri-eye-fill"></i></a>
+                                    <a href="{{ route('teacher.show', $teacher->id) }}" class="btn btn-primary"><i
+                                            class="ri-eye-fill"></i></a>
                                 @endcan
                                 @can('teacher-delete')
                                     <a class="btn btn-danger" data-bs-toggle="modal"
@@ -240,7 +242,7 @@
             const doc = new jsPDF();
 
             // Add the heading
-            doc.text(heading, doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' }); // Centered heading
+            doc.text(heading, doc.internal.pageSize.getWidth() / 2, 20, {align: 'center'}); // Centered heading
 
             let rows = document.querySelectorAll("table tr");
             let data = [];

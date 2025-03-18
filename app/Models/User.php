@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function assetAssignments()
+    {
+        return $this->hasMany(AssetAssignment::class, 'check_out_to');
+    }
 }

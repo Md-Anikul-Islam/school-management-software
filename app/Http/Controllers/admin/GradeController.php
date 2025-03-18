@@ -107,6 +107,9 @@ class GradeController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('grade-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $grade = Grade::find($id);
             $grade->delete();

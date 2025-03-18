@@ -41,6 +41,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div>
                         <a href="{{ route('question-bank.index') }}" class="btn btn-primary"><span><i class="ri-arrow-go-back-line"></i></span>Back</a>
+                        <a href="{{ route('question-bank.download.pdf', $questionBank->id) }}" class="btn btn-success">Download PDF</a>
                     </div>
                 </div>
             </div>

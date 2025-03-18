@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Models\QuestionBank;
 use App\Models\QuestionGroup;
 use App\Models\QuestionLevel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class QuestionBankController extends Controller
 {
@@ -58,8 +59,7 @@ class QuestionBankController extends Controller
                 'question_level_id' => 'required',
                 'question' => 'required',
                 'question_type' => 'required',
-                'total_options' => 'nullable|integer|min:0', // Optional, integer, non-negative
-                // Add validation for correct_answers here if needed
+                'total_options' => 'nullable|integer|min:0',
             ]);
 
             $questionBank = new QuestionBank();
@@ -94,16 +94,15 @@ class QuestionBankController extends Controller
 
             // Correct Answers Handling
             if ($request->question_type === 'Multi Answer' || $request->question_type === 'Single Answer') {
-                // Assuming you have a way to identify correct options (e.g., checkboxes)
                 $correctAnswers = [];
                 for ($i = 1; $i <= $request->total_options; $i++) {
                     if ($request->has('correct_option_' . $i)) {
-                        $correctAnswers[] = $request->input('option_' . $i);
+                        // Store the index of the correct option
+                        $correctAnswers[] = $i - 1; // Subtract 1 to make it zero-based
                     }
                 }
                 $questionBank->correct_answers = json_encode($correctAnswers);
             } elseif ($request->question_type === 'Fill in the blanks') {
-                // Assuming you have input fields for correct answers
                 $correctAnswers = [];
                 if ($request->filled('blanks')) {
                     foreach ($request->blanks as $blank) {
@@ -113,7 +112,7 @@ class QuestionBankController extends Controller
                 $questionBank->correct_answers = json_encode($correctAnswers);
             }
 
-            $questionBank->school_id = Auth::id(); // Simplified user ID handling
+            $questionBank->school_id = Auth::id();
             $questionBank->created_by = Auth::id();
             $questionBank->save();
 
@@ -156,8 +155,7 @@ class QuestionBankController extends Controller
                 'question_level_id' => 'required',
                 'question' => 'required',
                 'question_type' => 'required',
-                'total_options' => 'nullable|integer|min:0', // Optional, integer, non-negative
-                // Add validation for correct_answers here if needed
+                'total_options' => 'nullable|integer|min:0',
             ]);
 
             $questionBank = QuestionBank::find($id);
@@ -200,16 +198,15 @@ class QuestionBankController extends Controller
 
             // Correct Answers Handling
             if ($request->question_type === 'Multi Answer' || $request->question_type === 'Single Answer') {
-                // Assuming you have a way to identify correct options (e.g., checkboxes)
                 $correctAnswers = [];
                 for ($i = 1; $i <= $request->total_options; $i++) {
                     if ($request->has('correct_option_' . $i)) {
-                        $correctAnswers[] = $request->input('option_' . $i);
+                        // Store the index of the correct option
+                        $correctAnswers[] = $i - 1; // Subtract 1 to make it zero-based
                     }
                 }
                 $questionBank->correct_answers = json_encode($correctAnswers);
             } elseif ($request->question_type === 'Fill in the blanks') {
-                // Assuming you have input fields for correct answers
                 $correctAnswers = [];
                 if ($request->filled('blanks')) {
                     foreach ($request->blanks as $blank) {
@@ -219,7 +216,7 @@ class QuestionBankController extends Controller
                 $questionBank->correct_answers = json_encode($correctAnswers);
             }
 
-            $questionBank->school_id = Auth::id(); // Simplified user ID handling
+            $questionBank->school_id = Auth::id();
             $questionBank->updated_by = Auth::id();
             $questionBank->save();
 
@@ -233,6 +230,9 @@ class QuestionBankController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('question-bank-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $questionBank = QuestionBank::find($id);
             $questionBank->delete();
@@ -242,5 +242,14 @@ class QuestionBankController extends Controller
             toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
         }
+    }
+
+    public function downloadPdf($id)
+    {
+        $questionBank = QuestionBank::findOrFail($id);
+
+        $pdf = Pdf::loadView('admin.pages.questionBank.pdf', compact('questionBank'));
+
+        return $pdf->download('question_bank_' . $questionBank->id . '.pdf');
     }
 }

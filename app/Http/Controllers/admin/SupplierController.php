@@ -101,6 +101,9 @@ class SupplierController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('supplier-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $supplier = Supplier::findOrFail($id);
             $supplier->delete();

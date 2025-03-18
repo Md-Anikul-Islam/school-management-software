@@ -27,6 +27,11 @@ use App\Http\Controllers\admin\QuestionBankController;
 use App\Http\Controllers\admin\InstructionController;
 use App\Http\Controllers\admin\VendorController;
 use App\Http\Controllers\admin\LocationController;
+use App\Http\Controllers\admin\AssetCategoryController;
+use App\Http\Controllers\admin\AssetController;
+use App\Http\Controllers\admin\AssetAssignmentController;
+use App\Http\Controllers\admin\PurchaseController;
+use App\Http\Controllers\admin\LeaveCategoryController;
 use App\Http\Controllers\FrontendAdmissionController;
 use App\Http\Controllers\FrontendBlogController;
 use App\Http\Controllers\FrontendContactController;
@@ -236,6 +241,7 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/question-bank-edit/{id}', [QuestionBankController::class, 'edit'])->name('question-bank.edit');
     Route::put('/question-bank-update/{id}', [QuestionBankController::class, 'update'])->name('question-bank.update');
     Route::delete('/question-bank-delete/{id}', [QuestionBankController::class, 'destroy'])->name('question-bank.destroy');
+    Route::get('/question-bank/{id}/download-pdf', [QuestionBankController::class, 'downloadPdf'])->name('question-bank.download.pdf');
 
     //instruction
     Route::get('/instruction-list', [InstructionController::class, 'index'])->name('instruction.index');
@@ -279,6 +285,52 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/location-edit/{id}', [LocationController::class, 'edit'])->name('location.edit');
     Route::put('/location-update/{id}', [LocationController::class, 'update'])->name('location.update');
     Route::delete('/location-delete/{id}', [LocationController::class, 'destroy'])->name('location.destroy');
+
+    //asset category
+    Route::get('/asset-category-list', [AssetCategoryController::class, 'index'])->name('asset-category.index');
+    Route::get('/asset-category-create', [AssetCategoryController::class, 'create'])->name('asset-category.create');
+    Route::post('/asset-category-store', [AssetCategoryController::class, 'store'])->name('asset-category.store');
+    Route::get('/asset-category-edit/{id}', [AssetCategoryController::class, 'edit'])->name('asset-category.edit');
+    Route::put('/asset-category-update/{id}', [AssetCategoryController::class, 'update'])->name('asset-category.update');
+    Route::delete('/asset-category-delete/{id}', [AssetCategoryController::class, 'destroy'])->name('asset-category.destroy');
+
+    //asset
+    Route::get('/asset-list', [AssetController::class, 'index'])->name('asset.index');
+    Route::get('/asset-create', [AssetController::class, 'create'])->name('asset.create');
+    Route::post('/asset-store', [AssetController::class, 'store'])->name('asset.store');
+    Route::get('/asset-edit/{id}', [AssetController::class, 'edit'])->name('asset.edit');
+    Route::put('/asset-update/{id}', [AssetController::class, 'update'])->name('asset.update');
+    Route::delete('/asset-delete/{id}', [AssetController::class, 'destroy'])->name('asset.destroy');
+    Route::get('/asset-show/{id}', [AssetController::class, 'show'])->name('asset.show');
+    Route::get('/assets/{id}/download-pdf', [AssetController::class, 'downloadPdf'])->name('asset.download.pdf');
+
+    //asset assignment
+    Route::get('/asset-assignment-list', [AssetAssignmentController::class, 'index'])->name('asset-assignment.index');
+    Route::get('/asset-assignment-create', [AssetAssignmentController::class, 'create'])->name('asset-assignment.create');
+    Route::post('/asset-assignment-store', [AssetAssignmentController::class, 'store'])->name('asset-assignment.store');
+    Route::get('/asset-assignment-edit/{id}', [AssetAssignmentController::class, 'edit'])->name('asset-assignment.edit');
+    Route::put('/asset-assignment-update/{id}', [AssetAssignmentController::class, 'update'])->name('asset-assignment.update');
+    Route::delete('/asset-assignment-delete/{id}', [AssetAssignmentController::class, 'destroy'])->name('asset-assignment.destroy');
+    Route::get('/asset-assignment-show/{id}', [AssetAssignmentController::class, 'show'])->name('asset-assignment.show');
+    Route::get('/asset-assignment/{id}/download-pdf', [AssetAssignmentController::class, 'downloadPdf'])->name('asset-assignment.download.pdf');
+
+    //purchase
+    Route::get('/purchase-list', [PurchaseController::class, 'index'])->name('purchase.index');
+    Route::get('/purchase-create', [PurchaseController::class, 'create'])->name('purchase.create');
+    Route::post('/purchase-store', [PurchaseController::class, 'store'])->name('purchase.store');
+    Route::get('/purchase-edit/{id}', [PurchaseController::class, 'edit'])->name('purchase.edit');
+    Route::put('/purchase-update/{id}', [PurchaseController::class, 'update'])->name('purchase.update');
+    Route::delete('/purchase-delete/{id}', [PurchaseController::class, 'destroy'])->name('purchase.destroy');
+    Route::put('/purchase-approve/{id}', [PurchaseController::class, 'is_approved'])->name('purchase.is_approved');
+
+    //leave category
+    Route::get('/leave-category-list', [LeaveCategoryController::class, 'index'])->name('leave-category.index');
+    Route::get('/leave-category-create', [LeaveCategoryController::class, 'create'])->name('leave-category.create');
+    Route::post('/leave-category-store', [LeaveCategoryController::class, 'store'])->name('leave-category.store');
+    Route::get('/leave-category-edit/{id}', [LeaveCategoryController::class, 'edit'])->name('leave-category.edit');
+    Route::put('/leave-category-update/{id}', [LeaveCategoryController::class, 'update'])->name('leave-category.update');
+    Route::delete('/leave-category-delete/{id}', [LeaveCategoryController::class, 'destroy'])->name('leave-category.destroy');
+
 
     //Role and User Section
     Route::resource('roles', RoleController::class);

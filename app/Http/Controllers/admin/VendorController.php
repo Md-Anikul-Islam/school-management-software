@@ -90,6 +90,9 @@ class VendorController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('vendor-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try{
             $vendor = Vendor::find($id);
             $vendor->delete();

@@ -83,6 +83,9 @@ class QuestionGroupController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('question-group-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try{
             $questionGroup = QuestionGroup::find($id);
             $questionGroup->delete();

@@ -103,6 +103,9 @@ class ClassNameController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('class-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try{
             $class = ClassName::find($id);
             $class->delete();

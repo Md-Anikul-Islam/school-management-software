@@ -16,4 +16,14 @@ class Location extends Model
         'created_by',
         'updated_by',
     ];
+
+    public function assets()
+    {
+        return $this->hasMany(Asset::class, 'location_id');
+    }
+
+    public function assetAssignments()
+    {
+        return $this->hasMany(AssetAssignment::class, 'location_id');
+    }
 }

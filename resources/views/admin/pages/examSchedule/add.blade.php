@@ -3,9 +3,6 @@
     {{-- Select2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-    <!-- Include Bootstrap Datepicker CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">
-
     <style>
         .select2-container--default .select2-selection--single {
             height: 38px; /* Same as Bootstrap .form-control */
@@ -82,7 +79,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="date" class="form-label">Date</label>
-                        <input type="text" class="form-control datepicker" id="date" name="date" required>
+                        <input type="date" class="form-control" id="date" name="date" required>
                     </div>
                     <div class="mb-3">
                         <label for="time_from" class="form-label">Time From</label>
@@ -119,13 +116,6 @@
             } else {
                 console.error("Select2 not loaded");
             }
-        });
-        $(document).ready(function() {
-            $('.datepicker').datepicker({
-                format: 'yyyy-mm-dd',
-                autoclose: true,
-                todayHighlight: true
-            });
         });
     </script>
 

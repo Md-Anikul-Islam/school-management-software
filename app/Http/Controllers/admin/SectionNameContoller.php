@@ -130,6 +130,9 @@ class SectionNameContoller extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('section-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $section = SectionName::find($id);
             $section->delete();

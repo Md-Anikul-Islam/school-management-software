@@ -163,6 +163,9 @@ class AssignmentController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('assignment-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $assignment = Assignment::find($id);
             $assignment->delete();

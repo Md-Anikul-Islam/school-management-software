@@ -127,19 +127,21 @@
                             </td>
                             <td>{{ $guardian->name }}</td>
                             <td>{{ $guardian->email }}</td>
-                            <td>
-                                <form action="{{ route('guardian.update_status', $guardian->id) }}" method="POST"
-                                      class="status-form">
-                                    @csrf
-                                    @method('PUT')
-                                    <label class="switch">
-                                        <input type="checkbox" name="status" value="1"
-                                               {{ $guardian->status == 1 ? 'checked' : '' }}
-                                               onchange="this.form.submit()">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </form>
-                            </td>
+                            @can('guardian-status')
+                                <td>
+                                    <form action="{{ route('guardian.update_status', $guardian->id) }}" method="POST"
+                                          class="status-form">
+                                        @csrf
+                                        @method('PUT')
+                                        <label class="switch">
+                                            <input type="checkbox" name="status" value="1"
+                                                   {{ $guardian->status == 1 ? 'checked' : '' }}
+                                                   onchange="this.form.submit()">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </form>
+                                </td>
+                            @endcan
                             <td>
                                 @can('guardian-edit')
                                     <a href="{{ route('guardian.edit', $guardian->id) }}" class="btn btn-info"><i

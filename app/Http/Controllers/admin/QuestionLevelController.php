@@ -83,6 +83,9 @@ class QuestionLevelController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('question-level-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try{
             $questionLevel = QuestionLevel::find($id);
             $questionLevel->delete();

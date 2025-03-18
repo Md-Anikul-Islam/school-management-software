@@ -96,6 +96,9 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('category-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $category = Category::find($id);
             $category->delete();
