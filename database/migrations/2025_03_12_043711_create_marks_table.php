@@ -17,6 +17,11 @@ return new class extends Migration
             $table->unsignedBigInteger('exam_id');
             $table->unsignedBigInteger('section_id');
             $table->unsignedBigInteger('subject_id');
+            $table->unsignedBigInteger('student_id');
+            $table->unsignedInteger('exam');
+            $table->unsignedInteger('attendance');
+            $table->unsignedInteger('class_test');
+            $table->unsignedInteger('assignment');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
