@@ -246,8 +246,6 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/instruction-update/{id}', [InstructionController::class, 'update'])->name('instruction.update');
     Route::delete('/instruction-delete/{id}', [InstructionController::class, 'destroy'])->name('instruction.destroy');
 
-
-
     //mark
     Route::get('/mark-list', [MarkController::class, 'index'])->name('mark.index');
     Route::get('/mark-create', [MarkController::class, 'create'])->name('mark.create');
@@ -255,6 +253,7 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/mark-edit/{id}', [MarkController::class, 'edit'])->name('mark.edit');
     Route::put('/mark-update/{id}', [MarkController::class, 'update'])->name('mark.update');
     Route::delete('/mark-delete/{id}', [MarkController::class, 'destroy'])->name('mark.destroy');
+    Route::post('/get-exam-students', [MarkController::class, 'getExamStudents'])->name('get.exam.students');
 
     //student
     Route::get('/student-list', [StudentController::class, 'index'])->name('student.index');

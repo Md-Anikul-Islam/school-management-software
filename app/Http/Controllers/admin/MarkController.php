@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\ClassName;
 use App\Models\Exam;
+use App\Models\ExamSchedule;
 use App\Models\Mark;
 use App\Models\SectionName;
 use App\Models\Student;
@@ -46,6 +47,7 @@ class MarkController extends Controller
     public function store(Request $request)
     {
         try{
+            dd($request->all());
             $request->validate([
                 'name' => 'required',
                 'date' => 'required',
@@ -94,5 +96,35 @@ class MarkController extends Controller
         } catch (\Exception $e){
             return redirect()->back()->with('error', 'Something went wrong. Please try again');
         }
+    }
+
+    public function getExamStudents(Request $request)
+    {
+        $request->validate([
+            'class_id' => 'required',
+            'exam_id' => 'required',
+            'section_id' => 'required',
+            'subject_id' => 'required'
+        ]);
+
+        // Fetch students of that class and section
+        $students = Student::where('class_id', $request->class_id)
+            ->where('section_id', $request->section_id)
+            ->get();
+
+        if ($students->isEmpty()) {
+            return response()->json(['status' => 'error', 'message' => 'No students found.']);
+        }
+
+        // Fetch full Exam and Subject entities
+        $exam = Exam::find($request->exam_id);
+        $subject = Subject::find($request->subject_id);
+
+        return response()->json([
+            'status' => 'success',
+            'students' => $students,
+            'exam' => $exam,   // Send full Exam object
+            'subject' => $subject // Send full Subject object
+        ]);
     }
 }

@@ -16,10 +16,10 @@
           type="text/css"/>
     <link href="{{asset('backend/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}"
           rel="stylesheet" type="text/css"/>
-    <link href="{{asset('backend/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css')}}"
-          rel="stylesheet" type="text/css"/>
-    <link href="{{asset('backend/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css')}}"
-          rel="stylesheet" type="text/css"/>
+{{--    <link href="{{asset('backend/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css')}}"--}}
+{{--          rel="stylesheet" type="text/css"/>--}}
+{{--    <link href="{{asset('backend/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css')}}"--}}
+{{--          rel="stylesheet" type="text/css"/>--}}
     <link href="{{asset('backend/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet"
           type="text/css"/>
     <link href="{{asset('backend/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet"
@@ -499,6 +499,7 @@
 
 {{-- font awesome here --}}
 <script src="{{asset('backend/js/vendor.min.js')}}"></script>
+
 <!-- Dropzone File Upload js -->
 <script src="{{asset('backend/vendor/dropzone/min/dropzone.min.js')}}"></script>
 <script src="{{asset('backend/js/pages/fileupload.init.js')}}"></script>
@@ -511,15 +512,17 @@
 <script src="{{asset('backend/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
 <script
     src="{{asset('backend/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js')}}"></script>
+
 <!-- Ckeditor Here -->
 <script src="{{asset('backend/js/sdmg.ckeditor.js')}}"></script>
+
 <!-- Datatables js -->
 <script src="{{asset('backend/vendor/datatables.net/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('backend/vendor/datatables.net-bs5/js/dataTables.bootstrap5.min.js')}}"></script>
 <script src="{{asset('backend/vendor/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('backend/vendor/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js')}}"></script>
-<script src="{{asset('backend/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js')}}"></script>
-<script src="{{asset('backend/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
+{{--<script src="{{asset('backend/vendor/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>--}}
+{{--<script src="{{asset('backend/vendor/datatables.net-fixedcolumns-bs5/js/fixedColumns.bootstrap5.min.js')}}"></script>--}}
 <script src="{{asset('backend/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
 <script src="{{asset('backend/vendor/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js')}}"></script>
 <script src="{{asset('backend/vendor/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
@@ -529,10 +532,12 @@
 <script src="{{asset('backend/vendor/datatables.net-select/js/dataTables.select.min.js')}}"></script>
 
 <!-- Datatable Demo Aapp js -->
-<script src="{{asset('backend/js/pages/datatable.init.js')}}"></script>
+{{--<script src="{{asset('backend/js/pages/datatable.init.js')}}"></script>--}}
 <script src="{{asset('backend/js/pages/dashboard.js')}}"></script>
 <script src="{{asset('backend/js/app.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('.form-control[multiple]').select2({
@@ -540,18 +545,5 @@
         });
     });
 </script>
-<script>
-    $(document).ready(function () {
-        $('.datepicker').daterangepicker({
-            singleDatePicker: true,
-            autoApply: true,
-            format: 'yyyy-mm-dd',
-        });
-    });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
 </body>
 </html>

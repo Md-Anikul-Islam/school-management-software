@@ -84,7 +84,7 @@ class ExamScheduleController extends Controller
             $examSchedule->exam_id = $request->exam_id;
             $examSchedule->section_id = $request->section_id;
             $examSchedule->subject_id = $request->subject_id;
-            $examSchedule->date = Carbon::createFromFormat('m/d/Y', $request->date)->format('Y-m-d');;
+            $examSchedule->date = $request->date;
             $examSchedule->time_from = $request->time_from;
             $examSchedule->time_to = $request->time_to;
             $examSchedule->room_no = $request->room_no;
@@ -138,7 +138,7 @@ class ExamScheduleController extends Controller
             $examSchedule->exam_id = $request->exam_id;
             $examSchedule->section_id = $request->section_id;
             $examSchedule->subject_id = $request->subject_id;
-            $examSchedule->date = Carbon::createFromFormat('m/d/Y', $request->date)->format('Y-m-d');;
+            $examSchedule->date = $request->date;
             $examSchedule->time_from = $request->time_from;
             $examSchedule->time_to = $request->time_to;
             $examSchedule->room_no = $request->room_no;
