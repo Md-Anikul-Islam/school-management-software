@@ -66,7 +66,6 @@ class AssetController extends Controller
                 'condition' => 'required',
                 'asset_category_id' => 'required',
                 'location_id' => 'required',
-                'attachment' => 'required',
             ]);
             $asset = new Asset();
             $asset->serial = $request->serial;
@@ -79,7 +78,7 @@ class AssetController extends Controller
                 $file = $request->file('attachment');
                 $fileName = time() . '.' . $file->getClientOriginalExtension();
                 $file->move(public_path('uploads/assets/'), $fileName);
-                $asset->attachment = $request->attachment;
+                $asset->attachment = $fileName;
             }
             $asset->school_id = Auth::user()->school_id ?? Auth::id();
             $asset->created_by = Auth::id();
@@ -130,7 +129,6 @@ class AssetController extends Controller
                 'condition' => 'required',
                 'asset_category_id' => 'required',
                 'location_id' => 'required',
-                'attachment' => 'required',
             ]);
             $asset = Asset::find($id);
             $fileName = $request->attachment ?? "";
@@ -141,7 +139,7 @@ class AssetController extends Controller
                 }
                 $file = $request->file('attachment');
                 $fileName = time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads/asset/'), $fileName);
+                $file->move(public_path('uploads/assets/'), $fileName);
             }
             $asset->serial = $request->serial;
             $asset->title = $request->title;

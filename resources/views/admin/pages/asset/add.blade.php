@@ -88,7 +88,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="attachment" class="form-label">Attachment</label>
-                        <input type="file" class="form-control" id="attachment" name="attachment" required>
+                        <input type="file" class="form-control" id="attachment" name="attachment">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

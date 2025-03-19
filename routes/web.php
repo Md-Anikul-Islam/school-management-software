@@ -32,6 +32,9 @@ use App\Http\Controllers\admin\AssetController;
 use App\Http\Controllers\admin\AssetAssignmentController;
 use App\Http\Controllers\admin\PurchaseController;
 use App\Http\Controllers\admin\LeaveCategoryController;
+use App\Http\Controllers\admin\LeaveAssignController;
+use App\Http\Controllers\admin\LeaveApplyController;
+use App\Http\Controllers\admin\LeaveApplicationController;
 use App\Http\Controllers\FrontendAdmissionController;
 use App\Http\Controllers\FrontendBlogController;
 use App\Http\Controllers\FrontendContactController;
@@ -329,6 +332,30 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/leave-category-edit/{id}', [LeaveCategoryController::class, 'edit'])->name('leave-category.edit');
     Route::put('/leave-category-update/{id}', [LeaveCategoryController::class, 'update'])->name('leave-category.update');
     Route::delete('/leave-category-delete/{id}', [LeaveCategoryController::class, 'destroy'])->name('leave-category.destroy');
+
+    //leave assign
+    Route::get('/leave-assign-list', [LeaveAssignController::class, 'index'])->name('leave-assign.index');
+    Route::get('/leave-assign-create', [LeaveAssignController::class, 'create'])->name('leave-assign.create');
+    Route::post('/leave-assign-store', [LeaveAssignController::class, 'store'])->name('leave-assign.store');
+    Route::get('/leave-assign-edit/{id}', [LeaveAssignController::class, 'edit'])->name('leave-assign.edit');
+    Route::put('/leave-assign-update/{id}', [LeaveAssignController::class, 'update'])->name('leave-assign.update');
+    Route::delete('/leave-assign-delete/{id}', [LeaveAssignController::class, 'destroy'])->name('leave-assign.destroy');
+
+    //leave apply
+    Route::get('/leave-apply-list', [LeaveApplyController::class, 'index'])->name('leave-apply.index');
+    Route::get('/leave-apply-create', [LeaveApplyController::class, 'create'])->name('leave-apply.create');
+    Route::post('/leave-apply-store', [LeaveApplyController::class, 'store'])->name('leave-apply.store');
+    Route::get('/leave-apply-edit/{id}', [LeaveApplyController::class, 'edit'])->name('leave-apply.edit');
+    Route::put('/leave-apply-update/{id}', [LeaveApplyController::class, 'update'])->name('leave-apply.update');
+    Route::delete('/leave-apply-delete/{id}', [LeaveApplyController::class, 'destroy'])->name('leave-apply.destroy');
+
+    //leave application
+    Route::get('/leave-application-list', [LeaveApplicationController::class, 'index'])->name('leave-application.index');
+    Route::post('/approve/{id}', [LeaveApplicationController::class, 'approve'])->name('leave-application.approve');
+    Route::post('/decline/{id}', [LeaveApplicationController::class, 'decline'])->name('leave-application.decline');
+    Route::get('/show/{id}', [LeaveApplicationController::class, 'show'])->name('leave-application.show');
+    Route::get('/leave-application/pdf/{id}', [LeaveApplicationController::class, 'pdf'])->name('leave-application.pdf');
+
 
 
     //Role and User Section

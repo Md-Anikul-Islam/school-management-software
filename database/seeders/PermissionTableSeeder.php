@@ -269,6 +269,24 @@ class PermissionTableSeeder extends Seeder
             'leave-category-edit',
             'leave-category-delete',
 
+            //leave-assign
+            'leave-assign-list',
+            'leave-assign-create',
+            'leave-assign-edit',
+            'leave-assign-delete',
+
+            //leave-apply
+            'leave-apply-list',
+            'leave-apply-create',
+            'leave-apply-edit',
+            'leave-apply-delete',
+
+            //leave-application
+            'leave-application-list',
+            'leave-application-show',
+            'leave-application-approve',
+            'leave-application-decline',
+
         ];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {

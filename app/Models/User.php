@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(AssetAssignment::class, 'check_out_to');
     }
+
+    public function leaveApplies()
+    {
+        return $this->hasMany(LeaveApply::class, 'application_to');
+    }
 }

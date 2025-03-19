@@ -91,7 +91,9 @@
                         <label for="attachment" class="form-label">Attachment</label>
                         <input type="file" class="form-control" id="attachment" name="attachment">
                         @if($asset->attachment)
-                            <img src="{{ asset('storage/uploads/assets/' . $asset->attachment) }}" alt="Asset Attachment" style="max-width: 150px; margin-top: 10px;">
+                            <a href="{{ asset('uploads/assets/' . $asset->attachment) }}" class="btn btn-success mt-2" download>
+                                <i class="ri-download-line"></i> Download Current File
+                            </a>
                         @endif
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>

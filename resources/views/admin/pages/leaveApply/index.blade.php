@@ -12,8 +12,8 @@
             <div class="page-title-box">
                 <div class="page-title-right">
                     <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">School</a></li>
-                        <li class="breadcrumb-item"><a href="javascript: void(0);">Management</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Leave</a></li>
+                        <li class="breadcrumb-item"><a href="javascript: void(0);">Apply</a></li>
                         <li class="breadcrumb-item active">{{ $pageTitle }}</li>
                     </ol>
                 </div>
@@ -24,25 +24,21 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex justify-content-between gap-1">
-                        @can('asset-create')
-                            <a href="{{ route('asset.create') }}" class="btn btn-primary"><span><i
-                                        class="ri-add-fill"></i></span>Add Asset</a>
-                        @endcan
-                    </div>
-                    <div>
-                        <div class="d-flex justify-content-between">
-                            <div class="btn-group">
-                                <button style="background-color:darkblue;" class="btn text-nowrap text-light"
-                                        onclick="exportTableToPDF('assets.pdf', '{{ $pageTitle }}')">
-                                    Export As PDF
-                                </button>
-                                <button style="background-color: darkgreen" class="btn btn-info text-nowrap"
-                                        onclick="exportTableToCSV('assets.csv')">
-                                    Export To CSV
-                                </button>
-                            </div>
+                <div class="d-flex justify-content-between">
+                    @can('leave-apply-create')
+                        <a href="{{ route('leave-apply.create') }}" class="btn btn-primary"><span><i
+                                    class="ri-add-fill"></i></span>Apply Leave</a>
+                    @endcan
+                    <div class="d-flex justify-content-between">
+                        <div class="btn-group">
+                            <button style="background-color:darkblue;" class="btn text-nowrap text-light"
+                                    onclick="exportTableToPDF('leave_apply.pdf', '{{ $pageTitle }}')">
+                                Export As PDF
+                            </button>
+                            <button style="background-color: darkgreen" class="btn btn-info text-nowrap"
+                                    onclick="exportTableToCSV('leave_apply.csv')">
+                                Export To CSV
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -52,29 +48,33 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Serial</th>
-                        <th>Title</th>
-                        <th>Status</th>
-                        <th>Condition</th>
-                        <th>Category</th>
-                        <th>Location</th>
+                        <th>Role</th>
+                        <th>Application To</th>
+                        <th>Leave Category</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Reason</th>
                         <th>Attachment</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse ($assets as $asset)
+                    @foreach ($leaveApplies as $leaveApply)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $asset->serial }}</td>
-                            <td>{{ $asset->title }}</td>
-                            <td>{{ $asset->status }}</td>
-                            <td>{{ $asset->condition }}</td>
-                            <td>{{ $asset->assetCategory->category }}</td>
-                            <td>{{ $asset->location->location }}</td>
+                            <td>{{ $loop->index + 1 }}</td>
+                            @if($leaveApply->role_id == '1')
+                                <td>Student</td>
+                            @else
+                                <td>Teacher</td>
+                            @endif
+                            <td>{{ $leaveApply->applicationTo->name }}</td>
+                            <td>{{ $leaveApply->leaveCategory->category }}</td>
+                            <td>{{ $leaveApply->start_date }}</td>
+                            <td>{{ $leaveApply->end_date }}</td>
+                            <td>{{ $leaveApply->reason }}</td>
                             <td>
-                                @if($asset->attachment)
-                                    <a href="{{ asset('uploads/assets/' . $asset->attachment) }}" class="btn btn-success"
+                                @if($leaveApply->attachment)
+                                    <a href="{{ asset('uploads/leave-apply/' . $leaveApply->attachment) }}" class="btn btn-success"
                                        download>
                                         <i class="ri-download-line"></i> Download
                                     </a>
@@ -83,40 +83,34 @@
                                 @endif
                             </td>
                             <td>
-                                @can('asset-edit')
-                                    <a href="{{ route('asset.edit', $asset->id) }}" class="btn btn-info"><i
+                                @can('leave-apply-edit')
+                                    <a href="{{ route('leave-apply.edit', $leaveApply->id) }}" class="btn btn-info"><i
                                             class="ri-edit-line"></i></a>
                                 @endcan
-                                @can('asset-show')
-                                    <a href="{{ route('asset.show', $asset->id) }}" class="btn btn-primary"><i
-                                            class="ri-eye-fill"></i></a>
-                                @endcan
-                                @can('asset-delete')
+                                @can('leave-apply-delete')
                                     <a class="btn btn-danger" data-bs-toggle="modal"
-                                       data-bs-target="#danger-header-modal{{ $asset->id }}"><i
+                                       data-bs-target="#danger-header-modal{{ $leaveApply->id }}"><i
                                             class="ri-delete-bin-6-fill"></i></a>
-                                    <div id="danger-header-modal{{ $asset->id }}" class="modal fade"
-                                         tabindex="-1"
-                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $asset->id }}"
+                                    <div id="danger-header-modal{{ $leaveApply->id }}" class="modal fade" tabindex="-1"
+                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $leaveApply->id }}"
                                          aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header modal-colored-header bg-danger">
                                                     <h4 class="modal-title"
-                                                        id="danger-header-modalLabel{{ $asset->id }}">Delete</h4>
+                                                        id="danger-header-modalLabel{{ $leaveApply->id }}">Delete</h4>
                                                     <button type="button" class="btn-close btn-close-white"
                                                             data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h5 class="mt-0">Are you sure you want to delete this asset?</h5>
+                                                    <h5 class="mt-0">Are you sure you want to delete this leave application?</h5>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-light"
                                                             data-bs-dismiss="modal">Close
                                                     </button>
-                                                    <form
-                                                        action="{{ route('asset.destroy', $asset->id) }}"
-                                                        method="post">
+                                                    <form action="{{ route('leave-apply.destroy', $leaveApply->id) }}"
+                                                          method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -128,16 +122,13 @@
                                 @endcan
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="9" class="text-center">No assets found.</td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
     <script type="text/javascript">
         // Excel Print
         function downloadCSV(csv, filename) {
@@ -160,7 +151,6 @@
             // Click download link
             downloadLink.click();
         }
-
 
         function exportTableToCSV(filename) {
             let csv = [];

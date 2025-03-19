@@ -495,6 +495,33 @@
                                     </li>
                                 @endcan
                             </ul>
+                            <ul class="side-nav-second-level">
+                                @can('leave-assign-list')
+                                    <li>
+                                        <a href="{{ route('leave-assign.index') }}">
+                                            <i class="ri-user-search-line"></i>
+                                            <span>Leave Assign</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('leave-apply-list')
+                                    <li>
+                                        <a href="{{ route('leave-apply.index') }}">
+                                            <i class="ri-file-edit-line"></i>
+                                            <span>Leave Apply</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('leave-application-list')
+                                    <li>
+                                        <a href="{{ route('leave-application.index') }}">
+                                            <i class="ri-file-edit-line"></i>
+                                            <span>Leave Application</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
                         </div>
                     </li>
                 @endcan
