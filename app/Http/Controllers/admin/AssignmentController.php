@@ -89,7 +89,7 @@ class AssignmentController extends Controller
             $assignment = new Assignment();
             $assignment->title = $request->title;
             $assignment->description = $request->description;
-            $assignment->deadline = Carbon::createFromFormat('m/d/Y', $request->deadline)->format('Y-m-d');
+            $assignment->deadline = $request->deadline;
             $assignment->class_id = $request->class_id;
             $assignment->section_id = json_encode($request->section_id); // Convert array to JSON
             $assignment->subject_id = $request->subject_id;
@@ -138,7 +138,7 @@ class AssignmentController extends Controller
             $assignment = Assignment::find($id);
             $assignment->title = $request->title;
             $assignment->description = $request->description;
-            $assignment->deadline = Carbon::createFromFormat('m/d/Y', $request->deadline)->format('Y-m-d');
+            $assignment->deadline = $request->deadline;
             $assignment->class_id = $request->class_id;
             $assignment->section_id = json_encode($request->section_id); // Convert array to JSON
             $assignment->subject_id = $request->subject_id;
