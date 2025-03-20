@@ -20,6 +20,11 @@
         .option, .blank-option {
             margin-bottom: 10px;
         }
+
+        .correct-answer {
+            color: green;
+            font-weight: bold;
+        }
     </style>
     <div class="row">
         <div class="col-12">
@@ -48,8 +53,12 @@
             <div class="card-body">
                 <div class="question-container">
                     <div class="d-flex justify-content-between">
-                        <div class="question-text">
-                            {!! $questionBank->question !!}
+                        <div class="question-text d-flex justify-content-between">
+                            @if($questionBank->question_type === 'Fill in the blanks')
+                                {!! $questionBank->question !!} &nbsp _________________ .
+                            @else
+                                {!! $questionBank->question !!}
+                            @endif
                         </div>
 
                         <div class="question-mark">
@@ -57,37 +66,61 @@
                         </div>
                     </div>
 
-
                     @if ($questionBank->question_type === 'Single Answer' && $questionBank->options)
                         <form>
+                            @php
+                                $correctAnswers = json_decode($questionBank->correct_answers);
+                            @endphp
                             @foreach (json_decode($questionBank->options) as $key => $option)
                                 <div class="option">
-                                    <input type="radio" id="option{{ $key }}" name="answer" value="{{ $option }}">
-                                    <label for="option{{ $key }}">{{ $option }}</label>
+                                    <input type="radio" id="option{{ $key }}" name="answer" value="{{ $option }}" {{ isset($correctAnswers[0]) && $correctAnswers[0] == $key ? 'checked' : '' }} disabled>
+                                    <label for="option{{ $key }}" {{ isset($correctAnswers[0]) && $correctAnswers[0] == $key ? 'class=correct-answer' : '' }}>{{ $option }}</label>
                                 </div>
                             @endforeach
                         </form>
                     @elseif ($questionBank->question_type === 'Multi Answer' && $questionBank->options)
                         <form>
+                            @php
+                                $correctAnswers = json_decode($questionBank->correct_answers);
+                            @endphp
                             @foreach (json_decode($questionBank->options) as $key => $option)
                                 <div class="option">
-                                    <input type="checkbox" id="option{{ $key }}" name="answers[]" value="{{ $option }}">
-                                    <label for="option{{ $key }}">{{ $option }}</label>
+                                    <input type="checkbox" id="option{{ $key }}" name="answers[]" value="{{ $option }}" {{ in_array($key, $correctAnswers ?? []) ? 'checked' : '' }} disabled>
+                                    <label for="option{{ $key }}" {{ in_array($key, $correctAnswers ?? []) ? 'class=correct-answer' : '' }}>{{ $option }}</label>
                                 </div>
                             @endforeach
                         </form>
-                    @elseif ($questionBank->question_type === 'Fill in the blanks' && $questionBank->options)
-                        <form>
-                            @foreach (json_decode($questionBank->options) as $key => $option)
+                    @elseif ($questionBank->question_type === 'Fill in the blanks' && $questionBank->correct_answers)
+                        @php
+                            $correctAnswers = json_decode($questionBank->correct_answers);
+                        @endphp
+                        @if(is_array($correctAnswers))
+                            @foreach ($correctAnswers as $key => $answer)
                                 <div class="blank-option">
-                                    <label for="blank{{ $key }}">{{ $key + 1 }}.</label>
-                                    <input type="text" id="blank{{ $key }}" name="blanks[]" placeholder="Enter Answer">
+                                    <div class="correct-answer">
+                                        Answer: {{ $answer ?? 'N/A' }}
+                                    </div>
                                 </div>
                             @endforeach
-                        </form>
-                    @else
-                        <p>This question type does not have options or is not supported.</p>
+                        @else
+                            <p>No correct answers found for this question.</p>
+                        @endif
                     @endif
+
+                    @if ($questionBank->explanation)
+                        <div class="mt-3">
+                            <strong>Explanation:</strong>
+                            <p>{!! $questionBank->explanation !!}</p>
+                        </div>
+                    @endif
+
+                    @if ($questionBank->hints)
+                        <div class="mt-3">
+                            <strong>Hints:</strong>
+                            <p>{{ $questionBank->hints }}</p>
+                        </div>
+                    @endif
+
                 </div>
             </div>
         </div>

@@ -102,7 +102,10 @@
             <td>: {{ $leaveApply->status }}</td>
         </tr>
     </table>
-    <p>{{ $leaveApply->reason }}</p>
+    <div style="margin-top: 10px; margin-left: 7px;">
+        <strong>Reason:</strong>
+        <p>{!! $leaveApply->reason !!}</p>
+    </div>
 </div>
 </body>
 </html>

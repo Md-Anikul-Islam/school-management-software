@@ -34,8 +34,19 @@
             margin-left: 5px;
         }
 
-        .option input[type="radio"] {
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
             vertical-align: middle;
+        }
+
+        .blank-option {
+            margin-bottom: 10px;
+        }
+
+        .blank-option input[type="text"] {
+            display: inline-block;
+            width: 150px;
+            margin-left: 5px;
         }
     </style>
 </head>
@@ -43,7 +54,23 @@
 <div class="question-container">
     <div style="display: flex; justify-content: space-between; align-items: flex-start;">
         <div class="question-text">
-            {!! $questionBank->question !!}
+            @if($questionBank->question_type === 'Fill in the blanks' && $questionBank->correct_answers)
+                {!! $questionBank->question !!} _____
+                @php
+                    $correctAnswers = json_decode($questionBank->correct_answers);
+                @endphp
+                @if(is_array($correctAnswers) && count($correctAnswers) > 0)
+                    <div style="margin-top: 5px;">
+                        Answer: {{ $correctAnswers[0] ?? 'N/A' }}
+                    </div>
+                @else
+                    <div style="margin-top: 5px;">
+                        Answer: N/A
+                    </div>
+                @endif
+            @else
+                {!! $questionBank->question !!}
+            @endif
         </div>
         <div class="question-mark">
             {{ $questionBank->mark }} Mark
@@ -53,9 +80,12 @@
     @if ($questionBank->question_type === 'Single Answer' && $questionBank->options)
         <form>
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                @php
+                    $correctAnswers = json_decode($questionBank->correct_answers);
+                @endphp
                 @foreach (json_decode($questionBank->options) as $key => $option)
                     <div class="option">
-                        <input type="radio" id="option{{ $key }}" name="answer" value="{{ $option }}" {{ $key === 2 ? 'checked' : '' }}>
+                        <input type="radio" id="option{{ $key }}" name="answer" value="{{ $option }}" {{ isset($correctAnswers[0]) && $correctAnswers[0] == $key ? 'checked' : '' }}>
                         <label for="option{{ $key }}">{{ $option }}</label>
                     </div>
                 @endforeach
@@ -64,25 +94,17 @@
     @elseif ($questionBank->question_type === 'Multi Answer' && $questionBank->options)
         <form>
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                @php
+                    $correctAnswers = json_decode($questionBank->correct_answers);
+                @endphp
                 @foreach (json_decode($questionBank->options) as $key => $option)
                     <div class="option">
-                        <input type="checkbox" id="option{{ $key }}" name="answers[]" value="{{ $option }}">
+                        <input type="checkbox" id="option{{ $key }}" name="answers[]" value="{{ $option }}" {{ in_array($key, $correctAnswers ?? []) ? 'checked' : '' }}>
                         <label for="option{{ $key }}">{{ $option }}</label>
                     </div>
                 @endforeach
             </div>
         </form>
-    @elseif ($questionBank->question_type === 'Fill in the blanks' && $questionBank->options)
-        <form>
-            @foreach (json_decode($questionBank->options) as $key => $option)
-                <div class="blank-option">
-                    <label for="blank{{ $key }}">{{ $key + 1 }}.</label>
-                    <input type="text" id="blank{{ $key }}" name="blanks[]" placeholder="Enter Answer">
-                </div>
-            @endforeach
-        </form>
-    @else
-        <p>This question type does not have options or is not supported.</p>
     @endif
 </div>
 </body>
