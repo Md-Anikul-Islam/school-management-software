@@ -35,6 +35,7 @@ use App\Http\Controllers\admin\LeaveCategoryController;
 use App\Http\Controllers\admin\LeaveAssignController;
 use App\Http\Controllers\admin\LeaveApplyController;
 use App\Http\Controllers\admin\LeaveApplicationController;
+use App\Http\Controllers\admin\NoticeController;
 use App\Http\Controllers\FrontendAdmissionController;
 use App\Http\Controllers\FrontendBlogController;
 use App\Http\Controllers\FrontendContactController;
@@ -355,6 +356,16 @@ Route::middleware('auth')->group(callback: function () {
     Route::post('/decline/{id}', [LeaveApplicationController::class, 'decline'])->name('leave-application.decline');
     Route::get('/show/{id}', [LeaveApplicationController::class, 'show'])->name('leave-application.show');
     Route::get('/leave-application/pdf/{id}', [LeaveApplicationController::class, 'pdf'])->name('leave-application.pdf');
+
+    //notice
+    Route::get('/notice-list', [NoticeController::class, 'index'])->name('notice.index');
+    Route::get('/notice-create', [NoticeController::class, 'create'])->name('notice.create');
+    Route::post('/notice-store', [NoticeController::class, 'store'])->name('notice.store');
+    Route::get('/notice-edit/{id}', [NoticeController::class, 'edit'])->name('notice.edit');
+    Route::put('/notice-update/{id}', [NoticeController::class, 'update'])->name('notice.update');
+    Route::delete('/notice-delete/{id}', [NoticeController::class, 'destroy'])->name('notice.destroy');
+    Route::get('/notice-show/{id}', [NoticeController::class, 'show'])->name('notice.show');
+    Route::get('/notice/pdf/{id}', [NoticeController::class, 'pdf'])->name('notice.pdf');
 
 
 
