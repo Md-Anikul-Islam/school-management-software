@@ -93,15 +93,16 @@ class QuestionBankController extends Controller
             }
 
             // Correct Answers Handling
-            if ($request->question_type === 'Multi Answer' || $request->question_type === 'Single Answer') {
-                $correctAnswers = [];
-                for ($i = 1; $i <= $request->total_options; $i++) {
-                    if ($request->has('correct_option_' . $i)) {
-                        // Store the index of the correct option
-                        $correctAnswers[] = $i - 1; // Subtract 1 to make it zero-based
-                    }
+            if ($request->question_type === 'Single Answer') {
+                $correctAnswer = $request->input('correct_answer');
+                if ($correctAnswer !== null) {
+                    $questionBank->correct_answers = json_encode([(int) $correctAnswer]);
+                } else {
+                    $questionBank->correct_answers = null;
                 }
-                $questionBank->correct_answers = json_encode($correctAnswers);
+            } elseif ($request->question_type === 'Multi Answer') {
+                $correctAnswers = $request->input('correct_answers', []);
+                $questionBank->correct_answers = json_encode(array_map('intval', $correctAnswers));
             } elseif ($request->question_type === 'Fill in the blanks') {
                 $correctAnswers = [];
                 if ($request->filled('blanks')) {
@@ -112,7 +113,7 @@ class QuestionBankController extends Controller
                 $questionBank->correct_answers = json_encode($correctAnswers);
             }
 
-            $questionBank->school_id = Auth::id();
+            $questionBank->school_id = Auth::user()->school_id ?? Auth::id();
             $questionBank->created_by = Auth::id();
             $questionBank->save();
 
@@ -126,6 +127,9 @@ class QuestionBankController extends Controller
 
     public function show($id)
     {
+        if(!Gate::allows('question-bank-show')) {
+            return redirect()->route('unauthorized.action');
+        }
         $questionBank = QuestionBank::find($id);
         return view('admin.pages.questionBank.show', compact('questionBank'));
     }
@@ -197,15 +201,37 @@ class QuestionBankController extends Controller
             }
 
             // Correct Answers Handling
-            if ($request->question_type === 'Multi Answer' || $request->question_type === 'Single Answer') {
-                $correctAnswers = [];
-                for ($i = 1; $i <= $request->total_options; $i++) {
-                    if ($request->has('correct_option_' . $i)) {
-                        // Store the index of the correct option
-                        $correctAnswers[] = $i - 1; // Subtract 1 to make it zero-based
+            if ($request->question_type === 'Single Answer') {
+                $correctAnswer = $request->input('correct_answer');
+                if ($correctAnswer !== null) {
+                    // Find the index of the selected option
+                    $options = json_decode($questionBank->options, true);
+                    $index = array_search($request->input('option_'.(intval(str_replace('option_', '', $correctAnswer)))), $options);
+                    if($index !== false) {
+                        $questionBank->correct_answers = json_encode([$index]);
+                    } else{
+                        $questionBank->correct_answers = null;
                     }
+
+                } else {
+                    $questionBank->correct_answers = null;
                 }
-                $questionBank->correct_answers = json_encode($correctAnswers);
+            } elseif ($request->question_type === 'Multi Answer') {
+                $correctAnswers = $request->input('correct_answers', []);
+                $correctIndices = [];
+                if(is_array($correctAnswers)){
+                    foreach ($correctAnswers as $correctAnswer) {
+                        $options = json_decode($questionBank->options, true);
+                        $index = array_search($request->input('option_'.(intval(str_replace('option_', '', $correctAnswer)))), $options);
+                        if($index !== false) {
+                            $correctIndices[] = $index;
+                        }
+                    }
+                    $questionBank->correct_answers = json_encode($correctIndices);
+                } else {
+                    $questionBank->correct_answers = null;
+                }
+
             } elseif ($request->question_type === 'Fill in the blanks') {
                 $correctAnswers = [];
                 if ($request->filled('blanks')) {
@@ -216,7 +242,7 @@ class QuestionBankController extends Controller
                 $questionBank->correct_answers = json_encode($correctAnswers);
             }
 
-            $questionBank->school_id = Auth::id();
+            $questionBank->school_id = Auth::user()->school_id ?? Auth::id();
             $questionBank->updated_by = Auth::id();
             $questionBank->save();
 
