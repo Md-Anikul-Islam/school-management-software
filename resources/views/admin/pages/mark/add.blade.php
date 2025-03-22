@@ -2,6 +2,7 @@
 @section('admin_content')
     <!-- Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style>
         .select2-container--default .select2-selection--single {
@@ -41,7 +42,8 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('mark.store') }}" method="POST">
+{{--                <form action="{{ route('mark.store') }}" method="POST">--}}
+                <form id="mark-form" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-md-3">
@@ -94,8 +96,10 @@
                                     @if(empty($subjects))
                                         <option value="">No Subject Available</option>
                                     @else
-                                        @foreach($subjects as $subject)
-                                            <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                        @foreach($examSchedules as $schedule)
+                                            <option value="{{ $schedule->subject->id }}" data-exam="{{ $schedule->exam->id }}">
+                                                {{ $schedule->subject->name }}
+                                            </option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -105,50 +109,60 @@
                     <div class="d-flex justify-content-end">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
+
+                    <div id="loading" style="display: none;">
+                        <p>Loading students...</p>
+                    </div>
+
+                    <div class="mt-3">
+                        <table id="basic-datatable" class="table table-striped table-bordered display">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Photo</th>
+                                <th>Name</th>
+                                <th>Roll</th>
+                                <th>Exam</th>
+                                <th>Attendance</th>
+                                <th>Class Test</th>
+                                <th>Assignment</th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="d-flex justify-content-end mt-3">
+                        <button type="button" id="new-submit" class="btn btn-success d-none">Submit Marks</button>
+                    </div>
                 </form>
-
-
-                <div id="loading" style="display: none;">
-                    <p>Loading students...</p>
-                </div>
-
-                <div class="mt-3">
-                    <table id="basic-datatable" class="table table-striped table-bordered display">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Photo</th>
-                            <th>Name</th>
-                            <th>Roll</th>
-                            <th>Exam</th>
-                            <th>Attendance</th>
-                            <th>Class Test</th>
-                            <th>Assignment</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-                <div class="d-flex justify-content-end mt-3">
-                    <button type="button" id="new-submit" class="btn btn-success d-none">Submit Marks</button>
-                </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right" // You can adjust the position
+        }
+    </script>
 
     <!-- Include jQuery (Required for Select2) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
         $(document).ready(function () {
-            $('#basic-datatable').DataTable();
-        });
-    </script>
 
-    <script>
-        $(document).ready(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
             $('.select2').select2();
+            $('#basic-datatable').DataTable();
 
             function filterSections() {
                 let selectedClassId = $('#class').val();
@@ -170,6 +184,28 @@
             // Update sections when class changes
             $('#class').on('change', function () {
                 filterSections();
+            });
+
+            function filterSubjects() {
+                let selectedExamId = $('#exam').val();
+                $('#subject').html('<option value="">Select Subject</option>'); // Reset subject dropdown
+
+                @foreach($examSchedules as $schedule)
+                if ({{ $schedule->exam->id }} == selectedExamId) {
+                    $('#subject').append('<option value="{{ $schedule->subject->id }}">{{ $schedule->subject->name }}</option>');
+                }
+                @endforeach
+
+                // Auto-select first subject if available
+                $('#subject option:eq(1)').prop('selected', true);
+            }
+
+            // Run filterSubjects() on page load
+            filterSubjects();
+
+            // Update subjects when exam changes
+            $('#exam').on('change', function () {
+                filterSubjects();
             });
 
             // Submit Form Using AJAX
@@ -216,10 +252,12 @@
                                         <td><img src="/uploads/students/${student.photo}" width="50"></td>
                                         <td>${student.name}</td>
                                         <td>${student.roll}</td>
-                                        <td><input type="text" name="exam[${student.id}]" class="form-control"></td>
-                                        <td><input type="text" name="attendance[${student.id}]" class="form-control"></td>
-                                        <td><input type="text" name="class_test[${student.id}]" class="form-control"></td>
-                                        <td><input type="text" name="assignment[${student.id}]" class="form-control"></td>
+                                        <td><input type="hidden" name="student_id[]" value="${student.id}">
+                                            <input type="number" name="exam_mark[${student.id}]" class="form-control">
+                                        </td>
+                                        <td><input type="number" name="attendance[${student.id}]" class="form-control"></td>
+                                        <td><input type="number" name="class_test[${student.id}]" class="form-control"></td>
+                                        <td><input type="number" name="assignment[${student.id}]" class="form-control"></td>
                                     </tr>
                                 `);
                             });
@@ -240,7 +278,9 @@
             });
 
             $('#new-submit').on('click', function () {
-                let formData = $('form').serialize(); // Get all form data
+                // let formData = $('form').serialize(); // Get all form data
+                let formData = $('form').serializeArray();
+                console.log("Form Data:", formData);
 
                 $.ajax({
                     url: "{{ route('mark.store') }}",
@@ -248,8 +288,9 @@
                     data: formData,
                     success: function (response) {
                         if (response.status === "success") {
-                            alert("Marks submitted successfully!");
-                            location.reload(); // Reload page after submission
+                            // alert("Marks submitted successfully!");
+                            toastr.success(response.message); // Display toastr notification
+                            // location.reload(); // Reload page after submission
                         } else {
                             alert("Error submitting marks.");
                         }

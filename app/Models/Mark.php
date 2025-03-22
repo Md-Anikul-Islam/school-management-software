@@ -14,6 +14,11 @@ class Mark extends Model
         'exam_id',
         'section_id',
         'subject_id',
+        'student_id',
+        'exam_mark',
+        'attendance',
+        'class_test',
+        'assignment',
         'created_by',
         'updated_by',
     ];
