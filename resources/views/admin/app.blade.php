@@ -530,8 +530,7 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages10" aria-expanded="false"
                            aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-announcement-line"></i>
-                            <span>Announcement</span>
+                            <i class="ri-megaphone-line"></i>  <span>Announcement</span>
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages10">
@@ -539,8 +538,17 @@
                                 @can('notice-list')
                                     <li>
                                         <a href="{{ route('notice.index') }}">
-                                            <i class="ri-notification-2-line"></i>
-                                            <span>Notice</span></a>
+                                            <i class="ri-information-line"></i>  <span>Notice</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('event-list')
+                                    <li>
+                                        <a href="{{ route('event.index') }}">
+                                            <i class="ri-calendar-line"></i>  <span>Event</span>
+                                        </a>
                                     </li>
                                 @endcan
                             </ul>

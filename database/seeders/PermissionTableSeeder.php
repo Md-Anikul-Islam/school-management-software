@@ -297,6 +297,13 @@ class PermissionTableSeeder extends Seeder
             'notice-edit',
             'notice-delete',
 
+            //event
+            'event-list',
+            'event-show',
+            'event-create',
+            'event-edit',
+            'event-delete',
+
         ];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {
