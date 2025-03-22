@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('section_id');
             $table->unsignedBigInteger('subject_id');
             $table->unsignedBigInteger('student_id');
-            $table->unsignedInteger('exam');
+            $table->unsignedInteger('exam_mark');
             $table->unsignedInteger('attendance');
             $table->unsignedInteger('class_test');
             $table->unsignedInteger('assignment');
