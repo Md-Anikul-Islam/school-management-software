@@ -37,6 +37,9 @@ use App\Http\Controllers\admin\LeaveApplyController;
 use App\Http\Controllers\admin\LeaveApplicationController;
 use App\Http\Controllers\admin\NoticeController;
 use App\Http\Controllers\admin\EventController;
+use App\Http\Controllers\admin\HolidayController;
+use App\Http\Controllers\admin\TransportController;
+use App\Http\Controllers\admin\MediaController;
 use App\Http\Controllers\FrontendAdmissionController;
 use App\Http\Controllers\FrontendBlogController;
 use App\Http\Controllers\FrontendContactController;
@@ -378,6 +381,31 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/event-show/{id}', [EventController::class, 'show'])->name('event.show');
     Route::get('/event/pdf/{id}', [EventController::class, 'pdf'])->name('event.pdf');
 
+    //holiday
+    Route::get('/holiday-list', [HolidayController::class, 'index'])->name('holiday.index');
+    Route::get('/holiday-create', [HolidayController::class, 'create'])->name('holiday.create');
+    Route::post('/holiday-store', [HolidayController::class, 'store'])->name('holiday.store');
+    Route::get('/holiday-edit/{id}', [HolidayController::class, 'edit'])->name('holiday.edit');
+    Route::put('/holiday-update/{id}', [HolidayController::class, 'update'])->name('holiday.update');
+    Route::delete('/holiday-delete/{id}', [HolidayController::class, 'destroy'])->name('holiday.destroy');
+    Route::get('/holiday-show/{id}', [HolidayController::class, 'show'])->name('holiday.show');
+    Route::get('/holiday/pdf/{id}', [HolidayController::class, 'pdf'])->name('holiday.pdf');
+
+    //transport
+    Route::get('/transport-list', [TransportController::class, 'index'])->name('transport.index');
+    Route::get('/transport-create', [TransportController::class, 'create'])->name('transport.create');
+    Route::post('/transport-store', [TransportController::class, 'store'])->name('transport.store');
+    Route::get('/transport-edit/{id}', [TransportController::class, 'edit'])->name('transport.edit');
+    Route::put('/transport-update/{id}', [TransportController::class, 'update'])->name('transport.update');
+    Route::delete('/transport-delete/{id}', [TransportController::class, 'destroy'])->name('transport.destroy');
+
+    //media
+    Route::get('/media', [MediaController::class, 'index'])->name('media.index');
+    Route::post('/media/folders', [MediaController::class, 'createFolder'])->name('media.createFolder');
+    Route::get('/media/folders/{folder}/create', [MediaController::class, 'createFolderForm'])->name('media.createFolderForm');
+    Route::post('/media/images', [MediaController::class, 'uploadImage'])->name('media.uploadImage');
+    Route::get('/media/folders/{folder}', [MediaController::class, 'showFolder'])->name('media.showFolder');
+    Route::delete('/media/{mediaItem}', [MediaController::class, 'destroy'])->name('media.destroy');
 
 
     //Role and User Section

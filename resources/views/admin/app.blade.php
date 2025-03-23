@@ -552,6 +552,45 @@
                                     </li>
                                 @endcan
                             </ul>
+                            <ul class="side-nav-second-level">
+                                @can('holiday-list')
+                                    <li>
+                                        <a href="{{ route('holiday.index') }}">
+                                            <i class="ri-calendar-event-line"></i>  <span>Holiday</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+                @can('media-list')
+                    <li class="side-nav-item">
+                        <a href="{{route('media.index')}}" class="side-nav-link">
+                            <i class="ri-gallery-line"></i> <span> Media </span>
+                        </a>
+                    </li>
+                @endcan
+
+
+                @can('transport-module')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages11" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-bus-2-line"></i>  <span>Transport</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages11">
+                            <ul class="side-nav-second-level">
+                                @can('transport-list')
+                                    <li>
+                                        <a href="{{ route('transport.index') }}">
+                                            <i class="ri-list-check"></i>   <span>Transport</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
                         </div>
                     </li>
                 @endcan

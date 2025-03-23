@@ -27,7 +27,7 @@ class NoticeController extends Controller
     public function index()
     {
         $pageTitle = 'Notice List';
-        if (auth()->user()->role == 'Super Admin') {
+        if (auth()->user()->hasRole('Super Admin')) {
             $notices = Notice::all();
         } else {
             $notices = Notice::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
@@ -37,6 +37,9 @@ class NoticeController extends Controller
 
     public function create()
     {
+        if (!Gate::allows('notice-create')) {
+            return redirect()->route('unauthorized.action');
+        }
         return view('admin.pages.notice.add');
     }
 
@@ -65,12 +68,18 @@ class NoticeController extends Controller
 
     public function show($id)
     {
+        if(!Gate::allows('notice-show')) {
+            return redirect()->route('unauthorized.action');
+        }
         $notice = Notice::find($id);
         return view('admin.pages.notice.show', compact('notice'));
     }
 
     public function edit($id)
     {
+        if (!Gate::allows('notice-edit')) {
+            return redirect()->route('unauthorized.action');
+        }
         $notice = Notice::find($id);
         $editorId = (int) $id;
         return view('admin.pages.notice.edit', compact('notice', 'editorId'));
@@ -101,6 +110,9 @@ class NoticeController extends Controller
 
     public function destroy($id)
     {
+        if(!Gate::allows('notice-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try {
             $notice = Notice::find($id);
             $notice->delete();

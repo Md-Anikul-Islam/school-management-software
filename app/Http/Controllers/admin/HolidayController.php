@@ -3,21 +3,20 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
-use App\Models\Event;
+use App\Models\Holiday;
 
-class EventController extends Controller
+class HolidayController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware(function ($request, $next) {
-            if (!Gate::allows('event-list')) {
+            if (!Gate::allows('holiday-list')) {
                 return redirect()->route('unauthorized.action');
             }
 
@@ -27,26 +26,26 @@ class EventController extends Controller
 
     public function index()
     {
-        $pageTitle = 'Event List';
-        if (auth()->user()->hasRole('Super Admin')) {
-            $events = Event::all();
+        $pageTitle = "Holiday List";
+        if(auth()->user()->hasRole('Super Admin')) {
+            $holidays = Holiday::all();
         } else {
-            $events = Event::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
+            $holidays = Holiday::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->get();
         }
-        return view('admin.pages.event.index', compact('pageTitle', 'events'));
+        return view('admin.pages.holiday.index', compact('pageTitle', 'holidays'));
     }
 
     public function create()
     {
-        if(!Gate::allows('event-create')) {
+        if(!Gate::allows('holiday-create')) {
             return redirect()->route('unauthorized.action');
         }
-        return view('admin.pages.event.add');
+        return view('admin.pages.holiday.add');
     }
 
     public function store(Request $request)
     {
-        try {
+        try{
             $request->validate([
                 'title' => 'required',
                 'from_date' => 'required',
@@ -54,50 +53,51 @@ class EventController extends Controller
                 'photo' => 'required',
                 'details' => 'required',
             ]);
-            $event = new Event();
-            $event->title = $request->title;
-            $event->from_date = $request->from_date;
-            $event->to_date = $request->to_date;
+
+            $holiday = new Holiday();
+            $holiday->title = $request->title;
+            $holiday->from_date = $request->from_date;
+            $holiday->to_date = $request->to_date;
             if ($request->hasFile('photo')) {
                 $file = $request->file('photo');
                 $fileName = time() . '.' . $file->getClientOriginalExtension();
-                $file->move('uploads/events/', $fileName);
+                $file->move('uploads/holidays/', $fileName);
             }
-            $event->photo = $fileName;
-            $event->details = $request->details;
-            $event->school_id = Auth::user()->school_id ?? Auth::id();
-            $event->created_by = Auth::id();
-            $event->save();
+            $holiday->photo = $fileName;
+            $holiday->details = $request->details;
+            $holiday->school_id = Auth::user()->school_id ?? Auth::id();
+            $holiday->created_by = Auth::id();
+            $holiday->save();
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            toastr()->error('Data cannot be saved!');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
         }
     }
 
     public function show($id)
     {
-        if(!Gate::allows('event-show')) {
+        if(!Gate::allows('holiday-show')) {
             return redirect()->route('unauthorized.action');
         }
-        $event = Event::find($id);
-        return view('admin.pages.event.show', compact('event'));
+        $holiday = Holiday::find($id);
+        return view('admin.pages.holiday.show', compact('holiday'));
     }
 
     public function edit($id)
     {
-        if(!Gate::allows('event-edit')) {
+        if(!Gate::allows('holiday-edit')) {
             return redirect()->route('unauthorized.action');
         }
-        $event = Event::find($id);
         $editorId = (int) $id;
-        return view('admin.pages.event.edit', compact('event', 'editorId'));
+        $holiday = Holiday::find($id);
+        return view('admin.pages.holiday.edit', compact('holiday', 'editorId'));
     }
 
     public function update(Request $request, $id)
     {
-        try {
+        try{
             $request->validate([
                 'title' => 'required',
                 'from_date' => 'required',
@@ -105,53 +105,53 @@ class EventController extends Controller
                 'photo' => 'required',
                 'details' => 'required',
             ]);
-            $event = Event::find($id);
-            $event->title = $request->title;
-            $event->from_date = $request->from_date;
-            $event->to_date = $request->to_date;
+
+            $holiday = Holiday::find($id);
+            $holiday->title = $request->title;
+            $holiday->from_date = $request->from_date;
+            $holiday->to_date = $request->to_date;
             $fileName = $request->photo ?? "";
             if ($request->hasFile('photo')) {
-                if (File::exists(public_path('uploads/events/' . $event->photo))) {
-                    File::delete(public_path('uploads/events/' . $event->photo));
+                if (File::exists(public_path('uploads/holidays/' . $holiday->photo))) {
+                    File::delete(public_path('uploads/holidays/' . $holiday->photo));
                 }
                 $file = $request->file('photo');
                 $fileName = time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads/events/'), $fileName);
+                $file->move(public_path('uploads/holidays/'), $fileName);
             }
-            $event->photo = $fileName;
-            $event->details = $request->details;
-            $event->school_id = Auth::user()->school_id ?? Auth::id();
-            $event->updated_by = Auth::id();
-            $event->save();
+            $holiday->photo = $fileName;
+            $holiday->details = $request->details;
+            $holiday->school_id = Auth::user()->school_id ?? Auth::id();
+            $holiday->updated_by = Auth::id();
+            $holiday->save();
             toastr()->success('Data has been updated successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            toastr()->error('Data cannot be updated!');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
         }
     }
 
     public function destroy($id)
     {
-        if(!Gate::allows('event-delete')) {
+        if(!Gate::allows('holiday-delete')) {
             return redirect()->route('unauthorized.action');
         }
         try {
-            $event = Event::find($id);
-            $event->delete();
+            $holiday = Holiday::find($id);
+            $holiday->delete();
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();
         } catch (\Exception $e) {
-            toastr()->error('Data cannot be deleted!');
+            toastr()->error($e->getMessage(), ['title' => 'Error']);
             return redirect()->back();
         }
     }
 
     public function pdf($id)
     {
-        $event = Event::find($id);
-        $createdBy = User::find($event->created_by); // Assuming 'created_by' stores the user ID
-        $pdf = PDF::loadView('admin.pages.event.pdf', compact('event', 'createdBy'));
-        return $pdf->download('event_' . $event->id . '.pdf');
+        $holiday = Holiday::find($id);
+        $pdf = PDF::loadView('admin.pages.holiday.pdf', compact('holiday'));
+        return $pdf->download('holiday_' . $holiday->id . '.pdf');
     }
 }

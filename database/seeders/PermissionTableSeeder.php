@@ -304,6 +304,27 @@ class PermissionTableSeeder extends Seeder
             'event-edit',
             'event-delete',
 
+            //holiday
+            'holiday-list',
+            'holiday-show',
+            'holiday-create',
+            'holiday-edit',
+            'holiday-delete',
+
+            //transport-module
+            'transport-module',
+
+            //transport
+            'transport-list',
+            'transport-create',
+            'transport-edit',
+            'transport-delete',
+
+            //media
+            'media-list',
+            'media-create',
+            'media-delete',
+
         ];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {
