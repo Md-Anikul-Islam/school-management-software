@@ -320,10 +320,26 @@ class PermissionTableSeeder extends Seeder
             'transport-edit',
             'transport-delete',
 
+            //transport member
+            'transport-member-list',
+            'transport-member-show',
+            'transport-member-create',
+            'transport-member-edit',
+            'transport-member-delete',
+
             //media
             'media-list',
             'media-create',
             'media-delete',
+
+            //child-module
+            'child-module',
+
+            //activities category
+            'activities-category-list',
+            'activities-category-create',
+            'activities-category-edit',
+            'activities-category-delete',
 
         ];
         foreach ($permissions as $permission) {

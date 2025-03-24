@@ -39,6 +39,8 @@ use App\Http\Controllers\admin\NoticeController;
 use App\Http\Controllers\admin\EventController;
 use App\Http\Controllers\admin\HolidayController;
 use App\Http\Controllers\admin\TransportController;
+use App\Http\Controllers\admin\TransportMemberController;
+use App\Http\Controllers\admin\ActivitiesCategoryController;
 use App\Http\Controllers\admin\MediaController;
 use App\Http\Controllers\FrontendAdmissionController;
 use App\Http\Controllers\FrontendBlogController;
@@ -398,6 +400,26 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/transport-edit/{id}', [TransportController::class, 'edit'])->name('transport.edit');
     Route::put('/transport-update/{id}', [TransportController::class, 'update'])->name('transport.update');
     Route::delete('/transport-delete/{id}', [TransportController::class, 'destroy'])->name('transport.destroy');
+
+    //transport member
+    Route::get('transport-members', [TransportMemberController::class, 'index'])->name('transport-members.index');
+    Route::get('transport-members/create/{studentId}', [TransportMemberController::class, 'create'])->name('transport-members.create');
+    Route::post('transport-members', [TransportMemberController::class, 'store'])->name('transport-members.store');
+    Route::get('transport-members/{transportMember}', [TransportMemberController::class, 'show'])->name('transport-members.show');
+    Route::get('transport-members/{transportMember}/edit', [TransportMemberController::class, 'edit'])->name('transport-members.edit');
+    Route::put('transport-members/{transportMember}', [TransportMemberController::class, 'update'])->name('transport-members.update');
+    Route::delete('transport-members/{transportMember}', [TransportMemberController::class, 'destroy'])->name('transport-members.destroy');
+    Route::get('get-fare/{transportId}', [TransportMemberController::class, 'getFare'])->name('get-fare');
+    Route::get('transport-members/{transportMember}/pdf', [TransportMemberController::class, 'pdf'])->name('transport-members.pdf');
+
+    //activities category
+    Route::get('/activities-category-list', [ActivitiesCategoryController::class, 'index'])->name('activities-category.index');
+    Route::get('/activities-category-create', [ActivitiesCategoryController::class, 'create'])->name('activities-category.create');
+    Route::post('/activities-category-store', [ActivitiesCategoryController::class, 'store'])->name('activities-category.store');
+    Route::get('/activities-category-edit/{id}', [ActivitiesCategoryController::class, 'edit'])->name('activities-category.edit');
+    Route::put('/activities-category-update/{id}', [ActivitiesCategoryController::class, 'update'])->name('activities-category.update');
+    Route::delete('/activities-category-delete/{id}', [ActivitiesCategoryController::class, 'destroy'])->name('activities-category.destroy');
+
 
     //media
     Route::get('/media', [MediaController::class, 'index'])->name('media.index');

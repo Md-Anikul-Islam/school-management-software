@@ -6,21 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Transport extends Model
+class ActivitiesCategory extends Model
 {
     use HasFactory, SoftDeletes;
     protected $fillable = [
-        'route_name',
-        'vehicle_no',
-        'route_fare',
-        'note',
+        'title',
+        'font_awesome_icon',
         'school_id',
         'created_by',
         'updated_by',
     ];
-
-    public function transportMembers()
-    {
-        return $this->hasMany(TransportMember::class);
-    }
 }

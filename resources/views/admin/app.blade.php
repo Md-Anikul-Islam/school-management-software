@@ -591,6 +591,37 @@
                                     </li>
                                 @endcan
                             </ul>
+                            <ul class="side-nav-second-level">
+                                @can('transport-member-list')
+                                    <li>
+                                        <a href="{{ route('transport-members.index') }}">
+                                            <i class="ri-user-3-line"></i>   <span>Transport Member</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+
+                @can('child-module')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages12" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-bus-2-line"></i>  <span>Child</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages12">
+                            <ul class="side-nav-second-level">
+                                @can('activities-category-list')
+                                    <li>
+                                        <a href="{{ route('activities-category.index') }}">
+                                            <i class="ri-list-check"></i><span>Activities Category</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
                         </div>
                     </li>
                 @endcan

@@ -69,5 +69,10 @@ class Student extends Model
     {
         return $this->belongsTo(Subject::class, 'code', 'optional_subject');
     }
+
+    public function transportMembers()
+    {
+        return $this->hasMany(TransportMember::class);
+    }
 }
 

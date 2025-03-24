@@ -6,21 +6,26 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Transport extends Model
+class TransportMember extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
-        'route_name',
-        'vehicle_no',
-        'route_fare',
-        'note',
+        'student_id',
+        'transport_id',
+        'fare',
         'school_id',
         'created_by',
         'updated_by',
     ];
 
-    public function transportMembers()
+    public function student()
     {
-        return $this->hasMany(TransportMember::class);
+        return $this->belongsTo(Student::class);
+    }
+
+    public function transport()
+    {
+        return $this->belongsTo(Transport::class);
     }
 }
