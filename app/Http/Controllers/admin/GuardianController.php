@@ -226,6 +226,9 @@ class GuardianController extends Controller
         }
         try {
             $guardian = Guardian::find($id);
+            if (File::exists(public_path('uploads/guardians/' . $guardian->photo))) {
+                File::delete(public_path('uploads/guardians/' . $guardian->photo));
+            }
             $guardian->delete();
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();

@@ -261,6 +261,9 @@ class QuestionBankController extends Controller
         }
         try {
             $questionBank = QuestionBank::find($id);
+            if ($questionBank->upload && file_exists(public_path('uploads/question_bank/' . $questionBank->upload))) {
+                unlink(public_path('uploads/question_bank/' . $questionBank->upload));
+            }
             $questionBank->delete();
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();

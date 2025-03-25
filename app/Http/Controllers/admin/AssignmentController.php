@@ -168,6 +168,9 @@ class AssignmentController extends Controller
         }
         try {
             $assignment = Assignment::find($id);
+            if($assignment->file) {
+                unlink(public_path('uploads/assignment/' . $assignment->file));
+            }
             $assignment->delete();
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();

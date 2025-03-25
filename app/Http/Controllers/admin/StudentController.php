@@ -244,6 +244,9 @@ class StudentController extends Controller
     {
         try{
             $student = Student::find($id);
+            if ($student->photo && file_exists(public_path('uploads/students/' . $student->photo))) {
+                unlink(public_path('uploads/students/' . $student->photo));
+            }
             $student->delete();
             toastr()->success('Data has been deleted successfully!');
             return redirect()->route('student.index');

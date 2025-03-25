@@ -166,6 +166,9 @@ class AssetController extends Controller
         }
         try {
             $asset = Asset::find($id);
+            if (File::exists(public_path('uploads/assets/' . $asset->attachment))) {
+                File::delete(public_path('uploads/assets/' . $asset->attachment));
+            }
             $asset->delete();
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();

@@ -139,6 +139,9 @@ class HolidayController extends Controller
         }
         try {
             $holiday = Holiday::find($id);
+            if (File::exists(public_path('uploads/holidays/' . $holiday->photo))) {
+                File::delete(public_path('uploads/holidays/' . $holiday->photo));
+            }
             $holiday->delete();
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();

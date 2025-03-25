@@ -7,6 +7,7 @@ use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class MediaController extends Controller
 {
@@ -100,6 +101,9 @@ class MediaController extends Controller
         }
         try{
             $mediaItem->delete();
+            if(File::exists(public_path($mediaItem->path))) {
+                File::delete(public_path($mediaItem->path));
+            }
             toastr()->success('Data has been saved successfully!');
             return redirect()->back();
         } catch (\Exception $e) {

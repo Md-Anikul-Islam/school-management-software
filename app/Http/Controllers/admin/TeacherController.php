@@ -258,6 +258,9 @@ class TeacherController extends Controller
         }
         try {
             $teacher = Teacher::find($id);
+            if (File::exists(public_path('uploads/teachers/' . $teacher->photo))) {
+                File::delete(public_path('uploads/teachers/' . $teacher->photo));
+            }
             $teacher->delete();
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();

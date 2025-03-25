@@ -141,6 +141,9 @@ class SyllabusController extends Controller
         }
         try {
             $syllabus = Syllabus::find($id);
+            if (File::exists(public_path('uploads/syllabus/' . $syllabus->file))) {
+                File::delete(public_path('uploads/syllabus/' . $syllabus->file));
+            }
             $syllabus->delete();
             toastr()->success('Data has been updated successfully!');
             return redirect()->back();

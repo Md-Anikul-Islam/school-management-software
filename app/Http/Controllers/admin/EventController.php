@@ -138,6 +138,9 @@ class EventController extends Controller
         }
         try {
             $event = Event::find($id);
+            if (File::exists(public_path('uploads/events/' . $event->photo))) {
+                File::delete(public_path('uploads/events/' . $event->photo));
+            }
             $event->delete();
             toastr()->success('Data has been deleted successfully!');
             return redirect()->back();
