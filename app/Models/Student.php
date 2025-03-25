@@ -74,5 +74,10 @@ class Student extends Model
     {
         return $this->hasMany(TransportMember::class);
     }
+
+    public function hostelMembers()
+    {
+        return $this->hasMany(HostelMember::class);
+    }
 }
 

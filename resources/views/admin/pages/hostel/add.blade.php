@@ -34,8 +34,8 @@
                         <label for="type" class="form-label">Hostel Type</label>
                         <select class="form-control" id="type" name="type" required>
                             <option value="">Select Type</option>
-                            <option value="boys">Boys</option>
-                            <option value="girls">Girls</option>
+                            <option value="1">Boys</option>
+                            <option value="2">Girls</option>
                         </select>
                     </div>
                     <div class="mb-3">

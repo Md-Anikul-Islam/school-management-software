@@ -364,6 +364,15 @@
                                     </li>
                                 @endcan
                             </ul>
+                            <ul class="side-nav-second-level">
+                                @can('hostel-member-list')
+                                    <li>
+                                        <a href="{{ route('hostel-members.index') }}">
+                                            <i class="ri-user-3-line"></i>
+                                            <span>Member</span></a>
+                                    </li>
+                                @endcan
+                            </ul>
                         </div>
                     </li>
                 @endcan

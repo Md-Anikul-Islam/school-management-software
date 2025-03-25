@@ -40,10 +40,10 @@
                                     data-bs-target="#upload-image-modal"><span><i
                                         class="ri-upload-2-line"></i></span>Upload Image
                             </button>
-                            <a href="{{ route('media.createFolder', ['folder' => $folder->id]) }}"
-                               class="btn btn-primary">
-                                <span><i class="ri-add-fill"></i></span>Create Folder Inside
-                            </a>
+{{--                            <a href="{{ route('media.createFolder', ['folder' => $folder->id]) }}"--}}
+{{--                               class="btn btn-primary">--}}
+{{--                                <span><i class="ri-add-fill"></i></span>Create Folder Inside--}}
+{{--                            </a>--}}
                         @endcan
                     </div>
                 </div>

@@ -173,6 +173,7 @@ class PermissionTableSeeder extends Seeder
             'hostel-member-show',
             'hostel-member-create',
             'hostel-member-edit',
+            'hostel-member-delete',
 
             //online exam
             'online-exam-module',

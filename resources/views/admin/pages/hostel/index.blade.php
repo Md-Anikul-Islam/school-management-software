@@ -60,7 +60,13 @@
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $hostel->name }}</td>
-                            <td>{{ $hostel->type }}</td>
+                            <td>
+                                @if ($hostel->type == 1)
+                                    <span class="badge bg-success"> Boys</span>
+                                @else
+                                    <span class="badge bg-danger"> Girls</span>
+                                @endif
+                            </td>
                             <td>{{ $hostel->address }}</td>
                             <td>{{ $hostel->note }}</td>
                             <td>
@@ -158,7 +164,7 @@
             const doc = new jsPDF();
 
             // Add the heading
-            doc.text(heading, doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' }); // Centered heading
+            doc.text(heading, doc.internal.pageSize.getWidth() / 2, 20, {align: 'center'}); // Centered heading
 
             let rows = document.querySelectorAll("table tr");
             let data = [];

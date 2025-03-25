@@ -80,7 +80,11 @@ class MediaController extends Controller
 
     public function showFolder(Media $folder)
     {
-        $items = Media::where('parent_id', $folder->id)->get();
+        if(auth()->user()->hasRole('Super Admin')) {
+            $items = Media::where('parent_id', $folder->id)->get();
+        } else {
+            $items = Media::where('school_id', Auth::user()->school_id)->orWhere('school_id', Auth::id())->where('parent_id', $folder->id)->get();
+        }
         return view('admin.pages.media.folder', compact('folder', 'items'));
     }
 
@@ -91,6 +95,9 @@ class MediaController extends Controller
 
     public function destroy(Media $mediaItem)
     {
+        if (!Gate::allows('media-delete')) {
+            return redirect()->route('unauthorized.action');
+        }
         try{
             $mediaItem->delete();
             toastr()->success('Data has been saved successfully!');

@@ -36,8 +36,8 @@
                             <label for="type" class="form-label">Hostel Type</label>
                             <select class="form-control" id="type" name="type" required>
                                 <option value="">Select Type</option>
-                                <option value="boys" {{ $hostel->type == 'boys' ? 'selected' : '' }}>Boys</option>
-                                <option value="girls" {{ $hostel->type == 'girls' ? 'selected' : '' }}>Girls</option>
+                                <option value="1" {{ $hostel->type == '1' ? 'selected' : '' }}>Boys</option>
+                                <option value="2" {{ $hostel->type == '2' ? 'selected' : '' }}>Girls</option>
                             </select>
                         </div>
                         <div class="mb-3">

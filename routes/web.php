@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\GradeController;
 use App\Http\Controllers\admin\GuardianController;
 use App\Http\Controllers\admin\HostelController;
 use App\Http\Controllers\admin\HostelCategoryController;
+use App\Http\Controllers\admin\HostelMemberController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\MarkController;
 use App\Http\Controllers\admin\SectionNameContoller;
@@ -227,6 +228,17 @@ Route::middleware('auth')->group(callback: function () {
     Route::put('/hostel-category-update/{id}', [HostelCategoryController::class, 'update'])->name('hostel-category.update');
     Route::delete('/hostel-category-delete/{id}', [HostelCategoryController::class, 'destroy'])->name('hostel-category.destroy');
 
+    // Hostel member routes
+    Route::get('hostel-members', [HostelMemberController::class, 'index'])->name('hostel-members.index');
+    Route::get('hostel-members/create/{studentId}', [HostelMemberController::class, 'create'])->name('hostel-members.create');
+    Route::post('hostel-members', [HostelMemberController::class, 'store'])->name('hostel-members.store');
+    Route::get('hostel-members/{hostelMember}', [HostelMemberController::class, 'show'])->name('hostel-members.show');
+    Route::get('hostel-members/{hostelMember}/edit', [HostelMemberController::class, 'edit'])->name('hostel-members.edit');
+    Route::put('hostel-members/{hostelMember}', [HostelMemberController::class, 'update'])->name('hostel-members.update');
+    Route::delete('hostel-members/{hostelMember}', [HostelMemberController::class, 'destroy'])->name('hostel-members.destroy');
+    Route::get('hostel-members/{hostelMember}/pdf', [HostelMemberController::class, 'pdf'])->name('hostel-members.pdf');
+    Route::get('/get-hostel-categories/{hostelId}', [HostelMemberController::class, 'getHostelCategories']);
+
     //question group
     Route::get('/question-group-list', [QuestionGroupController::class, 'index'])->name('question-group.index');
     Route::get('/question-group-create', [QuestionGroupController::class, 'create'])->name('question-group.create');
@@ -437,4 +449,4 @@ Route::middleware('auth')->group(callback: function () {
 
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
