@@ -618,7 +618,7 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages12" aria-expanded="false"
                            aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-bus-2-line"></i>  <span>Child</span>
+                            <i class="ri-user-heart-line"></i>  <span>Child</span>  {{-- Child Icon--}}
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages12">
@@ -626,7 +626,7 @@
                                 @can('activities-category-list')
                                     <li>
                                         <a href="{{ route('activities-category.index') }}">
-                                            <i class="ri-list-check"></i><span>Activities Category</span>
+                                            <i class="ri-bookmark-3-line"></i><span>Activities Category</span> {{-- Activity Category Icon--}}
                                         </a>
                                     </li>
                                 @endcan
