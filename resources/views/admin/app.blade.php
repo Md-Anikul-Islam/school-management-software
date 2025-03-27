@@ -103,8 +103,8 @@
             </span>
         </a>
 
-        <div class="h-100" id="leftside-menu-container" data-simplebar>
-            <ul class="side-nav">
+        <div class="h-100" id="leftside-menu-container " data-simplebar>
+            <ul class="side-nav pb-5">
                 <li class="side-nav-title">Main</li>
                 <li class="side-nav-item">
                     <a href="{{route('dashboard')}}" class="side-nav-link">
