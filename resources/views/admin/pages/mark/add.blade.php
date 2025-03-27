@@ -288,9 +288,7 @@
                     data: formData,
                     success: function (response) {
                         if (response.status === "success") {
-                            // alert("Marks submitted successfully!");
-                            toastr.success(response.message); // Display toastr notification
-                            // location.reload(); // Reload page after submission
+                            toastr.success(response.message);
                         } else {
                             alert("Error submitting marks.");
                         }
