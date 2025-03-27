@@ -27,4 +27,29 @@ class Mark extends Model
     {
         return $this->hasMany(ExamSchedule::class, 'exam_id');
     }
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class, 'student_id');
+    }
+
+    public function exam()
+    {
+        return $this->belongsTo(Exam::class, 'exam_id');
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(SectionName::class, 'section_id');
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class, 'subject_id');
+    }
+
+    public function className()
+    {
+        return $this->belongsTo(ClassName::class, 'class_id');
+    }
 }

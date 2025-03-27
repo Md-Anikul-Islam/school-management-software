@@ -50,7 +50,10 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Exam</th>
+                        <th>Section</th>
+                        <th>Subject</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -58,43 +61,46 @@
                     @forelse ($marks as $mark)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $mark->name }}</td>
+                            <td>{{ $mark->className->name }}</td>
+                            <td>{{ $mark->exam->name }}</td>
+                            <td>{{ $mark->section->name }}</td>
+                            <td>{{ $mark->subject->name }}</td>
                             <td>
                                 @can('mark-edit')
-                                <a href="{{ route('mark.edit', $mark->id) }}" class="btn btn-info"><i class="ri-edit-line"></i></a>
+                                    <a href="{{ route('mark.edit', $mark->id) }}" class="btn btn-info"><i class="ri-edit-line"></i></a>
                                 @endcan
                                 @can('mark-delete')
 {{--                                @if(!$mark->do_not_delete)--}}
-{{--                                    <a class="btn btn-danger" data-bs-toggle="modal"--}}
-{{--                                       data-bs-target="#danger-header-modal{{ $mark->id }}"><i class="ri-delete-bin-6-fill"></i></a>--}}
-{{--                                    <div id="danger-header-modal{{ $mark->id }}" class="modal fade" tabindex="-1"--}}
-{{--                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $mark->id }}"--}}
-{{--                                         aria-hidden="true">--}}
-{{--                                        <div class="modal-dialog modal-dialog-centered">--}}
-{{--                                            <div class="modal-content">--}}
-{{--                                                <div class="modal-header modal-colored-header bg-danger">--}}
-{{--                                                    <h4 class="modal-title"--}}
-{{--                                                        id="danger-header-modalLabel{{ $mark->id }}">Delete</h4>--}}
-{{--                                                    <button type="button" class="btn-close btn-close-white"--}}
-{{--                                                            data-bs-dismiss="modal" aria-label="Close"></button>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="modal-body">--}}
-{{--                                                    <h5 class="mt-0">Are you sure you want to delete this mark?</h5>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="modal-footer">--}}
-{{--                                                    <button type="button" class="btn btn-light"--}}
-{{--                                                            data-bs-dismiss="modal">Close--}}
-{{--                                                    </button>--}}
-{{--                                                    <form action="{{ route('mark.destroy', $mark->id) }}"--}}
-{{--                                                          method="post">--}}
-{{--                                                        @csrf--}}
-{{--                                                        @method('DELETE')--}}
-{{--                                                        <button type="submit" class="btn btn-danger">Delete</button>--}}
-{{--                                                    </form>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
+                                    <a class="btn btn-danger" data-bs-toggle="modal"
+                                       data-bs-target="#danger-header-modal{{ $mark->id }}"><i class="ri-delete-bin-6-fill"></i></a>
+                                    <div id="danger-header-modal{{ $mark->id }}" class="modal fade" tabindex="-1"
+                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $mark->id }}"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header modal-colored-header bg-danger">
+                                                    <h4 class="modal-title"
+                                                        id="danger-header-modalLabel{{ $mark->id }}">Delete</h4>
+                                                    <button type="button" class="btn-close btn-close-white"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h5 class="mt-0">Are you sure you want to delete this mark?</h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light"
+                                                            data-bs-dismiss="modal">Close
+                                                    </button>
+                                                    <form action="{{ route('mark.destroy', $mark->id) }}"
+                                                          method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 {{--                                @endif--}}
                                 @endcan
                             </td>
