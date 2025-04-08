@@ -42,6 +42,11 @@ use App\Http\Controllers\admin\HolidayController;
 use App\Http\Controllers\admin\TransportController;
 use App\Http\Controllers\admin\TransportMemberController;
 use App\Http\Controllers\admin\ActivitiesCategoryController;
+use App\Http\Controllers\admin\ActivitiesController;
+use App\Http\Controllers\admin\ChildCareController;
+use App\Http\Controllers\admin\BooksController;
+use App\Http\Controllers\admin\IssueController;
+use App\Http\Controllers\admin\EbooksController;
 use App\Http\Controllers\admin\MediaController;
 use App\Http\Controllers\FrontendAdmissionController;
 use App\Http\Controllers\FrontendBlogController;
@@ -431,6 +436,48 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/activities-category-edit/{id}', [ActivitiesCategoryController::class, 'edit'])->name('activities-category.edit');
     Route::put('/activities-category-update/{id}', [ActivitiesCategoryController::class, 'update'])->name('activities-category.update');
     Route::delete('/activities-category-delete/{id}', [ActivitiesCategoryController::class, 'destroy'])->name('activities-category.destroy');
+
+    //activities
+    Route::get('/activities-list', [ActivitiesController::class, 'index'])->name('activities.index');
+    Route::get('/activities-create', [ActivitiesController::class, 'create'])->name('activities.create');
+    Route::post('/activities-store', [ActivitiesController::class, 'store'])->name('activities.store');
+    Route::delete('/activities-delete/{id}', [ActivitiesController::class, 'destroy'])->name('activities.destroy');
+
+    //childcare
+    Route::get('/childcare-list', [ChildCareController::class, 'index'])->name('childcare.index');
+    Route::get('/childcare-create', [ChildCareController::class, 'create'])->name('childcare.create');
+    Route::post('/childcare-store', [ChildCareController::class, 'store'])->name('childcare.store');
+    Route::get('/childcare-edit/{id}', [ChildCareController::class, 'edit'])->name('childcare.edit');
+    Route::put('/childcare-update/{id}', [ChildCareController::class, 'update'])->name('childcare.update');
+    Route::delete('/childcare-delete/{id}', [ChildCareController::class, 'destroy'])->name('childcare.destroy');
+    Route::get('/get-students-by-class', [ChildCareController::class, 'getStudentsByClass'])->name('get-students-by-class');
+
+
+    //books
+    Route::get('/books-list', [BooksController::class, 'index'])->name('books.index');
+    Route::get('/books-create', [BooksController::class, 'create'])->name('books.create');
+    Route::post('/books-store', [BooksController::class, 'store'])->name('books.store');
+    Route::get('/books-edit/{id}', [BooksController::class, 'edit'])->name('books.edit');
+    Route::put('/books-update/{id}', [BooksController::class, 'update'])->name('books.update');
+    Route::delete('/books-delete/{id}', [BooksController::class, 'destroy'])->name('books.destroy');
+
+    //issue
+    Route::get('/issue-list', [IssueController::class, 'index'])->name('issue.index');
+    Route::get('/issue-create', [IssueController::class, 'create'])->name('issue.create');
+    Route::post('/issue-store', [IssueController::class, 'store'])->name('issue.store');
+    Route::get('/issue-edit/{id}', [IssueController::class, 'edit'])->name('issue.edit');
+    Route::put('/issue-update/{id}', [IssueController::class, 'update'])->name('issue.update');
+    Route::delete('/issue-delete/{id}', [IssueController::class, 'destroy'])->name('issue.destroy');
+
+    //ebooks
+    Route::get('/ebooks-list', [EbooksController::class, 'index'])->name('ebooks.index');
+    Route::get('/ebooks-create', [EbooksController::class, 'create'])->name('ebooks.create');
+    Route::post('/ebooks-store', [EbooksController::class, 'store'])->name('ebooks.store');
+    Route::get('/ebooks-edit/{id}', [EbooksController::class, 'edit'])->name('ebooks.edit');
+    Route::put('/ebooks-update/{id}', [EbooksController::class, 'update'])->name('ebooks.update');
+    Route::delete('/ebooks-delete/{id}', [EbooksController::class, 'destroy'])->name('ebooks.destroy');
+    Route::get('/ebooks/view/{ebook}', [EbooksController::class, 'view'])->name('ebooks.view');
+
 
 
     //media

@@ -47,4 +47,14 @@ class ClassName extends Model
     {
         return $this->hasMany(ExamSchedule::class, 'class_id');
     }
+
+    public function childCare()
+    {
+        return $this->hasMany(ChildCare::class, 'class_id');
+    }
+
+    public function ebooks()
+    {
+        return $this->hasMany(Ebooks::class, 'class_id');
+    }
 }

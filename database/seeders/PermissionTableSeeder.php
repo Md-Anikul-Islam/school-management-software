@@ -342,6 +342,39 @@ class PermissionTableSeeder extends Seeder
             'activities-category-edit',
             'activities-category-delete',
 
+            //activities
+            'activities-list',
+            'activities-create',
+            'activities-delete',
+
+            //child care
+            'childcare-list',
+            'childcare-create',
+            'childcare-edit',
+            'childcare-delete',
+
+            //librarry-module
+            'library-module',
+
+            //books
+            'books-list',
+            'books-create',
+            'books-edit',
+            'books-delete',
+
+            //issue
+            'issue-list',
+            'issue-create',
+            'issue-edit',
+            'issue-delete',
+
+            //ebooks
+            'ebooks-list',
+            'ebooks-create',
+            'ebooks-edit',
+            'ebooks-delete',
+            'ebooks-view',
+
         ];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {

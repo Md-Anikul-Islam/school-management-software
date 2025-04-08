@@ -6,19 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ActivitiesCategory extends Model
+class Ebooks extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $fillable = [
-        'title',
-        'font_awesome_icon',
+        'name',
+        'author',
+        'class_id',
+        'cover_photo',
+        'file',
         'school_id',
         'created_by',
         'updated_by',
     ];
 
-    public function activities()
+    public function class()
     {
-        return $this->hasMany(Activities::class, 'activity_category_id');
+        return $this->belongsTo(ClassName::class, 'class_id');
     }
 }

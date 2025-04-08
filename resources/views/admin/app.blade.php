@@ -16,10 +16,10 @@
           type="text/css"/>
     <link href="{{asset('backend/vendor/datatables.net-responsive-bs5/css/responsive.bootstrap5.min.css')}}"
           rel="stylesheet" type="text/css"/>
-{{--    <link href="{{asset('backend/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css')}}"--}}
-{{--          rel="stylesheet" type="text/css"/>--}}
-{{--    <link href="{{asset('backend/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css')}}"--}}
-{{--          rel="stylesheet" type="text/css"/>--}}
+    {{--    <link href="{{asset('backend/vendor/datatables.net-fixedcolumns-bs5/css/fixedColumns.bootstrap5.min.css')}}"--}}
+    {{--          rel="stylesheet" type="text/css"/>--}}
+    {{--    <link href="{{asset('backend/vendor/datatables.net-fixedheader-bs5/css/fixedHeader.bootstrap5.min.css')}}"--}}
+    {{--          rel="stylesheet" type="text/css"/>--}}
     <link href="{{asset('backend/vendor/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css')}}" rel="stylesheet"
           type="text/css"/>
     <link href="{{asset('backend/vendor/datatables.net-select-bs5/css/select.bootstrap5.min.css')}}" rel="stylesheet"
@@ -539,7 +539,7 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages10" aria-expanded="false"
                            aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-megaphone-line"></i>  <span>Announcement</span>
+                            <i class="ri-megaphone-line"></i> <span>Announcement</span>
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages10">
@@ -547,7 +547,7 @@
                                 @can('notice-list')
                                     <li>
                                         <a href="{{ route('notice.index') }}">
-                                            <i class="ri-information-line"></i>  <span>Notice</span>
+                                            <i class="ri-information-line"></i> <span>Notice</span>
                                         </a>
                                     </li>
                                 @endcan
@@ -556,7 +556,7 @@
                                 @can('event-list')
                                     <li>
                                         <a href="{{ route('event.index') }}">
-                                            <i class="ri-calendar-line"></i>  <span>Event</span>
+                                            <i class="ri-calendar-line"></i> <span>Event</span>
                                         </a>
                                     </li>
                                 @endcan
@@ -565,7 +565,7 @@
                                 @can('holiday-list')
                                     <li>
                                         <a href="{{ route('holiday.index') }}">
-                                            <i class="ri-calendar-event-line"></i>  <span>Holiday</span>
+                                            <i class="ri-calendar-event-line"></i> <span>Holiday</span>
                                         </a>
                                     </li>
                                 @endcan
@@ -587,7 +587,7 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages11" aria-expanded="false"
                            aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-bus-2-line"></i>  <span>Transport</span>
+                            <i class="ri-bus-2-line"></i> <span>Transport</span>
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages11">
@@ -595,7 +595,7 @@
                                 @can('transport-list')
                                     <li>
                                         <a href="{{ route('transport.index') }}">
-                                            <i class="ri-list-check"></i>   <span>Transport</span>
+                                            <i class="ri-list-check"></i> <span>Transport</span>
                                         </a>
                                     </li>
                                 @endcan
@@ -604,7 +604,7 @@
                                 @can('transport-member-list')
                                     <li>
                                         <a href="{{ route('transport-members.index') }}">
-                                            <i class="ri-user-3-line"></i>   <span>Transport Member</span>
+                                            <i class="ri-user-3-line"></i> <span>Transport Member</span>
                                         </a>
                                     </li>
                                 @endcan
@@ -618,7 +618,7 @@
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages12" aria-expanded="false"
                            aria-controls="sidebarPages" class="side-nav-link">
-                            <i class="ri-user-heart-line"></i>  <span>Child</span>  {{-- Child Icon--}}
+                            <i class="ri-user-heart-line"></i> <span>Child</span> {{-- Child Icon--}}
                             <span class="menu-arrow"></span>
                         </a>
                         <div class="collapse" id="sidebarPages12">
@@ -626,7 +626,65 @@
                                 @can('activities-category-list')
                                     <li>
                                         <a href="{{ route('activities-category.index') }}">
-                                            <i class="ri-bookmark-3-line"></i><span>Activities Category</span> {{-- Activity Category Icon--}}
+                                            <i class="ri-bookmark-3-line"></i><span>Activities Category</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('activities-list')
+                                    <li>
+                                        <a href="{{ route('activities.index') }}">
+                                            <i class="ri-file-list-3-line"></i><span>Activities</span> {{-- Activity Icon--}}
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('childcare-list')
+                                    <li>
+                                        <a href="{{ route('childcare.index') }}">
+                                            <i class="ri-user-3-line"></i><span>Child Care</span> {{-- Child Care Icon--}}
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+
+                @can('library-module')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages13" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-book-open-line"></i> <span>Library</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages13">
+                            <ul class="side-nav-second-level">
+                                @can('books-list')
+                                    <li>
+                                        <a href="{{ route('books.index') }}">
+                                            <i class="ri-book-3-line"></i><span>Books</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('issue-list')
+                                    <li>
+                                        <a href="{{ route('issue.index') }}">
+                                            <i class="ri-book-mark-line"></i><span>Issue Book</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('ebooks-list')
+                                    <li>
+                                        <a href="{{ route('ebooks.index') }}">
+                                            <i class="ri-book-2-line"></i><span>EBooks</span>
                                         </a>
                                     </li>
                                 @endcan
