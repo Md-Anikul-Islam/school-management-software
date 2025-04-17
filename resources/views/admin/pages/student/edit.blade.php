@@ -176,18 +176,13 @@
                             <div class="mb-3">
                                 <label for="group" class="form-label">Group</label>
                                 <select class="form-control select2" id="group" name="group">
-                                    @if(!empty($groups))
-                                        @foreach($groups as $group)
-                                            <option value="{{ $group->id }}" {{ old('group', $student->group) == $group->id ? 'selected' : '' }}>
-                                                {{ $group->name }}
-                                            </option>
-                                        @endforeach
-                                    @else
-                                        <option value="">No Groups Available</option>
-                                    @endif
+                                    <option value="Science" {{ old('group', $student->group) == 'Science' ? 'selected' : '' }}>Science</option>
+                                    <option value="Arts" {{ old('group', $student->group) == 'Arts' ? 'selected' : '' }}>Arts</option>
+                                    <option value="Business Studies" {{ old('group', $student->group) == 'Business Studies' ? 'selected' : '' }}>Business Studies</option>
                                 </select>
                             </div>
                         </div>
+
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label for="optional_subject" class="form-label">Optional Subject</label>

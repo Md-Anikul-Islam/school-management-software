@@ -44,6 +44,11 @@ use App\Http\Controllers\admin\TransportMemberController;
 use App\Http\Controllers\admin\ActivitiesCategoryController;
 use App\Http\Controllers\admin\ActivitiesController;
 use App\Http\Controllers\admin\ChildCareController;
+use App\Http\Controllers\admin\LibraryController;
+use App\Http\Controllers\admin\LibraryMemberController;
+use App\Http\Controllers\admin\CandidateController;
+use App\Http\Controllers\admin\SponsorController;
+use App\Http\Controllers\admin\SponsorshipController;
 use App\Http\Controllers\admin\BooksController;
 use App\Http\Controllers\admin\IssueController;
 use App\Http\Controllers\admin\EbooksController;
@@ -453,6 +458,26 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/get-students-by-class', [ChildCareController::class, 'getStudentsByClass'])->name('get-students-by-class');
 
 
+    //library
+    Route::get('/library-list', [LibraryController::class, 'index'])->name('library.index');
+    Route::get('/library-create', [LibraryController::class, 'create'])->name('library.create');
+    Route::post('/library-store', [LibraryController::class, 'store'])->name('library.store');
+    Route::get('/library-edit/{id}', [LibraryController::class, 'edit'])->name('library.edit');
+    Route::put('/library-update/{id}', [LibraryController::class, 'update'])->name('library.update');
+    Route::delete('/library-delete/{id}', [LibraryController::class, 'destroy'])->name('library.destroy');
+
+    //library member
+    Route::get('library-members', [LibraryMemberController::class, 'index'])->name('library-members.index');
+    Route::get('library-members/create/{studentId}', [LibraryMemberController::class, 'create'])->name('library-members.create');
+    Route::post('library-members', [LibraryMemberController::class, 'store'])->name('library-members.store');
+    Route::get('library-members/{libraryMember}', [LibraryMemberController::class, 'show'])->name('library-members.show');
+    Route::get('library-members/{libraryMember}/edit', [LibraryMemberController::class, 'edit'])->name('library-members.edit');
+    Route::put('library-members/{libraryMember}', [LibraryMemberController::class, 'update'])->name('library-members.update');
+    Route::delete('library-members/{libraryMember}', [LibraryMemberController::class, 'destroy'])->name('library-members.destroy');
+    Route::get('library-members/{libraryMember}/pdf', [LibraryMemberController::class, 'pdf'])->name('library-members.pdf');
+    Route::get('/get-library-details/{libraryId}', [LibraryMemberController::class, 'getLibraryDetails']);
+
+
     //books
     Route::get('/books-list', [BooksController::class, 'index'])->name('books.index');
     Route::get('/books-create', [BooksController::class, 'create'])->name('books.create');
@@ -479,7 +504,6 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/ebooks/view/{ebook}', [EbooksController::class, 'view'])->name('ebooks.view');
 
 
-
     //media
     Route::get('/media', [MediaController::class, 'index'])->name('media.index');
     Route::post('/media/folders', [MediaController::class, 'createFolder'])->name('media.createFolder');
@@ -488,6 +512,35 @@ Route::middleware('auth')->group(callback: function () {
     Route::get('/media/folders/{folder}', [MediaController::class, 'showFolder'])->name('media.showFolder');
     Route::delete('/media/{mediaItem}', [MediaController::class, 'destroy'])->name('media.destroy');
 
+    Route::get('/candidate', [CandidateController::class, 'index'])->name('candidate.index');
+    Route::get('/candidate/create', [CandidateController::class, 'create'])->name('candidate.create');
+    Route::post('/candidate', [CandidateController::class, 'store'])->name('candidate.store');
+    Route::get('/candidate/{id}', [CandidateController::class, 'show'])->name('candidate.show');
+    Route::get('/candidate/{id}/edit', [CandidateController::class, 'edit'])->name('candidate.edit');
+    Route::put('/candidate/{id}', [CandidateController::class, 'update'])->name('candidate.update');
+    Route::delete('/candidate/{id}', [CandidateController::class, 'destroy'])->name('candidate.destroy');
+    Route::get('/candidate/pdf/{id}', [CandidateController::class, 'pdf'])->name('candidate.pdf');
+    Route::get('/get-student-data/{studentId}', [CandidateController::class, 'getStudentData']);
+
+    //sponsor
+    Route::get('/sponsor-list', [SponsorController::class, 'index'])->name('sponsor.index');
+    Route::get('/sponsor-create', [SponsorController::class, 'create'])->name('sponsor.create');
+    Route::post('/sponsor-store', [SponsorController::class, 'store'])->name('sponsor.store');
+    Route::get('/sponsor-edit/{id}', [SponsorController::class, 'edit'])->name('sponsor.edit');
+    Route::put('/sponsor-update/{id}', [SponsorController::class, 'update'])->name('sponsor.update');
+    Route::delete('/sponsor-delete/{id}', [SponsorController::class, 'destroy'])->name('sponsor.destroy');
+    Route::get('/sponsor-show/{id}', [SponsorController::class, 'show'])->name('sponsor.show');
+    Route::get('/sponsor/pdf/{id}', [SponsorController::class, 'pdf'])->name('sponsor.pdf');
+
+    //sponsorship
+    Route::get('/sponsorship-list', [SponsorshipController::class, 'index'])->name('sponsorship.index');
+    Route::get('/sponsorship-create', [SponsorshipController::class, 'create'])->name('sponsorship.create');
+    Route::post('/sponsorship-store', [SponsorshipController::class, 'store'])->name('sponsorship.store');
+    Route::get('/sponsorship-edit/{id}', [SponsorshipController::class, 'edit'])->name('sponsorship.edit');
+    Route::put('/sponsorship-update/{id}', [SponsorshipController::class, 'update'])->name('sponsorship.update');
+    Route::delete('/sponsorship-delete/{id}', [SponsorshipController::class, 'destroy'])->name('sponsorship.destroy');
+    Route::get('/sponsorship-renew/{id}', [SponsorshipController::class, 'renew'])->name('sponsorship.renew');
+    Route::post('/renew-sponsorship/{id}', [SponsorshipController::class, 'renew_sponsorship'])->name('sponsorship.renew_sponsorship');
 
     //Role and User Section
     Route::resource('roles', RoleController::class);

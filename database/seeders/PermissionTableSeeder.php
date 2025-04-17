@@ -356,6 +356,19 @@ class PermissionTableSeeder extends Seeder
             //librarry-module
             'library-module',
 
+            //library
+            'library-list',
+            'library-create',
+            'library-edit',
+            'library-delete',
+
+            //library-member
+            'library-member-list',
+            'library-member-show',
+            'library-member-create',
+            'library-member-edit',
+            'library-member-delete',
+
             //books
             'books-list',
             'books-create',
@@ -374,6 +387,30 @@ class PermissionTableSeeder extends Seeder
             'ebooks-edit',
             'ebooks-delete',
             'ebooks-view',
+
+            //sponsorship-module
+            'sponsorship-module',
+
+            //candidate
+            'candidate-list',
+            'candidate-create',
+            'candidate-edit',
+            'candidate-delete',
+            'candidate-show',
+
+            //sponsor
+            'sponsor-list',
+            'sponsor-create',
+            'sponsor-edit',
+            'sponsor-delete',
+            'sponsor-show',
+
+            //sponsorship
+            'sponsorship-list',
+            'sponsorship-create',
+            'sponsorship-edit',
+            'sponsorship-delete',
+            'sponsorship-renew',
 
         ];
         foreach ($permissions as $permission) {

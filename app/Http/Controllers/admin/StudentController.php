@@ -82,7 +82,6 @@ class StudentController extends Controller
                 'city' => 'required|string',
                 'className' => 'required|integer',
                 'section' => 'required|integer',
-                'group_id' => 'nullable|integer',
                 'optional_subject_id' => 'nullable|integer',
                 'reg_no' => 'nullable|string',
                 'roll' => 'nullable|string',
@@ -109,7 +108,7 @@ class StudentController extends Controller
             $student->city = $request->city;
             $student->class_id = $request->className;
             $student->section_id = $request->section;
-            $student->group_id = $request->group_id;
+            $student->group = $request->group;
             $student->optional_subject_id = $request->optional_subject_id;
             $student->reg_no = $request->reg_no;
             $student->roll = $request->roll;
@@ -180,7 +179,6 @@ class StudentController extends Controller
                 'city' => 'required|string',
                 'className' => 'required|integer',
                 'section' => 'required|integer',
-                'group_id' => 'nullable|integer',
                 'optional_subject_id' => 'nullable|integer',
                 'reg_no' => 'nullable|string',
                 'roll' => 'nullable|string',
@@ -216,7 +214,7 @@ class StudentController extends Controller
             $student->city = $request->city;
             $student->class_id = $request->className;
             $student->section_id = $request->section;
-            $student->group_id = $request->group_id;
+            $student->group = $request->group;
             $student->optional_subject_id = $request->optional_subject_id;
             $student->reg_no = $request->reg_no;
             $student->roll = $request->roll;

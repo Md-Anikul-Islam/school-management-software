@@ -165,13 +165,15 @@
                             <div class="mb-3">
                                 <label for="group" class="form-label">Group</label>
                                 <select class="form-control select2" id="group" name="group">
-                                    @if(!empty($groups))
-                                        @foreach($groups as $group)
-                                            <option value="{{ $group->id }}">{{ $group->name }}</option>
-                                        @endforeach
-                                    @else
-                                        <option value="">No Groups Available</option>
-                                    @endif
+                                    <option value="Science">
+                                        Science
+                                    </option>
+                                    <option value="Arts">
+                                        Arts
+                                    </option>
+                                    <option value="Business Studies">
+                                        Business Studies
+                                    </option>
                                 </select>
                             </div>
                         </div>

@@ -67,8 +67,9 @@ class Student extends Model
 
     public function optionalSubject()
     {
-        return $this->belongsTo(Subject::class, 'code', 'optional_subject');
+        return $this->belongsTo(Subject::class, 'optional_subject_id', 'id'); // Maps optional_subject_id to id in subjects
     }
+
 
     public function transportMembers()
     {
@@ -83,6 +84,16 @@ class Student extends Model
     public function childCare()
     {
         return $this->hasMany(ChildCare::class);
+    }
+
+    public function members()
+    {
+        return $this->hasMany(LibraryMember::class);
+    }
+
+    public function candidates()
+    {
+        return $this->hasMany(Candidate::class);
     }
 }
 
