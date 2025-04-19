@@ -25,16 +25,18 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    @can('sponsorship-create')
-                        <a href="{{ route('sponsorship.create') }}" class="btn btn-primary"><span><i class="ri-add-fill"></i></span>Add Sponsorship</a>
+                    @can('feetypes-create')
+                        <a href="{{ route('fee-types.create') }}" class="btn btn-primary"><span><i class="ri-add-fill"></i></span>Add Fee Type</a>
                     @endcan
                     <div class="d-flex justify-content-between">
                         <div class="d-flex justify-content-between">
                             <div class="btn-group">
-                                <button style="background-color:darkblue;" class="btn text-nowrap text-light" onclick="exportTableToPDF('sponsorship.pdf', '{{ $pageTitle }}')">
+                                <button style="background-color:darkblue;" class="btn text-nowrap text-light"
+                                        onclick="exportTableToPDF('fee_types.pdf', '{{ $pageTitle }}')">
                                     Export As PDF
                                 </button>
-                                <button style="background-color: darkgreen" class="btn btn-info text-nowrap" onclick="exportTableToCSV('sponsorship.csv')">
+                                <button style="background-color: darkgreen" class="btn btn-info text-nowrap"
+                                        onclick="exportTableToCSV('fee_types.csv')">
                                     Export To CSV
                                 </button>
                             </div>
@@ -47,55 +49,52 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Candidate Name</th>
-                        <th>Sponsor Name</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Amount</th>
-                        <th>Status</th>
+                        <th>Fee Type</th>
+                        <th>Note</th>
+                        <th>Is Monthly</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    @forelse ($sponsorships as $sponsorship)
+                    @forelse ($feeTypes as $feeType)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $sponsorship->candidate->student->name }}</td>
-                            <td>{{ $sponsorship->sponsor->name }}</td>
-                            <td>{{ $sponsorship->start_date }}</td>
-                            <td>{{ $sponsorship->end_date }}</td>
-                            <td>{{ $sponsorship->amount }}</td>
+                            <td>{{ $feeType->fee_type }}</td>
+                            <td>{{ $feeType->note }}</td>
                             <td>
-                                @if ($sponsorship->payment_date == null)
-                                    <span class="badge bg-warning text-dark">Pending</span>
-                                @elseif ($sponsorship->end_date < now())
-                                    <span class="badge bg-danger">Expired</span>
+                                @if($feeType->is_monthly)
+                                    <span class="badge bg-success">Yes</span>
                                 @else
-                                    <span class="badge bg-success">Active</span>
+                                    <span class="badge bg-danger">No</span>
                                 @endif
                             </td>
                             <td>
-                                @can('sponsorship-renew')
-                                    <a href="{{ route('sponsorship.renew', $sponsorship->id) }}" class="btn btn-success"><i class=" ri-refresh-line"></i></a>
+                                @can('feetypes-edit')
+                                    <a href="{{ route('fee-types.edit', $feeType->id) }}" class="btn btn-info"><i class="ri-edit-line"></i></a>
                                 @endcan
-                                @can('sponsorship-edit')
-                                    <a href="{{ route('sponsorship.edit', $sponsorship->id) }}" class="btn btn-info"><i class="ri-edit-line"></i></a>
-                                @endcan
-                                @can('sponsorship-delete')
-                                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#danger-header-modal{{ $sponsorship->id }}"><i class="ri-delete-bin-6-fill"></i></a>
-                                    <div id="danger-header-modal{{ $sponsorship->id }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="danger-header-modalLabel{{ $sponsorship->id }}" aria-hidden="true">
+                                @can('feetypes-delete')
+                                    <a class="btn btn-danger" data-bs-toggle="modal"
+                                       data-bs-target="#danger-header-modal{{ $feeType->id }}"><i class="ri-delete-bin-6-fill"></i></a>
+                                    <div id="danger-header-modal{{ $feeType->id }}" class="modal fade" tabindex="-1"
+                                         role="dialog" aria-labelledby="danger-header-modalLabel{{ $feeType->id }}"
+                                         aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header modal-colored-header bg-danger">
-                                                    <h4 class="modal-title" id="danger-header-modalLabel{{ $sponsorship->id }}">Delete</h4>
-                                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    <h4 class="modal-title"
+                                                        id="danger-header-modalLabel{{ $feeType->id }}">Delete</h4>
+                                                    <button type="button" class="btn-close btn-close-white"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h5 class="mt-0">Are you sure you want to delete this sponsorship?</h5>
+                                                    <h5 class="mt-0">Are you sure you want to delete this fee type?</h5>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                                    <form action="{{ route('sponsorship.destroy', $sponsorship->id) }}" method="post">
+                                                    <button type="button" class="btn btn-light"
+                                                            data-bs-dismiss="modal">Close
+                                                    </button>
+                                                    <form action="{{ route('fee-types.destroy', $feeType->id) }}"
+                                                          method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -109,7 +108,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8" class="text-center">No sponsorships found.</td>
+                            <td colspan="5" class="text-center">No fee types found.</td>
                         </tr>
                     @endforelse
                     </tbody>
@@ -184,4 +183,3 @@
         }
     </script>
 @endsection
-

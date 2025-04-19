@@ -49,6 +49,9 @@ use App\Http\Controllers\admin\LibraryMemberController;
 use App\Http\Controllers\admin\CandidateController;
 use App\Http\Controllers\admin\SponsorController;
 use App\Http\Controllers\admin\SponsorshipController;
+use App\Http\Controllers\admin\FeeTypesController;
+use App\Http\Controllers\admin\ExpenseController;
+use App\Http\Controllers\admin\IncomeController;
 use App\Http\Controllers\admin\BooksController;
 use App\Http\Controllers\admin\IssueController;
 use App\Http\Controllers\admin\EbooksController;
@@ -541,6 +544,30 @@ Route::middleware('auth')->group(callback: function () {
     Route::delete('/sponsorship-delete/{id}', [SponsorshipController::class, 'destroy'])->name('sponsorship.destroy');
     Route::get('/sponsorship-renew/{id}', [SponsorshipController::class, 'renew'])->name('sponsorship.renew');
     Route::post('/renew-sponsorship/{id}', [SponsorshipController::class, 'renew_sponsorship'])->name('sponsorship.renew_sponsorship');
+
+    //feetypes
+    Route::get('/fee-types', [FeeTypesController::class, 'index'])->name('fee-types.index');
+    Route::get('/fee-types/create', [FeeTypesController::class, 'create'])->name('fee-types.create');
+    Route::post('/fee-types', [FeeTypesController::class, 'store'])->name('fee-types.store');
+    Route::get('/fee-types/{id}/edit', [FeeTypesController::class, 'edit'])->name('fee-types.edit');
+    Route::put('/fee-types/{id}', [FeeTypesController::class, 'update'])->name('fee-types.update');
+    Route::delete('/fee-types/{id}', [FeeTypesController::class, 'destroy'])->name('fee-types.destroy');
+
+    //expenses
+    Route::get('/expenses-list', [ExpenseController::class, 'index'])->name('expenses.index');
+    Route::get('/expenses-create', [ExpenseController::class, 'create'])->name('expenses.create');
+    Route::post('/expenses-store', [ExpenseController::class, 'store'])->name('expenses.store');
+    Route::get('/expenses-edit/{id}', [ExpenseController::class, 'edit'])->name('expenses.edit');
+    Route::post('/expenses-update/{id}', [ExpenseController::class, 'update'])->name('expenses.update');
+    Route::delete('/expenses-delete/{id}', [ExpenseController::class, 'destroy'])->name('expenses.destroy');
+
+    //incomes
+    Route::get('/incomes-list', [IncomeController::class, 'index'])->name('incomes.index');
+    Route::get('/incomes-create', [IncomeController::class, 'create'])->name('incomes.create');
+    Route::post('/incomes-store', [IncomeController::class, 'store'])->name('incomes.store');
+    Route::get('/incomes-edit/{id}', [IncomeController::class, 'edit'])->name('incomes.edit');
+    Route::post('/incomes-update/{id}', [IncomeController::class, 'update'])->name('incomes.update');
+    Route::delete('/incomes-delete/{id}', [IncomeController::class, 'destroy'])->name('incomes.destroy');
 
     //Role and User Section
     Route::resource('roles', RoleController::class);

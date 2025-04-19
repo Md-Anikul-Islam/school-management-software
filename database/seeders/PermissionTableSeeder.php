@@ -412,6 +412,27 @@ class PermissionTableSeeder extends Seeder
             'sponsorship-delete',
             'sponsorship-renew',
 
+            //accouts-module
+            'account-module',
+
+            //feetypes
+            'feetypes-list',
+            'feetypes-create',
+            'feetypes-edit',
+            'feetypes-delete',
+
+            //expenses
+            'expense-list',
+            'expense-create',
+            'expense-edit',
+            'expense-delete',
+
+            //incomes
+            'income-list',
+            'income-create',
+            'income-edit',
+            'income-delete',
+
         ];
         foreach ($permissions as $permission) {
             if (!Permission::where('name', $permission)->exists()) {

@@ -711,7 +711,74 @@
                     </li>
                 @endcan
 
-                @can('announcement-module')
+                @can('account-module')
+                    <li class="side-nav-item">
+                        <a data-bs-toggle="collapse" href="#sidebarPages15" aria-expanded="false"
+                           aria-controls="sidebarPages" class="side-nav-link">
+                            <i class="ri-bus-2-line"></i> <span>Account</span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="sidebarPages15">
+                            <ul class="side-nav-second-level">
+                                @can('feetypes-list')
+                                    <li>
+                                        <a href="{{ route('fee-types.index') }}">
+                                            <i class="ri-list-check"></i> <span>Fee Types</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('invoice-list')
+                                    <li>
+                                        <a href="#">
+                                            <i class="ri-list-check"></i> <span>Invoice</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('payment-history-list')
+                                    <li>
+                                        <a href="#">
+                                            <i class="ri-list-check"></i> <span>Payment History</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('expense-list')
+                                    <li>
+                                        <a href="{{ route('expenses.index') }}">
+                                            <i class="ri-list-check"></i> <span>Expense</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('income-list')
+                                    <li>
+                                        <a href="{{ route('incomes.index') }}">
+                                            <i class="ri-list-check"></i> <span>Income</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                            <ul class="side-nav-second-level">
+                                @can('global-payment-list')
+                                    <li>
+                                        <a href="#">
+                                            <i class="ri-list-check"></i> <span>Global Payment</span>
+                                        </a>
+                                    </li>
+                                @endcan
+                            </ul>
+                        </div>
+                    </li>
+                @endcan
+
+
+            @can('announcement-module')
                     <li class="side-nav-item">
                         <a data-bs-toggle="collapse" href="#sidebarPages10" aria-expanded="false"
                            aria-controls="sidebarPages" class="side-nav-link">
